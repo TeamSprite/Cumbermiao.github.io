@@ -3,22 +3,22 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>CentOS 常用命令 | Cumber&#39;s Blog</title>
+  <title>Cumber&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
   
-  <meta name="description" content="查看端口占用情况 根据服务或者端口号得到其占用的进程的详细信息，查询到主进程可以使用 kill 12netstat -tlnp|grep 80netstat -tlnp|grep nginx  根据服务名称查看    本地 ssh 访问报错 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!删除本地 ~/.ssh/kown_hosts 中对应 ip 的">
+  <meta name="description" content="专注前端">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CentOS 常用命令">
-<meta property="og:url" content="http://cumbermiao.github.io/aliyun/02.html">
+<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:url" content="http://cumbermiao.github.io/interview/01.html">
 <meta property="og:site_name" content="Cumber&#39;s Blog">
-<meta property="og:description" content="查看端口占用情况 根据服务或者端口号得到其占用的进程的详细信息，查询到主进程可以使用 kill 12netstat -tlnp|grep 80netstat -tlnp|grep nginx  根据服务名称查看    本地 ssh 访问报错 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!删除本地 ~/.ssh/kown_hosts 中对应 ip 的">
+<meta property="og:description" content="专注前端">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-28T05:54:11.553Z">
+<meta property="og:updated_time" content="2019-02-22T06:25:33.739Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CentOS 常用命令">
-<meta name="twitter:description" content="查看端口占用情况 根据服务或者端口号得到其占用的进程的详细信息，查询到主进程可以使用 kill 12netstat -tlnp|grep 80netstat -tlnp|grep nginx  根据服务名称查看    本地 ssh 访问报错 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!删除本地 ~/.ssh/kown_hosts 中对应 ip 的">
+<meta name="twitter:title" content="Cumber&#39;s Blog">
+<meta name="twitter:description" content="专注前端">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -106,48 +106,14 @@
         <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
-      <header class="article-header">
-        
-  
-    <h1 class="post-title" itemprop="name">
-      CentOS 常用命令
-    </h1>
-    <div class="post-title-bar">
-      <ul>
-          
-        <li>
-          <i class="fa fa-calendar"></i>  2019-02-22
-        </li>
-        <li>
-          <i class="fa fa-eye"></i>
-          <span id="busuanzi_value_page_pv"></span>
-        </li>
-      </ul>
-    </div>
-  
-
-          
-      </header>
-    
     <div class="article-entry " itemprop="articleBody">
       
             
-            <h3 id="查看端口占用情况"><a href="#查看端口占用情况" class="headerlink" title="查看端口占用情况"></a>查看端口占用情况</h3><ol>
-<li><p>根据服务或者端口号得到其占用的进程的详细信息，查询到主进程可以使用 kill</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netstat -tlnp|grep 80</span><br><span class="line">netstat -tlnp|grep nginx</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>根据服务名称查看</p>
-</li>
-</ol>
-<ol start="3">
-<li>本地 ssh 访问报错 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!<br>删除本地 ~/.ssh/kown_hosts 中对应 ip 的所有信息, <a href="https://blog.csdn.net/xlgen157387/article/details/52669709" target="_blank" rel="noopener">参考</a></li>
-</ol>
-<h3 id="阿里云创建-git-仓库"><a href="#阿里云创建-git-仓库" class="headerlink" title="阿里云创建 git 仓库"></a>阿里云创建 git 仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">adduser git</span><br><span class="line">passwd git</span><br><span class="line">su git</span><br><span class="line">cd ~</span><br><span class="line">mkdir .ssh &amp;&amp; cd .ssh</span><br><span class="line">touch authorized_keys &amp;&amp; chmod 700 authorized_keys</span><br><span class="line"></span><br><span class="line">//本地 copy ssh</span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa git@47.100.241.55</span><br></pre></td></tr></table></figure>
-
+            
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年02月28日 13:54</p>
-        <p>原始链接： <a class="post-url" href="/aliyun/02.html" title="CentOS 常用命令">http://cumbermiao.github.io/aliyun/02.html</a></p>
+        <p>最后更新： 2019年02月22日 14:25</p>
+        <p>原始链接： <a class="post-url" href="/interview/01.html" title="">http://cumbermiao.github.io/interview/01.html</a></p>
         <footer>
             <a href="http://cumbermiao.github.io">
                 <img src="/images/logo.png" alt="Cumbermiao">
@@ -204,7 +170,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/aliyun/02.html&title=《CentOS 常用命令》 — Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/interview/01.html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -214,22 +180,22 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/aliyun/02.html&title=《CentOS 常用命令》 — Cumber's Blog&source=专注前端" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/interview/01.html&title=Cumber's Blog&source=专注前端" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/aliyun/02.html" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/interview/01.html" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CentOS 常用命令》 — Cumber's Blog&url=http://cumbermiao.github.io/aliyun/02.html&via=http://cumbermiao.github.io" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/interview/01.html&via=http://cumbermiao.github.io" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/aliyun/02.html" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/interview/01.html" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -239,7 +205,7 @@
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/aliyun/02.html" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/interview/01.html" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -255,12 +221,6 @@
 </article>
 
 
-    <aside class="post-toc-pos post-toc-top" id="post-toc">
-        <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查看端口占用情况"><span class="post-toc-text">查看端口占用情况</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#阿里云创建-git-仓库"><span class="post-toc-text">阿里云创建 git 仓库</span></a></li></ol>
-        </nav>
-    </aside>
-    
 
 
 
