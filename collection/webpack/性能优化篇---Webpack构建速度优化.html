@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="原文链接：https://segmentfault.com/a/1190000018493260 性能优化篇—Webpack构建速度优化如何输出Webpack构建分析 输出Webpack构建信息的.json文件：webpack --profile --json &amp;gt; stats.json   --profile:记录构建中的耗时信息 --json:以json格式输出构建结果，最后只输出一个js">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:url" content="http://cumbermiao.github.io/collection/webpack/性能优化篇---Webpack构建速度优化.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="原文链接：https://segmentfault.com/a/1190000018493260 性能优化篇—Webpack构建速度优化如何输出Webpack构建分析 输出Webpack构建信息的.json文件：webpack --profile --json &amp;gt; stats.json   --profile:记录构建中的耗时信息 --json:以json格式输出构建结果，最后只输出一个js">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://segmentfault.com/img/bVbpGzp?w=2808&h=1684">
+<meta property="og:updated_time" content="2019-03-26T11:38:52.330Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cumber&#39;s Blog">
+<meta name="twitter:description" content="原文链接：https://segmentfault.com/a/1190000018493260 性能优化篇—Webpack构建速度优化如何输出Webpack构建分析 输出Webpack构建信息的.json文件：webpack --profile --json &amp;gt; stats.json   --profile:记录构建中的耗时信息 --json:以json格式输出构建结果，最后只输出一个js">
+<meta name="twitter:image" content="https://segmentfault.com/img/bVbpGzp?w=2808&h=1684">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <p>原文链接：<a href="https://segmentfault.com/a/1190000018493260" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018493260</a></p>
+<h1 id="性能优化篇—Webpack构建速度优化"><a href="#性能优化篇—Webpack构建速度优化" class="headerlink" title="性能优化篇—Webpack构建速度优化"></a>性能优化篇—Webpack构建速度优化</h1><h3 id="如何输出Webpack构建分析"><a href="#如何输出Webpack构建分析" class="headerlink" title="如何输出Webpack构建分析"></a>如何输出Webpack构建分析</h3><ul>
+<li>输出Webpack构建信息的.json文件：<code>webpack --profile --json &gt; stats.json</code></li>
+</ul>
+<ol>
+<li><code>--profile</code>:记录构建中的耗时信息</li>
+<li><code>--json</code>:以json格式输出构建结果，最后只输出一个json文件（包含所有的构建信息）</li>
+</ol>
+<ul>
+<li><p><strong>web可视化查看构建分析：</strong>得到了webpack构建信息文件stats.json，如何进行很好的可视化查看？</p>
+<ol>
+<li>方案一：通过可视化分析工具<a href="http://webpack.github.io/analyse/" target="_blank" rel="noopener">Webpack Analyse</a>，是个在线Web应用，上传stats.json文件就可以；不过好像需要翻墙；</li>
+<li>方案二：安装<code>webpack-bundle-analyzer</code>工具<code>npm i -g webpack-bundle-analyzer</code>,生成stats.json后直接在其文件夹目录执行<code>webpack-bundle-analyzer</code>后，浏览器会打开对应网页并展示构建分析<code>webpack-bundle-analyzer stats.json -p 8888</code><a href="https://www.npmjs.com/package/webpack-bundle-analyzer" target="_blank" rel="noopener">文档地址webpack-bundle-analyzer</a></li>
+<li>webpack-dashboard是一款统计和优化webpack日志的工具，可以以表格形势展示日志信息。其中包括构建过程和状态、日志以及涉及的模块列表</li>
+<li>jarvis是一款基于webapck-dashboard的webpack性能分析插件，性能分析的结果在浏览器显示，比webpack-bundler-anazlyer更美观清晰<a href="https://github.com/zouhir/jarvis" target="_blank" rel="noopener">GitHub文档地址</a></li>
+</ol>
+<ul>
+<li><code>npm i -D webpack-jarvis</code></li>
+<li><p><code>webpack.config.js</code>配置：</p>
+<p>const Jarvis = require(“webpack-jarvis”);</p>
+<p>plugins: [<br>  new Jarvis({</p>
+<pre><code>watchOnly: false,
+port: 3001 // optional: set a port
+</code></pre><p>  })<br>];</p>
+</li>
+<li><p>port:监听的端口，默认1337，监听面板将监听这个端口，通常像<a href="http://localhost" target="_blank" rel="noopener">http://localhost</a>:port/</p>
+</li>
+<li>host:域名，默认localhost,不限制域名。</li>
+<li>watchOnly:仅仅监听编译阶段。默认为true,如果高为false，jarvis不仅仅运行在编译阶段，在编译完成后还保持运行状态。</li>
+<li>界面：<strong>看到构建时间为：</strong><code>Time: 11593ms</code>(作为优化时间对比)</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://segmentfault.com/img/bVbpGzp?w=2808&amp;h=1684" alt="clipboard.png" title="clipboard.png"></p>
+<h3 id="webpack配置优化"><a href="#webpack配置优化" class="headerlink" title="webpack配置优化"></a>webpack配置优化</h3><ul>
+<li>webpack在启动时会从配置的Entry出发，解析出文件中的导入语句，再递归解析。</li>
+<li><p>对于导入语句Webpack会做出以下操作：</p>
+<ol>
+<li>根据导入语句寻找对应的要导入的文件；</li>
+<li>在根据要导入的文件后缀，使用配置中的Loader去处理文件（如使用ES6需要使用babel-loader处理）</li>
+</ol>
+</li>
+<li>针对这两点可以优化查找途径</li>
+</ul>
+<ol>
+<li><p><strong>优化Loader配置</strong></p>
+<ul>
+<li><p>Loader处理文件的转换操作是很耗时的，所以需要让尽可能少的文件被Loader处理</p>
+<p>{</p>
+<pre><code>test: /\.js$/,
+use: [
+    &apos;babel-loader?cacheDirectory&apos;,//开启转换结果缓存
+],
+include: path.resolve(__dirname, &apos;src&apos;),//只对src目录中文件采用babel-loader
+exclude: path.resolve(__dirname,&apos; ./node_modules&apos;),//排除node_modules目录下的文件
+</code></pre><p>},</p>
+</li>
+</ul>
+</li>
+<li><p><strong>优化resolve.modules配置</strong></p>
+<ul>
+<li><code>resolve.modules</code>用于配置webpack去哪些目录下寻找第三方模块，默认是<code>[&#39;node_modules&#39;]</code>，但是，它会先去当前目录的<code>./node_modules</code>查找，没有的话再去<code>../node_modules</code>最后到根目录；</li>
+<li><p>所以当安装的第三方模块都放在项目根目录时，就没有必要安默认的一层一层的查找，直接指明存放的绝对位置</p>
+<p>resolve: {</p>
+<pre><code>    modules: [path.resolve(__dirname, &apos;node_modules&apos;)],
+}
+</code></pre></li>
+</ul>
+</li>
+<li><p><strong>优化resolve.extensions</strong>配置</p>
+<ul>
+<li>在导入没带文件后缀的路径时，webpack会自动带上后缀去尝试询问文件是否存在，而<code>resolve.extensions</code>用于配置尝试后缀列表；默认为<code>extensions:[&#39;js&#39;,&#39;json&#39;]</code>;</li>
+<li>及当遇到<code>require(&#39;./data&#39;)</code>时webpack会先尝试寻找<code>data.js</code>，没有再去找<code>data.json</code>；如果列表越长，或者正确的后缀越往后，尝试的次数就会越多；</li>
+<li><p>所以在配置时为提升构建优化需遵守：</p>
+<ol>
+<li>频率出现高的文件后缀优先放在前面；</li>
+<li>列表尽可能的小；</li>
+<li>书写导入语句时，尽量写上后缀名</li>
+</ol>
+</li>
+<li>因为项目中用的<code>jsx</code>较多，所以配置<code>extensions: [&quot;.jsx&quot;,&quot;.js&quot;],</code></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>基本配置后查看构建速度：</strong><code>Time: 10654ms</code>;配置前为<code>Time: 11593ms</code></li>
+</ul>
+<h3 id="使用DllPlugin优化"><a href="#使用DllPlugin优化" class="headerlink" title="使用DllPlugin优化"></a>使用DllPlugin优化</h3><ul>
+<li>在使用webpack进行打包时候，对于依赖的第三方库，如react，react-dom等这些不会修改的依赖，可以让它和业务代码分开打包；</li>
+<li>只要不升级依赖库版本，之后webpack就只需要打包项目业务代码，遇到需要导入的模块在某个动态链接库中时，就直接去其中获取；而不用再去编译第三方库，这样第三方库就只需要打包一次。</li>
+<li><p><strong>接入需要完成的事：</strong></p>
+<ol>
+<li>将依赖的第三方模块抽离，打包到一个个单独的动态链接库中</li>
+<li>当需要导入的模块存在动态链接库中时，让其直接从链接库中获取</li>
+<li>项目依赖的所有动态链接库都需要被加载</li>
+</ol>
+</li>
+<li><p><strong>接入工具(webpack已内置)</strong></p>
+<ol>
+<li><strong>DllPlugin插件：</strong>用于打包出一个个单独的动态链接库文件；</li>
+<li><strong>DllReferencePlugin:</strong>用于在主要的配置文件中引入<code>DllPlugin</code>插件打包好的动态链接库文件</li>
+</ol>
+</li>
+<li><p><strong>配置webpack_dll.config.js</strong>构建动态链接库</p>
+<p>const path = require(‘path’);<br>const DllPlugin = require(‘webpack/lib/DllPlugin’);</p>
+<p>module.exports = {</p>
+<pre><code>mode: &apos;production&apos;,
+entry: {
+    // 将React相关模块放入一个动态链接库
+    react: [&apos;react&apos;,&apos;react-dom&apos;,&apos;react-router-dom&apos;,&apos;react-loadable&apos;],
+    librarys: [&apos;wangeditor&apos;],
+    utils: [&apos;axios&apos;,&apos;js-cookie&apos;]
+},
+output: {
+    filename: &apos;[name]-dll.js&apos;,
+    path: path.resolve(__dirname, &apos;dll&apos;),
+    // 存放动态链接库的全局变量名，加上_dll_防止全局变量冲突
+    library: &apos;_dll_[name]&apos;
+},
+// 动态链接库的全局变量名称，需要可output.library中保持一致，也是输出的manifest.json文件中name的字段值
+// 如react.manifest.json字段中存在&quot;name&quot;:&quot;_dll_react&quot;
+plugins: [
+    new DllPlugin({
+        name: &apos;_dll_[name]&apos;,
+        path: path.join(__dirname, &apos;dll&apos;, &apos;[name].manifest.json&apos;)
+    })
+]
+</code></pre><p>}</p>
+</li>
+<li><p><strong>webpack.pro.config.js</strong>中使用</p>
+<p>const DllReferencePlugin = require(‘webpack/lib/DllReferencePlugin’);<br>…<br>plugins: [</p>
+<pre><code>// 告诉webpack使用了哪些动态链接库
+    new DllReferencePlugin({
+        manifest: require(&apos;./dll/react.manifest.json&apos;)
+    }),
+    new DllReferencePlugin({
+        manifest: require(&apos;./dll/librarys.manifest.json&apos;)
+    }),
+    new DllReferencePlugin({
+        manifest: require(&apos;./dll/utils.manifest.json&apos;)
+    }),
+</code></pre><p>]</p>
+</li>
+<li><p><strong>注意：</strong>在<code>webpack_dll.config.js</code>文件中，<code>DllPlugin</code>中的name参数必须和<code>output.library</code>中的一致；因为<code>DllPlugin</code>的name参数影响输出的manifest.json的name；而webpack.pro.config.js中的<code>DllReferencePlugin</code>会读取<code>manifest.json</code>的name，将值作为从全局变量中获取动态链接库内容时的全局变量名</p>
+</li>
+<li><p><strong>执行构建</strong></p>
+<ol>
+<li><code>webpack --progress --colors --config ./webpack.dll.config.js</code></li>
+<li><code>webpack --progress --colors --config ./webpack.prod.js</code></li>
+</ol>
+</li>
+<li>html中引入dll.js文件</li>
+<li><strong>构建时间对比：</strong><code>[&quot;11593ms&quot;,&quot;10654ms&quot;,&quot;8334ms&quot;]</code></li>
+</ul>
+<hr>
+<h3 id="HappyPack并行构建优化"><a href="#HappyPack并行构建优化" class="headerlink" title="HappyPack并行构建优化"></a>HappyPack并行构建优化</h3><ul>
+<li><strong>核心原理：</strong>将webpack中最耗时的loader文件转换操作任务，分解到多个进程中并行处理，从而减少构建时间。</li>
+<li><a href="https://www.npmjs.com/package/happypack" target="_blank" rel="noopener">HappyPack</a></li>
+<li><p><strong>接入HappyPack</strong></p>
+<ol>
+<li>安装：<code>npm i -D happypack</code></li>
+<li>重新配置<code>rules</code>部分,将<code>loader</code>交给<code>happypack</code>来分配：</li>
+</ol>
+<p>const HappyPack = require(‘happypack’);<br>const happyThreadPool = HappyPack.ThreadPool({size: 5}); //构建共享进程池，包含5个进程<br>…<br>plugins: [</p>
+<pre><code>// happypack并行处理
+new HappyPack({
+    // 用唯一ID来代表当前HappyPack是用来处理一类特定文件的，与rules中的use对应
+    id: &apos;babel&apos;,
+    loaders: [&apos;babel-loader?cacheDirectory&apos;],//默认设置loader处理
+    threadPool: happyThreadPool,//使用共享池处理
+}),
+new HappyPack({
+    // 用唯一ID来代表当前HappyPack是用来处理一类特定文件的，与rules中的use对应
+    id: &apos;css&apos;,
+    loaders: [
+        &apos;css-loader&apos;,
+        &apos;postcss-loader&apos;,
+        &apos;sass-loader&apos;],
+        threadPool: happyThreadPool
+})
+</code></pre><p>],<br>module: {</p>
+<pre><code>rules: [
+{
+    test: /\.(js|jsx)$/,
+    use: [&apos;happypack/loader?id=babel&apos;],
+    exclude: path.resolve(__dirname,&apos; ./node_modules&apos;),
+},
+{
+    test: /\.(scss|css)$/,
+    //使用的mini-css-extract-plugin提取css此处，如果放在上面会出错
+    use: [MiniCssExtractPlugin.loader,&apos;happypack/loader?id=css&apos;],
+    include:[
+        path.resolve(__dirname,&apos;src&apos;),
+        path.join(__dirname, &apos;./node_modules/antd&apos;)
+    ]
+},
+</code></pre><p>}</p>
+</li>
+<li><p>参数：</p>
+<ol>
+<li><code>threads</code>：代表开启几个子进程去处理这一类文件，默认是3个；</li>
+<li><code>verbose</code>:是否运行HappyPack输出日志，默认true；</li>
+<li>threadPool：代表共享进程池，即多个HappyPack示例使用一个共享进程池中的子进程去处理任务，以防资源占有过多</li>
+</ol>
+</li>
+</ul>
+<h4 id="代码压缩用ParallelUglifyPlugin代替自带的-UglifyJsPlugin插件"><a href="#代码压缩用ParallelUglifyPlugin代替自带的-UglifyJsPlugin插件" class="headerlink" title="代码压缩用ParallelUglifyPlugin代替自带的 UglifyJsPlugin插件"></a>代码压缩用ParallelUglifyPlugin代替自带的 UglifyJsPlugin插件</h4><ul>
+<li>自带的JS压缩插件是单线程执行的，而<a href="https://github.com/gdborton/webpack-parallel-uglify-plugin" target="_blank" rel="noopener">webpack-parallel-uglify-plugin</a>可以并行的执行</li>
+<li><p>配置参数：</p>
+<ol>
+<li><code>uglifyJS: {}</code>：用于压缩 ES5 代码时的配置，Object 类型</li>
+<li><code>test: /.js$/g</code>:使用正则去匹配哪些文件需要被 ParallelUglifyPlugin 压缩，默认是 /.js$/</li>
+<li><code>include: []</code>:使用正则去包含被压缩的文件，默认为 [].</li>
+<li><code>exclude: []</code>: 使用正则去包含不被压缩的文件，默认为 []</li>
+<li><code>cacheDir: &#39;&#39;</code>：缓存压缩后的结果，下次遇到一样的输入时直接从缓存中获取压缩后的结果并返回，默认不会缓存，开启缓存设置一个目录路径</li>
+<li><code>workerCount: &#39;&#39;</code>：开启几个子进程去并发的执行压缩。默认是当前运行电脑的 CPU 核数减去1</li>
+<li><code>sourceMap: false</code>：是否为压缩后的代码生成对应的Source Map, 默认不生成</li>
+</ol>
+<p>…<br>minimizer: [</p>
+<pre><code>// webpack:production模式默认有配有js压缩，但是如果这里设置了css压缩，js压缩也要重新设置,因为使用minimizer会自动取消webpack的默认配置
+new optimizeCssPlugin({
+    assetNameRegExp: /\.css$/g,
+    cssProcessor: require(&apos;cssnano&apos;),
+    cssProcessorOptions: { discardComments: { removeAll: true } },
+    canPrint: true
+}),
+new ParallelUglifyPlugin({
+    cacheDir: &apos;.cache/&apos;,
+    uglifyJS:{
+        output: {
+       // 是否输出可读性较强的代码，即会保留空格和制表符，默认为输出，为了达到更好的压缩效果，可以设置为false
+            beautify: false,
+    //是否保留代码中的注释，默认为保留，为了达到更好的压缩效果，可以设置为false
+            comments: false
+        },
+        compress: {
+        //是否在UglifyJS删除没有用到的代码时输出警告信息，默认为输出
+            warnings: false,
+        //是否删除代码中所有的console语句，默认为不删除，开启后，会删除所有的console语句
+            drop_console: true,
+        //是否内嵌虽然已经定义了，但是只用到一次的变量，比如将 var x = 1; y = x, 转换成 y = 1, 默认为否
+            collapse_vars: true,
+        }
+    }
+</code></pre><p>}),<br>]</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>构建结果对比：</strong><code>[&quot;11593ms&quot;,&quot;10654ms&quot;,&quot;8334ms&quot;,&quot;7734ms&quot;]</code></li>
+<li>整体构建速度从<code>12000ms</code>降到现在的<code>8000ms</code></li>
+</ul>
+<blockquote>
+<p><strong>“积跬步、行千里”</strong>—— 持续更新中~，喜欢的话留下个赞和关注哦！</p>
+</blockquote>
+<ul>
+<li><p>往期经典好文：</p>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000018464348" target="_blank" rel="noopener">你不知道的CORS跨域资源共享</a></li>
+<li><a href="https://segmentfault.com/a/1190000018433489" target="_blank" rel="noopener">Koa日志中间件封装开发（log4js）</a></li>
+<li><a href="https://segmentfault.com/a/1190000015676846" target="_blank" rel="noopener">团队合作必备的Git操作</a></li>
+<li><a href="https://segmentfault.com/a/1190000018439311" target="_blank" rel="noopener">使用pm2部署node生产环境</a></li>
+</ul>
+</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年03月26日 19:38</p>
+        <p>原始链接： <a class="post-url" href="/collection/webpack/性能优化篇---Webpack构建速度优化.html" title="">http://cumbermiao.github.io/collection/webpack/性能优化篇---Webpack构建速度优化.html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/collection/webpack/性能优化篇---Webpack构建速度优化.html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/collection/webpack/性能优化篇---Webpack构建速度优化.html&title=Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/collection/webpack/性能优化篇---Webpack构建速度优化.html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/collection/webpack/性能优化篇---Webpack构建速度优化.html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/collection/webpack/性能优化篇---Webpack构建速度优化.html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/collection/webpack/性能优化篇---Webpack构建速度优化.html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#性能优化篇—Webpack构建速度优化"><span class="post-toc-text">性能优化篇—Webpack构建速度优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何输出Webpack构建分析"><span class="post-toc-text">如何输出Webpack构建分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#webpack配置优化"><span class="post-toc-text">webpack配置优化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用DllPlugin优化"><span class="post-toc-text">使用DllPlugin优化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HappyPack并行构建优化"><span class="post-toc-text">HappyPack并行构建优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码压缩用ParallelUglifyPlugin代替自带的-UglifyJsPlugin插件"><span class="post-toc-text">代码压缩用ParallelUglifyPlugin代替自带的 UglifyJsPlugin插件</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
