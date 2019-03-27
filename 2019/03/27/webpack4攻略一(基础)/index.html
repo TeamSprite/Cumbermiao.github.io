@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>webpack4攻略一(基础) | Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="webpack4 攻略一(基础)webpack4 安装 webpack4 将命令行相关的东西单独拆了出去封装成了 webpack-cli ， webpack xxx 命令需要依赖 webpack-cli。  注意 node 版本升级 &amp;gt;=6.11.5。如果你是从低版本升级过来，需要使用 npm outdated 升级老项目的依赖 1npm i webpack webpack-cli webp">
+<meta name="keywords" content="webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack4攻略一(基础)">
+<meta property="og:url" content="http://cumbermiao.github.io/2019/03/27/webpack4攻略一(基础)/index.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="webpack4 攻略一(基础)webpack4 安装 webpack4 将命令行相关的东西单独拆了出去封装成了 webpack-cli ， webpack xxx 命令需要依赖 webpack-cli。  注意 node 版本升级 &amp;gt;=6.11.5。如果你是从低版本升级过来，需要使用 npm outdated 升级老项目的依赖 1npm i webpack webpack-cli webp">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-27T09:46:52.017Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack4攻略一(基础)">
+<meta name="twitter:description" content="webpack4 攻略一(基础)webpack4 安装 webpack4 将命令行相关的东西单独拆了出去封装成了 webpack-cli ， webpack xxx 命令需要依赖 webpack-cli。  注意 node 版本升级 &amp;gt;=6.11.5。如果你是从低版本升级过来，需要使用 npm outdated 升级老项目的依赖 1npm i webpack webpack-cli webp">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-webpack4攻略一(基础)" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      webpack4攻略一(基础)
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-03-27
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="webpack4-攻略一-基础"><a href="#webpack4-攻略一-基础" class="headerlink" title="webpack4 攻略一(基础)"></a>webpack4 攻略一(基础)</h1><h2 id="webpack4-安装"><a href="#webpack4-安装" class="headerlink" title="webpack4 安装"></a>webpack4 安装</h2><blockquote>
+<p><code>webpack4</code> 将命令行相关的东西单独拆了出去封装成了 <code>webpack-cli</code> ， <code>webpack xxx</code> 命令需要依赖 <code>webpack-cli</code>。</p>
+</blockquote>
+<p>注意 <code>node</code> 版本升级 <code>&gt;=6.11.5</code>。<br>如果你是从低版本升级过来，需要使用 <code>npm outdated</code> 升级老项目的依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i webpack webpack-cli webpack-dev-server -S</span><br></pre></td></tr></table></figure>
+<h2 id="webpack-配置项"><a href="#webpack-配置项" class="headerlink" title="webpack 配置项"></a>webpack 配置项</h2><ul>
+<li>mode : <code>webpack</code> 打包模式</li>
+<li>context : 基础目录</li>
+<li>entry : 入口文件</li>
+<li>output : 打包文件</li>
+<li>module : 用于配置对不同类型的模块的处理</li>
+<li>resolve : 配置各模块的解析</li>
+<li>plugins : 插件</li>
+<li>optimization : 配置文件的优化</li>
+<li>devServer : <code>webpack-dev-server</code> 配置项</li>
+<li>watch : 构建之后是否继续监听文件变化</li>
+<li>watchOptions : 监听文件变化的配置项</li>
+<li>performance : 性能配置项</li>
+<li>externals : 外部扩展配置</li>
+</ul>
+<h3 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h3><blockquote>
+<p><code>webpack4</code> 引入了零配置的概念，根据 <code>mode</code> 在不同的模式下，会有一些默认的配置项，不需要用户配置很多。</p>
+</blockquote>
+<p>production 模式下像 <code>minimize</code> 会被默认开启。</p>
+<h3 id="context-amp-entry"><a href="#context-amp-entry" class="headerlink" title="context &amp; entry"></a>context &amp; entry</h3><blockquote>
+<p><code>webpack</code> 打包的入口文件， 可以根据项目需求进行不同的配置。<br><code>entry</code> 的路径是相对于 <code>context</code>， <code>context</code> 默认是当前目录。</p>
+</blockquote>
+<p>每个 <code>entry</code> 里的对象可以理解为一个 <code>chunk</code> ， 在打包时 <code>chunk</code> 会包含很多模块，如果其中一个模块的文件发生了变化，整个 <code>chunk</code> 就会发生变化。<br>所以不管在开发或者打包时，如果发现时间较长就可以考虑提取<code>chunk</code>中的模块。</p>
+<h3 id="output"><a href="#output" class="headerlink" title="output"></a>output</h3><blockquote>
+<p><code>output</code> 主要用于配置打包文件的路径及文件名。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">output:&#123;</span><br><span class="line">  filename: [name]_[hash:5]_bundle.js,</span><br><span class="line">  path: path.resolve(__dirname,&apos;./dist&apos;)</span><br><span class="line">  publicPath : build?&apos;/webapp&apos;:&apos;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>publicPath</code>在我常使用中有两种场景：</p>
+<ul>
+<li><p>第一种是前后端开发分离，但是最终前端打完包之后需要给后端，后端再打包，这时候前端文件相对于服务的路径可能会发生变化，例如访问 <code>index.html</code> 后台的路由为 <code>/webapp/index.html</code> ，<br>那么其他的静态资源路径应该也是 <code>/webapp/index.js</code> 这种，这就需要设置 <code>publicPath</code> 为 <code>/webapp</code> 。</p>
+</li>
+<li><p>第二种是前端的一些静态文件需要放到 cdn 上，那么所有的静态文件的访问就是 cdn+filename 这种形式。</p>
+</li>
+</ul>
+<p><code>filename</code> 的<code>md5</code> 分为： <code>hash</code>，<code>chunkhash</code>，<code>contenthash</code> ，主要防止缓存相关的问题。</p>
+<ul>
+<li><code>hash</code> 在每次打包时都会改变。</li>
+<li><code>chunhansh</code> 如果当前<code>chunk</code>中有内容修改就会改变。</li>
+<li><code>contenthash</code> 则是针对于当前的文件。</li>
+</ul>
+<h3 id="module"><a href="#module" class="headerlink" title="module"></a>module</h3><blockquote>
+<p><code>module</code> 最常用的是配置解析各种类型模块的 <code>loader</code>。</p>
+</blockquote>
+<p>对于 <code>css</code> 的处理，<code>style-loader</code> 使用使用 js 方式将样式使用 <code>&lt;style&gt;</code> 标签插入到页面的。浏览器一般情况下是优先请求样式文件，如果使用 js 插入，则需要等待 js 加载完毕，页面的首页渲染时间就会延长。<br>针对于以上问题， 可以使用 <code>mini-css-extract-plugin</code> 插件将样式提取成单独文件。但是与此同时要注意 js 文件和 css 文件的打包影响。</p>
+<p><code>postcss-loader</code> 用来优化样式代码，使用 <code>css</code> 变量需要配置 <code>cssnext</code> 插件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//.postcssrc.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    plugins:[</span><br><span class="line">        require(&apos;cssnano&apos;),</span><br><span class="line">        require(&apos;postcss-cssnext&apos;)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于一些自带缓存配置的<code>loader</code>，我们可以开启缓存来加快编译构建速度，如<code>babel-loader</code>可以配置<code>cacheDirectory:true</code>。<br>而那些没有缓存配置的我们可以借助于 <code>cache-loader</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  loader: resolve(&apos;cache-loader&apos;),</span><br><span class="line">  options: &#123; cacheDirectory: path.join(cache, &apos;cache-loader-css&apos;) &#125;,</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">  loader: resolve(&apos;css-loader&apos;),</span><br><span class="line">  options: &#123;</span><br><span class="line">  importLoaders: 2,</span><br><span class="line">  sourceMap,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于性能优化方面配置 <code>loader</code> 时, 我们应该尽量指定<code>include</code>和<code>exclude</code> 的范围。</p>
+<h3 id="resolve"><a href="#resolve" class="headerlink" title="resolve"></a>resolve</h3><p><code>resolve</code> 中常用配置为 <code>alias</code>，<code>modules</code> 和 <code>extensions</code>。<br><code>alias</code> 可以配置路径的别名，如我们可以简化组件的引入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">resolve:&#123;</span><br><span class="line">  alias:&#123;</span><br><span class="line">    $component:path.resolve(__dirname,&apos;./src/components&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">配置了 `$components` 之后，引入组件只需要 `import xxx from &apos;$component&apos;`</span><br></pre></td></tr></table></figure>
+<p><code>modules</code> 告诉 <code>webpack</code> 去哪加载模块默认设置 <code>[&quot;node_modules&quot;]</code> 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modules:[path.resolve(__dirname, &apos;src&apos;),path.resolve(__dirname,&apos;node_modules&apos;)]</span><br></pre></td></tr></table></figure>
+<p>扩展如果你使用了绝对路径后，可能就发现 vscode 智能代码导航就失效了，别慌！请在想目录下面配置 jsconfig.json 文件解决这个问题，配置和上面对应:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;compilerOptions&quot;: &#123;</span><br><span class="line">    &quot;baseUrl&quot;: &quot;.&quot;,</span><br><span class="line">      &quot;paths&quot;: &#123;</span><br><span class="line">      src/*&quot;: [&quot;./src/*&quot;],</span><br><span class="line">      &quot;components/*&quot;: [&quot;./src/components/*&quot;],</span><br><span class="line">      &quot;assets/*&quot;: [&quot;./src/assets/*&quot;],</span><br><span class="line">      &quot;pages/*&quot;: [&quot;./src/pages/*&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;include&quot;: [&quot;./src/**/*&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>extensions</code> 可以让我们在引入模块时省略后缀名，在性能方面看我们应该少配置忽略的后缀。</p>
+<h3 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h3><h3 id="devServer"><a href="#devServer" class="headerlink" title="devServer"></a>devServer</h3><p><code>devServer</code> 配置开发时<code>webpack-dev-server</code>启动的服务, 配合 <code>webpack.HotModuleReplacementPlugin</code> 进行热更新。<br><code>proxy</code> 配置接口的访问地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    host: &apos;localhost&apos;,</span><br><span class="line">    port: 8080,</span><br><span class="line">    hot: true,</span><br><span class="line">    compress: true,</span><br><span class="line">    proxy: &#123;</span><br><span class="line">        &apos;/api&apos;: &#123;</span><br><span class="line">            target: &apos;http://localhost:3000&apos;,</span><br><span class="line">            changeOrigin: true,</span><br><span class="line">            pathRewrite: &#123; &apos;^/api&apos;: &apos;&apos; &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="watch-amp-watchOptions"><a href="#watch-amp-watchOptions" class="headerlink" title="watch &amp; watchOptions"></a>watch &amp; watchOptions</h3><p>启用 Watch 模式。这意味着在初始构建之后，webpack 将继续监听任何已解析文件的更改。Watch 模式默认关闭。</p>
+<blockquote>
+<p>webpack-dev-server 和 webpack-dev-middleware 里 Watch 模式默认开启。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">watchOptions: &#123;</span><br><span class="line">  aggregateTimeout: 300, //构建延时，在这段时间的改动会聚集到一次构建中</span><br><span class="line">  poll: 1000, //轮询的间隔</span><br><span class="line">  ignored: /node_modules/ //忽略的模块</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="performance"><a href="#performance" class="headerlink" title="performance"></a>performance</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">performance: &#123;</span><br><span class="line">  hints: &quot;warning&quot;, // 出现性能问题提醒的级别</span><br><span class="line">  maxEntrypointSize: 250000 ,//入口chunk 最大size</span><br><span class="line">  maxAssetSize: 250000,//单个文件最大size</span><br><span class="line">  //计算性能时的文件</span><br><span class="line">  assetFilter: function(assetFilename) &#123;</span><br><span class="line">    return assetFilename.endsWith(&apos;.js&apos;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="externals"><a href="#externals" class="headerlink" title="externals"></a>externals</h3><p>有一些第三方或者必要的文件会放在一个公共的地址（cdn）上，使用直接使用 <code>script</code> 标签引入即可，构建时就需要将其排除在外。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">externals: &#123;</span><br><span class="line">  jquery: &apos;jQuery&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年03月27日 17:46</p>
+        <p>原始链接： <a class="post-url" href="/2019/03/27/webpack4攻略一(基础)/" title="webpack4攻略一(基础)">http://cumbermiao.github.io/2019/03/27/webpack4攻略一(基础)/</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/2019/03/27/webpack4攻略一(基础)/&title=《webpack4攻略一(基础)》 — Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/2019/03/27/webpack4攻略一(基础)/&title=《webpack4攻略一(基础)》 — Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/2019/03/27/webpack4攻略一(基础)/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webpack4攻略一(基础)》 — Cumber's Blog&url=http://cumbermiao.github.io/2019/03/27/webpack4攻略一(基础)/&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/2019/03/27/webpack4攻略一(基础)/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/2019/03/27/webpack4攻略一(基础)/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/webpack/" class="color3">webpack</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#webpack4-攻略一-基础"><span class="post-toc-text">webpack4 攻略一(基础)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#webpack4-安装"><span class="post-toc-text">webpack4 安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#webpack-配置项"><span class="post-toc-text">webpack 配置项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mode"><span class="post-toc-text">mode</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#context-amp-entry"><span class="post-toc-text">context &amp; entry</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#output"><span class="post-toc-text">output</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#module"><span class="post-toc-text">module</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#resolve"><span class="post-toc-text">resolve</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#plugins"><span class="post-toc-text">plugins</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#devServer"><span class="post-toc-text">devServer</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#watch-amp-watchOptions"><span class="post-toc-text">watch &amp; watchOptions</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#performance"><span class="post-toc-text">performance</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#externals"><span class="post-toc-text">externals</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2019/03/21/webpack优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">webpack优化</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
