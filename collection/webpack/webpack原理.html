@@ -8,18 +8,18 @@
   
     <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
   
-  <meta name="description" content="原文链接：https://segmentfault.com/a/1190000015088834?utm_source=tag-newest webpack原理webpack原理 查看所有文档页面：前端开发文档，获取更多信息。原文链接：webpack原理，原文广告模态框遮挡，阅读体验不好，所以整理成本文，方便查找。  工作原理概括基本概念在了解 Webpack 原理前，需要掌握以下几个核心概念，以">
+  <meta name="description" content="原文链接：https://segmentfault.com/a/1190000015088834?utm_source=tag-newest webpack 原理webpack 原理 查看所有文档页面：前端开发文档，获取更多信息。原文链接：webpack 原理，原文广告模态框遮挡，阅读体验不好，所以整理成本文，方便查找。  工作原理概括基本概念在了解 Webpack 原理前，需要掌握以下几个核心概">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Cumber&#39;s Blog">
 <meta property="og:url" content="http://cumbermiao.github.io/collection/webpack/webpack原理.html">
 <meta property="og:site_name" content="Cumber&#39;s Blog">
-<meta property="og:description" content="原文链接：https://segmentfault.com/a/1190000015088834?utm_source=tag-newest webpack原理webpack原理 查看所有文档页面：前端开发文档，获取更多信息。原文链接：webpack原理，原文广告模态框遮挡，阅读体验不好，所以整理成本文，方便查找。  工作原理概括基本概念在了解 Webpack 原理前，需要掌握以下几个核心概念，以">
+<meta property="og:description" content="原文链接：https://segmentfault.com/a/1190000015088834?utm_source=tag-newest webpack 原理webpack 原理 查看所有文档页面：前端开发文档，获取更多信息。原文链接：webpack 原理，原文广告模态框遮挡，阅读体验不好，所以整理成本文，方便查找。  工作原理概括基本概念在了解 Webpack 原理前，需要掌握以下几个核心概">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://segmentfault.com/img/remote/1460000015088839?w=339&h=415">
-<meta property="og:updated_time" content="2019-03-26T11:27:49.743Z">
+<meta property="og:updated_time" content="2019-03-29T06:24:25.092Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cumber&#39;s Blog">
-<meta name="twitter:description" content="原文链接：https://segmentfault.com/a/1190000015088834?utm_source=tag-newest webpack原理webpack原理 查看所有文档页面：前端开发文档，获取更多信息。原文链接：webpack原理，原文广告模态框遮挡，阅读体验不好，所以整理成本文，方便查找。  工作原理概括基本概念在了解 Webpack 原理前，需要掌握以下几个核心概念，以">
+<meta name="twitter:description" content="原文链接：https://segmentfault.com/a/1190000015088834?utm_source=tag-newest webpack 原理webpack 原理 查看所有文档页面：前端开发文档，获取更多信息。原文链接：webpack 原理，原文广告模态框遮挡，阅读体验不好，所以整理成本文，方便查找。  工作原理概括基本概念在了解 Webpack 原理前，需要掌握以下几个核心概">
 <meta name="twitter:image" content="https://segmentfault.com/img/remote/1460000015088839?w=339&h=415">
   
   
@@ -112,8 +112,8 @@
       
             
             <p>原文链接：<a href="https://segmentfault.com/a/1190000015088834?utm_source=tag-newest" target="_blank" rel="noopener">https://segmentfault.com/a/1190000015088834?utm_source=tag-newest</a></p>
-<h1 id="webpack原理"><a href="#webpack原理" class="headerlink" title="webpack原理"></a>webpack原理</h1><h1 id="webpack原理-1"><a href="#webpack原理-1" class="headerlink" title="webpack原理"></a>webpack原理</h1><blockquote>
-<p>查看所有文档页面：<a href="https://whjin.github.io/frontend-dev-doc/" target="_blank" rel="noopener">前端开发文档</a>，获取更多信息。<br>原文链接：<a href="http://webpack.wuhaolin.cn/5%E5%8E%9F%E7%90%86/" target="_blank" rel="noopener">webpack原理</a>，原文广告模态框遮挡，阅读体验不好，所以整理成本文，方便查找。</p>
+<h1 id="webpack-原理"><a href="#webpack-原理" class="headerlink" title="webpack 原理"></a>webpack 原理</h1><h1 id="webpack-原理-1"><a href="#webpack-原理-1" class="headerlink" title="webpack 原理"></a>webpack 原理</h1><blockquote>
+<p>查看所有文档页面：<a href="https://whjin.github.io/frontend-dev-doc/" target="_blank" rel="noopener">前端开发文档</a>，获取更多信息。<br>原文链接：<a href="http://webpack.wuhaolin.cn/5%E5%8E%9F%E7%90%86/" target="_blank" rel="noopener">webpack 原理</a>，原文广告模态框遮挡，阅读体验不好，所以整理成本文，方便查找。</p>
 </blockquote>
 <h1 id="工作原理概括"><a href="#工作原理概括" class="headerlink" title="工作原理概括"></a>工作原理概括</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>在了解 Webpack 原理前，需要掌握以下几个核心概念，以方便后面的理解：</p>
 <ul>
@@ -129,7 +129,7 @@
 <li>开始编译：用上一步得到的参数初始化 Compiler 对象，加载所有配置的插件，执行对象的 run 方法开始执行编译；</li>
 <li>确定入口：根据配置中的 entry 找出所有的入口文件；</li>
 <li>编译模块：从入口文件出发，调用所有配置的 Loader 对模块进行翻译，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理；</li>
-<li>完成模块编译：在经过第4步使用 Loader 翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系；</li>
+<li>完成模块编译：在经过第 4 步使用 Loader 翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系；</li>
 <li>输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再把每个 Chunk 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会；</li>
 <li>输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。</li>
 </ol>
@@ -389,7 +389,7 @@ module.exports = function(source) {
   // 通过 this.callback 告诉 Webpack 返回的结果
   this.callback(null, source, sourceMaps);
   // 当你使用 this.callback 返回内容时，该 Loader 必须返回 undefined，
-  // 以让 Webpack 知道该 Loader 返回的结果在 this.callback 中，而不是 return 中 
+  // 以让 Webpack 知道该 Loader 返回的结果在 this.callback 中，而不是 return 中
   return;
 };
 </code></pre><p>其中的 <code>this.callback</code> 是 Webpack 给 Loader 注入的 API，以方便 Loader 和 Webpack 之间通信。 <code>this.callback</code> 的详细使用方法如下：</p>
@@ -425,7 +425,7 @@ module.exports = function(source) {
     // 在 exports.raw !== true 时，Loader 也可以返回 Buffer 类型的结果
     return source;
 };
-// 通过 exports.raw 属性告诉 Webpack 该 Loader 是否需要二进制数据 
+// 通过 exports.raw 属性告诉 Webpack 该 Loader 是否需要二进制数据
 module.exports.raw = true;
 </code></pre><p>以上代码中最关键的代码是最后一行 <code>module.exports.raw = true;</code>，没有该行 Loader 只能拿到字符串。</p>
 <h2 id="缓存加速"><a href="#缓存加速" class="headerlink" title="缓存加速"></a>缓存加速</h2><p>在有些情况下，有些转换操作需要大量计算非常耗时，如果每次构建都重新执行重复的转换操作，构建将会变得非常缓慢。 为此，Webpack 会默认缓存所有 Loader 的处理结果，也就是说在需要被处理的文件或者其依赖的文件没有发生变化时， 是不会重新调用对应的 Loader 去执行转换操作的。</p>
@@ -467,7 +467,7 @@ module.exports.raw = true;
 <ul>
 <li>确保正在开发的本地 Npm 模块（也就是正在开发的 Loader）的 <code>package.json</code> 已经正确配置好；</li>
 <li>在本地 Npm 模块根目录下执行 <code>npm link</code>，把本地模块注册到全局；</li>
-<li>在项目根目录下执行 <code>npm link loader-name</code>，把第2步注册到全局的本地 Npm 模块链接到项目的 <code>node_moduels</code> 下，其中的 <code>loader-name</code> 是指在第1步中的 <code>package.json</code> 文件中配置的模块名称。</li>
+<li>在项目根目录下执行 <code>npm link loader-name</code>，把第 2 步注册到全局的本地 Npm 模块链接到项目的 <code>node_moduels</code> 下，其中的 <code>loader-name</code> 是指在第 1 步中的 <code>package.json</code> 文件中配置的模块名称。</li>
 </ul>
 <p>链接好 Loader 到项目后你就可以像使用一个真正的 Npm 模块一样使用本地的 Loader 了。</p>
 <h3 id="ResolveLoader"><a href="#ResolveLoader" class="headerlink" title="ResolveLoader"></a><code>ResolveLoader</code></h3><p>ResolveLoader 用于配置 Webpack 如何寻找 Loader。 默认情况下只会去 <code>node_modules</code> 目录下寻找，为了让 Webpack 加载放在本地项目中的 Loader 需要修改 <code>resolveLoader.modules</code>。</p>
@@ -492,7 +492,7 @@ module.exports.raw = true;
       {
         test: /\.js$/,
         use: [&apos;comment-require-loader&apos;],
-        // 针对采用了 fis3 CSS 导入语法的 JavaScript 文件通过 comment-require-loader 去转换 
+        // 针对采用了 fis3 CSS 导入语法的 JavaScript 文件通过 comment-require-loader 去转换
         include: [path.resolve(__dirname, &apos;node_modules/imui&apos;)]
       }
     ]
@@ -500,7 +500,7 @@ module.exports.raw = true;
 };
 </code></pre><p>该 Loader 的实现非常简单，完整代码如下：</p>
 <pre><code>function replace(source) {
-    // 使用正则把 // @require &apos;../style/index.css&apos; 转换成 require(&apos;../style/index.css&apos;);  
+    // 使用正则把 // @require &apos;../style/index.css&apos; 转换成 require(&apos;../style/index.css&apos;);
     return source.replace(/(\/\/ *@require) +((&apos;|&quot;).+(&apos;|&quot;)).*/, &apos;require($2);&apos;);
 }
 
@@ -562,13 +562,11 @@ compiler.plugin(&apos;event-name&apos;,function(params) {
 <li>只要能拿到 Compiler 或 Compilation 对象，就能广播出新的事件，所以在新开发的插件中也能广播出事件，给其它插件监听使用。</li>
 <li>传给每个插件的 Compiler 和 Compilation 对象都是同一个引用。也就是说在一个插件中修改了 Compiler 或 Compilation 对象上的属性，会影响到后面的插件。</li>
 <li><p>有些事件是异步的，这些异步的事件会附带两个参数，第二个参数为回调函数，在插件处理完任务时需要调用回调函数通知 Webpack，才会进入下一处理流程。例如：</p>
-<p> compiler.plugin(‘emit’,function(compilation, callback) {</p>
-<pre><code>// 支持处理逻辑
-
-// 处理完毕后执行 callback 以通知 Webpack 
-// 如果不执行 callback，运行流程将会一直卡在这不往下执行 
+<p>compiler.plugin(‘emit’,function(compilation, callback) {<br>// 支持处理逻辑</p>
+<pre><code>// 处理完毕后执行 callback 以通知 Webpack
+// 如果不执行 callback，运行流程将会一直卡在这不往下执行
 callback();
-</code></pre><p>  });</p>
+</code></pre><p>});</p>
 </li>
 </ul>
 <h2 id="常用-API"><a href="#常用-API" class="headerlink" title="常用 API"></a>常用 API</h2><p>插件可以用来修改输出文件、增加输出文件、甚至可以提升 Webpack 性能、等等，总之插件通过调用 Webpack 提供的 API 能完成很多事情。 由于 Webpack 提供的 API 非常多，有很多 API 很少用的上，又加上篇幅有限，下面来介绍一些常用的 API。</p>
@@ -634,7 +632,7 @@ function hasExtractTextPlugin(compiler) {
       // Webpack 构建成功，并且文件输出了后会执行到这里，在这里可以做发布文件操作
     }, (err) =&gt; {
       // Webpack 构建失败，err 是导致错误的原因
-      console.error(err);        
+      console.error(err);
     })
   ]
 }
@@ -663,7 +661,7 @@ function hasExtractTextPlugin(compiler) {
     });
   }
 }
-// 导出插件 
+// 导出插件
 module.exports = EndWebpackPlugin;
 </code></pre><p>从开发这个插件可以看出，找到合适的事件点去完成功能在开发插件时显得尤为重要。 在 <strong>工作原理概括</strong> 中详细介绍过 Webpack 在运行过程中广播出常用事件，你可以从中找到你需要的事件。</p>
 <h1 id="调试-Webpack"><a href="#调试-Webpack" class="headerlink" title="调试 Webpack"></a>调试 Webpack</h1><p>在编写 Webpack 的 Plugin 和 Loader 时，可能执行结果会和你预期的不一样，就和你平时写代码遇到了奇怪的 Bug 一样。 对于无法一眼看出问题的 Bug，通常需要调试程序源码才能找出问题所在。</p>
@@ -686,7 +684,7 @@ module.exports = EndWebpackPlugin;
 </script>
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年03月26日 19:27</p>
+        <p>最后更新： 2019年03月29日 14:24</p>
         <p>原始链接： <a class="post-url" href="/collection/webpack/webpack原理.html" title="">http://cumbermiao.github.io/collection/webpack/webpack原理.html</a></p>
         <footer>
             <a href="http://cumbermiao.github.io">
@@ -797,7 +795,7 @@ module.exports = EndWebpackPlugin;
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#webpack原理"><span class="post-toc-text">webpack原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#webpack原理-1"><span class="post-toc-text">webpack原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#工作原理概括"><span class="post-toc-text">工作原理概括</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本概念"><span class="post-toc-text">基本概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#流程概括"><span class="post-toc-text">流程概括</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#流程细节"><span class="post-toc-text">流程细节</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#初始化阶段"><span class="post-toc-text">初始化阶段</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编译阶段"><span class="post-toc-text">编译阶段</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输出阶段"><span class="post-toc-text">输出阶段</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#输出文件分析"><span class="post-toc-text">输出文件分析</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#编写-Loader"><span class="post-toc-text">编写 Loader</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#监听文件变化"><span class="post-toc-text">监听文件变化</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#webpack-原理"><span class="post-toc-text">webpack 原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#webpack-原理-1"><span class="post-toc-text">webpack 原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#工作原理概括"><span class="post-toc-text">工作原理概括</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本概念"><span class="post-toc-text">基本概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#流程概括"><span class="post-toc-text">流程概括</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#流程细节"><span class="post-toc-text">流程细节</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#初始化阶段"><span class="post-toc-text">初始化阶段</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编译阶段"><span class="post-toc-text">编译阶段</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输出阶段"><span class="post-toc-text">输出阶段</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#输出文件分析"><span class="post-toc-text">输出文件分析</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#编写-Loader"><span class="post-toc-text">编写 Loader</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#监听文件变化"><span class="post-toc-text">监听文件变化</span></a></li></ol></li></ol>
         </nav>
     </aside>
     

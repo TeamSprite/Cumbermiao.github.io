@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="原文链接：https://zhuanlan.zhihu.com/p/37913276 记忆化技术介绍——使用闭包提升你的 React 性能导读 动机 记忆化技术 在 React 中使用 memoize-one 用闭包实现记忆化技术 React Hook 中的记忆化技术提高你的组件性能  动机在开发 React 项目中，有一种场景很常见：从服务器中请求了一个数据结构，这个结构非常复杂，甚至还有一些垃">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:url" content="http://cumbermiao.github.io/collection/react/记忆化技术介绍——使用闭包提升你的 React 性能.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="原文链接：https://zhuanlan.zhihu.com/p/37913276 记忆化技术介绍——使用闭包提升你的 React 性能导读 动机 记忆化技术 在 React 中使用 memoize-one 用闭包实现记忆化技术 React Hook 中的记忆化技术提高你的组件性能  动机在开发 React 项目中，有一种场景很常见：从服务器中请求了一个数据结构，这个结构非常复杂，甚至还有一些垃">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-cba0b89d2bf2d96a1ed26edb5849f804_180x120.jpg">
+<meta property="og:updated_time" content="2019-03-28T09:40:11.197Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cumber&#39;s Blog">
+<meta name="twitter:description" content="原文链接：https://zhuanlan.zhihu.com/p/37913276 记忆化技术介绍——使用闭包提升你的 React 性能导读 动机 记忆化技术 在 React 中使用 memoize-one 用闭包实现记忆化技术 React Hook 中的记忆化技术提高你的组件性能  动机在开发 React 项目中，有一种场景很常见：从服务器中请求了一个数据结构，这个结构非常复杂，甚至还有一些垃">
+<meta name="twitter:image" content="https://pic1.zhimg.com/v2-cba0b89d2bf2d96a1ed26edb5849f804_180x120.jpg">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <p>原文链接：<a href="https://zhuanlan.zhihu.com/p/37913276" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/37913276</a></p>
+<h1 id="记忆化技术介绍——使用闭包提升你的-React-性能"><a href="#记忆化技术介绍——使用闭包提升你的-React-性能" class="headerlink" title="记忆化技术介绍——使用闭包提升你的 React 性能"></a>记忆化技术介绍——使用闭包提升你的 React 性能</h1><h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a><strong>导读</strong></h2><ol>
+<li>动机</li>
+<li>记忆化技术</li>
+<li>在 React 中使用 memoize-one</li>
+<li>用闭包实现记忆化技术</li>
+<li>React Hook 中的记忆化技术提高你的组件性能</li>
+</ol>
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a><strong>动机</strong></h2><p>在开发 React 项目中，有一种场景很常见：从服务器中请求了一个数据结构，这个结构非常复杂，甚至还有一些垃圾字段。这个数据结构一般通过 React 组件的 props 传入组件。而我们在render 的时候需要对这个很复杂的数据结构要做处理，比如过滤一些无用的信息，或者重新组合这个数据结构以便更方便的 render。</p>
+<p>来看一下这个例子：</p>
+<pre><code>class Example extends PureComponent {
+  // 当前的过滤文本:
+  state = {
+    filterText: &quot;&quot;
+  };
+
+  handleChange = event =&gt; {
+    this.setState({ filterText: event.target.value });
+  };
+
+  render() {
+    // 在 PureComponent 中，render 方发只有在 state.filterText 和 props.list
+    // 变化的时候才会重新调用
+    const filteredList = this.props.list.filter(
+      item =&gt; item.text.includes(this.state.filterText)
+    )
+
+    return (
+      &lt;Fragment&gt;
+        &lt;input onChange={this.handleChange} value={this.state.filterText} /&gt;
+        &lt;ul&gt;{filteredList.map(item =&gt; &lt;li key={item.id}&gt;{item.text}&lt;/li&gt;)}&lt;/ul&gt;
+      &lt;/Fragment&gt;
+    );
+  }
+}
+</code></pre><p>在上面这个例子中，filter 这一段代码的逻辑其实就是我们所说的，对 <em>从服务器拿来的数据结构</em> 进行处理的过程。每一次调用 render 方法都会调用 filter 这段逻辑。我们在一个组件中更新其实是比较频繁的，而 filter 的逻辑其实也相当占用CPU资源以及时间。如果每次更新调用 render 方法都要走一次这一段 filter 的逻辑，其实是非常消耗时间的。这对 App 的性能也会造成影响。</p>
+<p>而在实际的开发中，数据结构往往更加复杂，有时候甚至会有多次的循环。有时候组件的更新<strong>并不是</strong>因为从服务器拿来的这一段数据结构发生变化造成的（组件中的其他部分更新造成的），但是这一段很重的逻辑因为是写在 render 中的，所以不可避免的在每次 render 会调用一次。如果这段逻辑在两次调用的时候，输入参数是一样的，那么输出结果必然一样，所以再次计算是一种十分浪费资源的行为。</p>
+<p>那么有没有一种方法可以避免这种行为呢？确实是有的，下面我们介绍一种名为 memoization 的技术，中文翻译叫 “记忆化技术”</p>
+<h2 id="记忆化技术"><a href="#记忆化技术" class="headerlink" title="记忆化技术"></a><strong>记忆化技术</strong></h2><p>记忆化，顾名思义，就是把函数的调用结果记下来，或者缓存下来。如果下次调用这个函数的时候，输入的参数和上一次的完全一致，那么我们就不需要再次进行计算，而是把上一此的结果直接返回。</p>
+<p>看一下维基百科对记忆化的定义：</p>
+<blockquote>
+<p>在<a href="https://link.zhihu.com/?target=https%3A//zh.wikipedia.org/wiki/%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25A7%2591%25E5%25AD%25A6" target="_blank" rel="noopener">计算机科学</a>中，<strong>记忆化</strong>（英語：memoization而非memorization）是一种提高程序运行速度的优化技术。通过储存大计算量<a href="https://link.zhihu.com/?target=https%3A//zh.wikipedia.org/wiki/%25E5%25AD%2590%25E7%25A8%258B%25E5%25BA%258F" target="_blank" rel="noopener">函数</a>的返回值，当这个结果再次被需要时将其从<a href="https://link.zhihu.com/?target=https%3A//zh.wikipedia.org/wiki/%25E7%25BC%2593%25E5%25AD%2598" target="_blank" rel="noopener">缓存</a>提取，而不用再次计算来节省计算时间。<br>记忆化是一种典型的时间存储平衡方案。</p>
+</blockquote>
+<h2 id="在-React-中使用-memoize-one"><a href="#在-React-中使用-memoize-one" class="headerlink" title="在 React 中使用 memoize-one"></a><strong>在 React 中使用 memoize-one</strong></h2><p>根据 “memoize-one” 的名字可以知道，这个库缓存了一个结果 one， 而不是 two 或者其他数字。缓存一次而不是多次，可以节约内存。虽然只有一次，但不失为一个很好的折中方案。</p>
+<p>在上一节的 React 的场景中，如果把之前计算的结果缓存起来，这样每次 render 的时候，如果从服务器拿到的数据结构和上一次 render 的时候一样，就可以非常快的把结果渲染出来。这样本来需要 O(n) ，O(n2) 甚至更高复杂度的算法，我们瞬间可以以 O(1) 的效率把结果直接从缓存中读取出来。</p>
+<p>说了这么多，我们来看一下这个 memoize-one 到底是怎么用的呢？</p>
+<ol>
+<li><p>安装</p>
+<p>$ npm install memoize-one</p>
+</li>
+</ol>
+<p>2. API 简介以及用例</p>
+<pre><code>import memoizeOne from &apos;memoize-one&apos;;
+
+const add = (a, b) =&gt; a + b;
+const memoizedAdd = memoizeOne(add);
+
+memoizedAdd(1, 2); // 3
+
+memoizedAdd(1, 2); // 3
+// Add 函数并没有执行: 前一次执行的结果被返回
+
+memoizedAdd(2, 3); // 5
+// Add 函数再次被调用以获得新的结果
+
+memoizedAdd(2, 3); // 5
+// Add 函数并没有执行: 前一次执行的结果被返回
+
+memoizedAdd(1, 2); // 3
+// Add 函数再次被调用以获得新的结果
+// 虽然之前调用过
+// 但是不是上一次调用的，所以结果丢失了
+</code></pre><p>3. 在 React 中使用memoize-one</p>
+<pre><code>import memoize from &quot;memoize-one&quot;;
+
+class Example extends Component {
+  // 当前的过滤文本:
+  state = { filterText: &quot;&quot; };
+
+  // 只有在 list 和 filterText 改变的时候才会重新执行 filter 函数
+  filter = memoize(
+    (list, filterText) =&gt; list.filter(item =&gt; item.text.includes(filterText))
+  );
+
+  handleChange = event =&gt; {
+    this.setState({ filterText: event.target.value });
+  };
+
+  render() {
+    // 计算最新的过滤值. 如果参数没有发生改变
+    // 之前的一次 render 之后, `memoize-one` 会再次利用上一次的返回结果.
+    const filteredList = this.filter(this.props.list, this.state.filterText);
+
+    return (
+      &lt;Fragment&gt;
+        &lt;input onChange={this.handleChange} value={this.state.filterText} /&gt;
+        &lt;ul&gt;{filteredList.map(item =&gt; &lt;li key={item.id}&gt;{item.text}&lt;/li&gt;)}&lt;/ul&gt;
+      &lt;/Fragment&gt;
+    );
+  }
+}
+</code></pre><p>这样，我们就在 React 中实现了记忆化，性能也会得到提升。因为这样可以避免 render 的时候，浪费性地调用复杂的数据处理函数。</p>
+<p>那么在 JavaScript 中，记忆化函数 memoize-one 是如何实现的呢？</p>
+<h2 id="使用闭包来实现记忆化技术"><a href="#使用闭包来实现记忆化技术" class="headerlink" title="使用闭包来实现记忆化技术"></a><strong>使用闭包来实现记忆化技术</strong></h2><p>在前面的代码中，我们并没有看到上一次返回的结果被显式的存在一个缓存变量中。那么究竟是如何实现缓存的呢？其实很简单，缓存技术使用了JavaScript 中的_闭包_。</p>
+<p>本文假定你熟悉 JavaScript 中_闭包_的概念，如果你不熟悉闭包，可以参考<a href="https://link.zhihu.com/?target=https%3A//github.com/getify/You-Dont-Know-JS/blob/1ed-zh-CN/scope%2520%26%2520closures/README.md%23you-dont-know-js-scope--closures" target="_blank" rel="noopener">你不知道的JavaScript——作用域与闭包</a></p>
+<p>momoize-one 的源码可以在 <a href="https://link.zhihu.com/?target=https%3A//github.com/alexreardon/memoize-one/blob/master/src/index.js" target="_blank" rel="noopener">GitHub</a> 中查看，源码只有三十几行，非常简单，也很好理解。下面我把源码更简化一下，来介绍这个库实现的原理。</p>
+<pre><code>export function memoize (resultFn) {
+  let lastArgs = []; // 用来存放上一次调用的参数
+  let lastResult; // 用来缓存上一次的结果
+  let calledOnce: boolean = false; // 是否调用过，刚开始的时候是false
+
+  // 判断两次调用的时候的参数是否相等
+  // 这里的 `isEqual` 是一个抽象函数，用来判断两个值是否相等
+  const isNewArgEqualToLast = (newArg, index) =&gt; isEqual(newArg, lastArgs[index]);
+
+  // 如果上一次的参数和这一次一样，直接返回上一次的结果
+  const result = function (...newArgs) {
+    if (
+      calledOnce &amp;&amp;
+      newArgs.length === lastArgs.length &amp;&amp;
+      newArgs.every(isNewArgEqualToLast)
+    ) {
+      // 如果和上次的参数一致， 直接返回缓存的值
+      return lastResult;
+    }
+
+    // 如果和上一次的参数不一致，我们需要再次调用原来的函数
+    calledOnce = true; // 标记为调用过
+    lastArgs = newArgs; // 重新缓存参数
+    lastResult = resultFn.apply(this, newArgs); //重新缓存返回值
+
+    return lastResult;
+  }
+
+  // 返回闭包函数
+  return result;
+}
+</code></pre><p>原理非常简单，可以通过我的注释来理解。</p>
+<p>注意，我的代码中有一个 <code>isEqual</code> 的抽象函数，用来判断两次的参数是否一致。因为对相等的理解，不同场景不一样，而且参数有时候是复杂的对象，所以我们不能仅仅通过比较操作符 <code>==</code> 或者 <code>===</code> 来判断。<code>memoize-one</code> 允许用户自定义传入判断是否相等的函数，比如我们可以使用 lodash 的 isEqual 来判断两次参数是否相等。</p>
+<pre><code>import memoizeOne from &apos;memoize-one&apos;;
+import deepEqual from &apos;lodash.isEqual&apos;;
+
+const identity = x =&gt; x;
+
+const defaultMemoization = memoizeOne(identity);
+const customMemoization = memoizeOne(identity, deepEqual);
+
+const result1 = defaultMemoization({foo: &apos;bar&apos;});
+const result2 = defaultMemoization({foo: &apos;bar&apos;});
+
+result1 === result2 // false - 索引不同
+
+const result3 = customMemoization({foo: &apos;bar&apos;});
+const result4 = customMemoization({foo: &apos;bar&apos;});
+
+result3 === result4 // true - 参数通过 lodash 的 isEqual 判断是相等的
+</code></pre><h2 id="补充：React-Hook-中的记忆化技术提高你的组件性能"><a href="#补充：React-Hook-中的记忆化技术提高你的组件性能" class="headerlink" title="补充：React Hook 中的记忆化技术提高你的组件性能"></a>补充：React Hook 中的记忆化技术提高你的组件性能</h2><p>React 16.8 带来了全新的 Hook。Hook 为我们提供了原生的记忆化 API，我们可以使用 <a href="https://link.zhihu.com/?target=https%3A//reactjs.org/docs/hooks-reference.html%23usememo" target="_blank" rel="noopener">useMemo</a> 来实现上文所说的记忆化技术。具体用法请直接参考 API 文档。也可以阅读 Dan 的这篇文章：<a href="https://link.zhihu.com/?target=https%3A//overreacted.io/writing-resilient-components/" target="_blank" rel="noopener">Writing Resilient Components</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a><strong>参考资料</strong></h2><p><a href="https://link.zhihu.com/?target=https%3A//reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html%23what-about-memoization" target="_blank" rel="noopener">You Probably Don&#39;t Need Derived State - React Blog​reactjs.org<img src="https://pic1.zhimg.com/v2-cba0b89d2bf2d96a1ed26edb5849f804_180x120.jpg" alt="图标"></a><a href="https://link.zhihu.com/?target=https%3A//www.npmjs.com/package/memoize-one" target="_blank" rel="noopener">memoize-one​www.npmjs.com</a></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年03月28日 17:40</p>
+        <p>原始链接： <a class="post-url" href="/collection/react/记忆化技术介绍——使用闭包提升你的 React 性能.html" title="">http://cumbermiao.github.io/collection/react/记忆化技术介绍——使用闭包提升你的 React 性能.html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/collection/react/记忆化技术介绍——使用闭包提升你的 React 性能.html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/collection/react/记忆化技术介绍——使用闭包提升你的 React 性能.html&title=Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/collection/react/记忆化技术介绍——使用闭包提升你的 React 性能.html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/collection/react/记忆化技术介绍——使用闭包提升你的 React 性能.html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/collection/react/记忆化技术介绍——使用闭包提升你的 React 性能.html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/collection/react/记忆化技术介绍——使用闭包提升你的 React 性能.html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#记忆化技术介绍——使用闭包提升你的-React-性能"><span class="post-toc-text">记忆化技术介绍——使用闭包提升你的 React 性能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#导读"><span class="post-toc-text">导读</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动机"><span class="post-toc-text">动机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#记忆化技术"><span class="post-toc-text">记忆化技术</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在-React-中使用-memoize-one"><span class="post-toc-text">在 React 中使用 memoize-one</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用闭包来实现记忆化技术"><span class="post-toc-text">使用闭包来实现记忆化技术</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#补充：React-Hook-中的记忆化技术提高你的组件性能"><span class="post-toc-text">补充：React Hook 中的记忆化技术提高你的组件性能</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考资料"><span class="post-toc-text">参考资料</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

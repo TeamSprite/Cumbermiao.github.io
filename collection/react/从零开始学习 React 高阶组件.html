@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="原文链接：https://segmentfault.com/a/1190000018633603?utm_medium=hao.caibaojian.com 从零开始学习 React 高阶组件01、介绍 React 高阶组件也叫做 React HOC(High Order Component), 它是react中的高级技术, 用来重用组件逻辑。 但高阶组件本身并不是React API。它只是一种模">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:url" content="http://cumbermiao.github.io/collection/react/从零开始学习 React 高阶组件.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="原文链接：https://segmentfault.com/a/1190000018633603?utm_medium=hao.caibaojian.com 从零开始学习 React 高阶组件01、介绍 React 高阶组件也叫做 React HOC(High Order Component), 它是react中的高级技术, 用来重用组件逻辑。 但高阶组件本身并不是React API。它只是一种模">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://segmentfault.com/img/remote/1460000018633606?w=588&h=404">
+<meta property="og:image" content="https://segmentfault.com/img/remote/1460000018633607?w=298&h=127">
+<meta property="og:image" content="https://segmentfault.com/img/remote/1460000018633608?w=389&h=133">
+<meta property="og:updated_time" content="2019-03-28T09:42:07.682Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cumber&#39;s Blog">
+<meta name="twitter:description" content="原文链接：https://segmentfault.com/a/1190000018633603?utm_medium=hao.caibaojian.com 从零开始学习 React 高阶组件01、介绍 React 高阶组件也叫做 React HOC(High Order Component), 它是react中的高级技术, 用来重用组件逻辑。 但高阶组件本身并不是React API。它只是一种模">
+<meta name="twitter:image" content="https://segmentfault.com/img/remote/1460000018633606?w=588&h=404">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <p>原文链接：<a href="https://segmentfault.com/a/1190000018633603?utm_medium=hao.caibaojian.com" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018633603?utm_medium=hao.caibaojian.com</a></p>
+<h1 id="从零开始学习-React-高阶组件"><a href="#从零开始学习-React-高阶组件" class="headerlink" title="从零开始学习 React 高阶组件"></a>从零开始学习 React 高阶组件</h1><h2 id="01、介绍"><a href="#01、介绍" class="headerlink" title="01、介绍"></a>01、介绍</h2><ul>
+<li>React 高阶组件也叫做 React HOC(High Order Component), 它是react中的高级技术, 用来重用组件逻辑。</li>
+<li>但高阶组件本身并不是React API。它只是一种模式，这种模式是由react自身的组合性质必然产生的。</li>
+<li>那么在学习高阶组件之前有一个概念我们必须清楚，就是高阶函数。</li>
+</ul>
+<h2 id="02、高阶函数"><a href="#02、高阶函数" class="headerlink" title="02、高阶函数"></a>02、高阶函数</h2><ul>
+<li>概念：<strong>高阶函数是一个函数，它接收函数作为参数或将函数作为输出返回</strong></li>
+<li><p>举个栗子:</p>
+<ul>
+<li><p>接收函数作为参数</p>
+<pre><code>function a(x) {
+  x();
+}
+function b() {
+  alert(&apos;hello&apos;);
+}
+
+a(b);
+</code></pre></li>
+<li><p>将函数作为输出返回</p>
+<pre><code>function a() {
+  function b() {
+    alert(&apos;hello&apos;);
+  }
+  return b;
+}
+
+a()();
+</code></pre></li>
+</ul>
+</li>
+<li><p>以上函数a就是一个高阶函数, 用法非常简单, 那么实际开发中又有哪些是高阶函数呢？</p>
+<ul>
+<li>Array 的 map 、reduce 、filter 等方法</li>
+<li>Object 的 keys 、values 等方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="03、高阶组件"><a href="#03、高阶组件" class="headerlink" title="03、高阶组件"></a>03、高阶组件</h2><ul>
+<li>概念：<strong>高阶组件就是一个函数，且该函数接受一个组件作为参数，并返回一个新的组件</strong></li>
+<li><p>举个栗子：</p>
+<pre><code>// WrappedComponent 就是传入的包装组件
+function withHoc(WrappedComponent) {
+  return class extends Component {
+    render () {
+      return (
+        &lt;WrappedComponent /&gt;
+      )
+    }
+  }
+}
+</code></pre></li>
+<li><p>withHoc 函数就是一个高阶组件。那么高阶组件到底有什么神奇的魔力，值得我们为之着迷？</p>
+</li>
+<li><strong>开发组件时，我们会遇到相同的功能，使用高阶组件则能减少重复代码</strong></li>
+</ul>
+<h2 id="04、高阶组件实训1"><a href="#04、高阶组件实训1" class="headerlink" title="04、高阶组件实训1"></a>04、高阶组件实训1</h2><ul>
+<li>目的: 定义高阶组件</li>
+<li><p>组件 Login – 登陆页面</p>
+<pre><code>// 受控组件
+class Login extends Component {
+  state = {
+    username: &apos;&apos;,
+    password: &apos;&apos;
+  }
+
+  onUsernameChange = (e) =&gt; {
+    this.setState({username: e.target.value});
+  }
+
+  onPasswordChange = (e) =&gt; {
+    this.setState({password: e.target.value});
+  }
+
+  login = (e) =&gt; {
+    // 禁止默认事件
+    e.preventDefault();
+    // 收集表单数据
+    const { username, password } = this.state;
+    alert(`用户名: ${username}, 密码: ${password}`);
+  }
+
+  render () {
+    const { username, password } = this.state;
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;登陆&lt;/h2&gt;
+        &lt;form onSubmit={this.login}&gt;
+          用户名: &lt;input type=&quot;text&quot; name=&quot;username&quot; value={username} onChange={this.onUsernameChange}/&gt; &lt;br/&gt;
+          密码: &lt;input type=&quot;password&quot; name=&quot;password&quot; value={password} onChange={this.onPasswordChange}/&gt; &lt;br/&gt;
+          &lt;input type=&quot;submit&quot; value=&quot;登陆&quot;/&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre></li>
+<li><p>组件 Register – 注册页面</p>
+<pre><code>// 受控组件
+class Register extends Component {
+  state = {
+    username: &apos;&apos;,
+    password: &apos;&apos;,
+    rePassword: &apos;&apos;
+  }
+
+  onUsernameChange = (e) =&gt; {
+    this.setState({username: e.target.value});
+  }
+
+  onPasswordChange = (e) =&gt; {
+    this.setState({password: e.target.value});
+  }
+
+  onRePasswordChange = (e) =&gt; {
+    this.setState({rePassword: e.target.value});
+  }
+
+  register = (e) =&gt; {
+    // 禁止默认事件
+    e.preventDefault();
+    // 收集表单数据
+    const { username, password, rePassword } = this.state;
+    alert(`用户名: ${username}, 密码: ${password}, 确认密码: ${rePassword}`);
+  }
+
+  render () {
+    const { username, password, rePassword } = this.state;
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;注册&lt;/h2&gt;
+        &lt;form onSubmit={this.register}&gt;
+          用户名: &lt;input type=&quot;text&quot; name=&quot;username&quot; value={username} onChange={this.onUsernameChange}/&gt; &lt;br/&gt;
+          密码: &lt;input type=&quot;password&quot; name=&quot;password&quot; value={password} onChange={this.onPasswordChange}/&gt; &lt;br/&gt;
+          确认密码: &lt;input type=&quot;password&quot; name=&quot;rePassword&quot; value={rePassword} onChange={this.onRePasswordChange}/&gt; &lt;br/&gt;
+          &lt;input type=&quot;submit&quot; value=&quot;注册&quot;/&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre></li>
+<li><p>页面效果<br><img src="https://segmentfault.com/img/remote/1460000018633606?w=588&amp;h=404" alt=""></p>
+</li>
+<li><p>我们发现里面重复逻辑实在太多了，尤其是 onXxxChange 函数出现太多，我们先优化一下。</p>
+<pre><code>// 我们以 Register 组件为例来看
+class Register extends Component {
+  state = {
+    username: &apos;&apos;,
+    password: &apos;&apos;,
+    rePassword: &apos;&apos;
+  }
+  // 最终修改状态数据的函数
+  onChange = (stateName, stateValue) =&gt; {
+    this.setState({[stateName]: stateValue});
+  }
+  // 高阶函数 --&gt; 这样后面就能一直复用当前函数，而不用重新创建了~
+  composeChange = (name) =&gt; {
+    return (e) =&gt; this.onChange(name, e.target.value);
+  }
+  // 统一所有提交表单函数名
+  handleSubmit = (e) =&gt; {
+    e.preventDefault();
+    const { username, password, rePassword } = this.state;
+    alert(`用户名: ${username}, 密码: ${password}, 确认密码: ${rePassword}`);
+  }
+
+  render () {
+    const { username, password, rePassword } = this.state;
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;注册&lt;/h2&gt;
+        &lt;form onSubmit={this.handleSubmit}&gt;
+          用户名: &lt;input type=&quot;text&quot; name=&quot;username&quot; value={username} onChange={this.composeChange(&apos;username&apos;)}/&gt; &lt;br/&gt;
+          密码: &lt;input type=&quot;password&quot; name=&quot;password&quot; value={password} onChange={this.composeChange(&apos;password&apos;)}/&gt; &lt;br/&gt;
+          确认密码: &lt;input type=&quot;password&quot; name=&quot;rePassword&quot; value={rePassword} onChange={this.composeChange(&apos;rePassword&apos;)}/&gt; &lt;br/&gt;
+          &lt;input type=&quot;submit&quot; value=&quot;注册&quot;/&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre></li>
+<li><p>现在两个页面都有 onChange 、 composeChange 、handleSubmit 函数和相关的状态，我们接下来提取，封装成<strong>高阶组件</strong>！</p>
+<pre><code>// 高阶组件 withHoc
+export default function withHoc(WrappedComponent) {
+  return class extends Component {
+    state = {
+      username: &apos;&apos;,
+      password: &apos;&apos;,
+      rePassword: &apos;&apos;
+    }
+
+    onChange = (stateName, stateValue) =&gt; {
+      this.setState({[stateName]: stateValue});
+    }
+
+    composeChange = (name) =&gt; {
+      return (e) =&gt; this.onChange(name, e.target.value);
+    }
+
+    handleSubmit = (e) =&gt; {
+      e.preventDefault();
+      const { username, password, rePassword } = this.state;
+      if (rePassword) {
+        alert(`用户名: ${username}, 密码: ${password}, 确认密码: ${rePassword}`);
+      } else {
+        alert(`用户名: ${username}, 密码: ${password}`);
+      }
+    }
+
+    render () {
+      // 抽取方法
+      const mapMethodToProps = {
+        composeChange: this.composeChange,
+        handleSubmit: this.handleSubmit,
+      }
+      // 将状态数据和操作的方法以 props 的方式传入的包装组件中
+      return (
+        &lt;div&gt;
+          {/*提取公共头部*/}
+          &lt;h2&gt;xxx&lt;/h2&gt;
+          &lt;WrappedComponent {...this.state} {...mapMethodToProps}/&gt;
+        &lt;/div&gt;
+      )
+    }
+  }
+}
+
+// 组件 Register
+class Register extends Component {
+  render () {
+    const { handleSubmit, composeChange, username, password, rePassword } = this.props;
+    return (
+      &lt;form onSubmit={handleSubmit}&gt;
+        用户名: &lt;input type=&quot;text&quot; name=&quot;username&quot; value={username} onChange={composeChange(&apos;username&apos;)}/&gt; &lt;br/&gt;
+        密码: &lt;input type=&quot;password&quot; name=&quot;password&quot; value={password} onChange={composeChange(&apos;password&apos;)}/&gt; &lt;br/&gt;
+        确认密码: &lt;input type=&quot;password&quot; name=&quot;rePassword&quot; value={rePassword} onChange={composeChange(&apos;rePassword&apos;)}/&gt; &lt;br/&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;注册&quot;/&gt;
+      &lt;/form&gt;
+    )
+  }
+}
+// 向外暴露的是高阶组件的返回值~包装了 Register 组件返回了一个新组件
+export default withHoc(Register);
+</code></pre></li>
+<li><p>现在我们提取了公共方法、状态等数据, 封装了一个基本的高阶组件。 但是还有很多需要问题需要解决，现在开始行动~</p>
+</li>
+</ul>
+<h2 id="05、高阶组件实训2"><a href="#05、高阶组件实训2" class="headerlink" title="05、高阶组件实训2"></a>05、高阶组件实训2</h2><ul>
+<li>目的: 向高阶组件中传参</li>
+<li><p>修改高阶组件</p>
+<pre><code>// 再次包裹了一层高阶函数, 这个高阶函数执行后返回值才是高阶组件
+// 通过这种方式, 高阶组件内部就能获取参数了~
+export default (title) =&gt; (WrappedComponent) =&gt; {
+  return class Form extends Component {
+    ...重复代码省略...
+
+    render () {
+      const mapMethodToProps = {
+        composeChange: this.composeChange,
+        handleSubmit: this.handleSubmit,
+      }
+      return (
+        &lt;div&gt;
+          {/*获取到参数值就能正常显示了~*/}
+          &lt;h2&gt;{title}&lt;/h2&gt;
+          &lt;WrappedComponent {...this.state} {...mapMethodToProps}/&gt;
+        &lt;/div&gt;
+      )
+    }
+  }
+}
+</code></pre></li>
+<li><p>在 Login / Register 组件中使用</p>
+<ul>
+<li>export default withHoc(‘登陆’)(Login);</li>
+<li>export default withHoc(‘注册’)(Register);</li>
+</ul>
+</li>
+</ul>
+<h2 id="06、高阶组件实训3"><a href="#06、高阶组件实训3" class="headerlink" title="06、高阶组件实训3"></a>06、高阶组件实训3</h2><ul>
+<li>目的: 获取父组件传递的 props</li>
+<li><p>修改 App 组件</p>
+<pre><code>class App extends Component {
+  render() {
+    return (
+      &lt;div&gt;
+        {/*父组件向子组件传递属性*/}
+        &lt;Login name=&quot;jack&quot; age={18}/&gt;
+        &lt;Register /&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+</code></pre></li>
+<li><p>修改高阶组件</p>
+<pre><code>export default (title) =&gt; (WrappedComponent) =&gt; {
+  return class Form extends Component {
+    ...重复代码省略...
+
+    render () {
+      const mapMethodToProps = {
+        composeChange: this.composeChange,
+        handleSubmit: this.handleSubmit,
+      }
+      return (
+        &lt;div&gt;
+          {/*获取到参数值就能正常显示了~*/}
+          &lt;h2&gt;{title}&lt;/h2&gt;
+          {/* 将当前组件接受到的props传给包装组件~*/}
+          &lt;WrappedComponent {...this.props} {...this.state} {...mapMethodToProps}/&gt;
+        &lt;/div&gt;
+      )
+    }
+  }
+}
+</code></pre></li>
+<li><p>Login 组件中使用</p>
+<pre><code>class Login extends Component {
+  render () {
+    const { handleSubmit, composeChange, username, password, name, age } = this.props;
+    return (
+      &lt;div&gt;
+        &lt;p&gt;你的名字: {name}&lt;/p&gt;
+        &lt;p&gt;你的年龄: {age}&lt;/p&gt;
+        &lt;form onSubmit={handleSubmit}&gt;
+          用户名: &lt;input type=&quot;text&quot; name=&quot;username&quot; value={username} onChange={composeChange(&apos;username&apos;)}/&gt; &lt;br/&gt;
+          密码: &lt;input type=&quot;password&quot; name=&quot;password&quot; value={password} onChange={composeChange(&apos;password&apos;)}/&gt; &lt;br/&gt;
+          &lt;input type=&quot;submit&quot; value=&quot;登陆&quot;/&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre></li>
+</ul>
+<h2 id="07、高阶组件实训4"><a href="#07、高阶组件实训4" class="headerlink" title="07、高阶组件实训4"></a>07、高阶组件实训4</h2><ul>
+<li>目的: 修改在 React-devtool 中高阶组件名称，方便调试</li>
+<li><p>修改高阶组件</p>
+<pre><code>export default (title) =&gt; (WrappedComponent) =&gt; {
+  return class Form extends Component {
+    // 定义静态方法，修改组件在调试工具中显示的名称
+    static displayName = `Form(${getDisplayName(WrappedComponent)})`
+
+    ...省略重复代码...
+  }
+}
+// 获取包装组件的displayName的方法
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || &apos;Component&apos;;
+}
+</code></pre></li>
+<li><p>修改之前名称</p>
+</li>
+</ul>
+<p><img src="https://segmentfault.com/img/remote/1460000018633607?w=298&amp;h=127" alt=""></p>
+<ul>
+<li>修改之后名称</li>
+</ul>
+<p><img src="https://segmentfault.com/img/remote/1460000018633608?w=389&amp;h=133" alt=""></p>
+<h2 id="08、使用装饰器"><a href="#08、使用装饰器" class="headerlink" title="08、使用装饰器"></a>08、使用装饰器</h2><ul>
+<li>目的: 简化使用高阶组件</li>
+<li><p>下载包</p>
+<ul>
+<li>npm i react-app-rewired customize-cra @babel/plugin-proposal-decorators -D</li>
+</ul>
+</li>
+<li><p>在项目根目录配置 config-overrides.js</p>
+<pre><code>const { override, addBabelPlugins } = require(&apos;customize-cra&apos;);
+// 修改 create-react-app 的 webpack 的配置
+module.exports = override(
+  // 添加 babel 插件
+  addBabelPlugins(
+    [
+      &quot;@babel/plugin-proposal-decorators&quot;,
+      {
+        &quot;legacy&quot;: true
+      }
+    ]
+  )
+)
+</code></pre></li>
+<li><p>修改 package.json 的 scripts</p>
+<pre><code>// 将 react-scripts 修改为 react-app-rewired
+&quot;scripts&quot;: {
+  &quot;start&quot;: &quot;react-app-rewired start&quot;,
+  &quot;build&quot;: &quot;react-app-rewired build&quot;,
+  &quot;test&quot;: &quot;react-app-rewired test&quot;
+},
+</code></pre></li>
+<li><p>以上就是使用 decorator 的配置，修改完后就能使用了~</p>
+</li>
+<li><p>修改 Login 组件</p>
+<pre><code>@withHoc(&apos;登陆&apos;)
+class Login extends Component {
+  ...省略重复代码...
+}
+export default Login;
+</code></pre></li>
+<li><p>修改 Register 组件</p>
+<pre><code>@withHoc(&apos;注册&apos;)
+class Register extends Component {
+  ...省略重复代码...
+}
+export default Register;
+</code></pre></li>
+<li><p>react-app-rewired customize-cra 是 create-react-app 2.0以上专门用来修改 webpack 的配置</p>
+</li>
+<li>decorator 还能做很多事，感兴趣朋友可以看看 <a href="http://es6.ruanyifeng.com/#docs/decorator" target="_blank" rel="noopener">阮一峰ES6教程</a> 了解更多</li>
+</ul>
+<blockquote>
+<p>重复代码永远是我们需要考虑处理的代码，所以我们有模块化、组件化、工具类函数等等，<br>在 React 中再次引入了一个高阶组件的概念，都是为了去除掉万恶的重复代码，让我们代码变得更加精简。<br>本篇文章所有源码都放在了 <a href="https://github.com/xxpromise/React-HOC" target="_blank" rel="noopener">git仓库</a>，如果它对你有帮助的话，欢迎点 star ~~</p>
+</blockquote>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年03月28日 17:42</p>
+        <p>原始链接： <a class="post-url" href="/collection/react/从零开始学习 React 高阶组件.html" title="">http://cumbermiao.github.io/collection/react/从零开始学习 React 高阶组件.html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/collection/react/从零开始学习 React 高阶组件.html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/collection/react/从零开始学习 React 高阶组件.html&title=Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/collection/react/从零开始学习 React 高阶组件.html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/collection/react/从零开始学习 React 高阶组件.html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/collection/react/从零开始学习 React 高阶组件.html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/collection/react/从零开始学习 React 高阶组件.html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#从零开始学习-React-高阶组件"><span class="post-toc-text">从零开始学习 React 高阶组件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#01、介绍"><span class="post-toc-text">01、介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#02、高阶函数"><span class="post-toc-text">02、高阶函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#03、高阶组件"><span class="post-toc-text">03、高阶组件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#04、高阶组件实训1"><span class="post-toc-text">04、高阶组件实训1</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#05、高阶组件实训2"><span class="post-toc-text">05、高阶组件实训2</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#06、高阶组件实训3"><span class="post-toc-text">06、高阶组件实训3</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#07、高阶组件实训4"><span class="post-toc-text">07、高阶组件实训4</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#08、使用装饰器"><span class="post-toc-text">08、使用装饰器</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
