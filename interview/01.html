@@ -3,22 +3,22 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Cumber&#39;s Blog</title>
+  <title>手写Promise | Cumber&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
   
-  <meta name="description" content="专注前端">
+  <meta name="description" content="Promise 规范及分析Promise 所需要具备的方法:  new Promise((resolve,reject)=&amp;gt;{}) , 构造函数需要传入一个 fn ， 并且 fn 执行时需要传入 resolve &amp;amp; reject 。 Promise.resolve(value) , Promise.constructor 中有一个 resolve 方法， 需要将 value 值返回到">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:title" content="手写Promise">
 <meta property="og:url" content="http://cumbermiao.github.io/interview/01.html">
 <meta property="og:site_name" content="Cumber&#39;s Blog">
-<meta property="og:description" content="专注前端">
+<meta property="og:description" content="Promise 规范及分析Promise 所需要具备的方法:  new Promise((resolve,reject)=&amp;gt;{}) , 构造函数需要传入一个 fn ， 并且 fn 执行时需要传入 resolve &amp;amp; reject 。 Promise.resolve(value) , Promise.constructor 中有一个 resolve 方法， 需要将 value 值返回到">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-22T06:25:33.739Z">
+<meta property="og:updated_time" content="2019-04-30T02:47:09.049Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cumber&#39;s Blog">
-<meta name="twitter:description" content="专注前端">
+<meta name="twitter:title" content="手写Promise">
+<meta name="twitter:description" content="Promise 规范及分析Promise 所需要具备的方法:  new Promise((resolve,reject)=&amp;gt;{}) , 构造函数需要传入一个 fn ， 并且 fn 执行时需要传入 resolve &amp;amp; reject 。 Promise.resolve(value) , Promise.constructor 中有一个 resolve 方法， 需要将 value 值返回到">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -106,14 +106,59 @@
         <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      手写Promise
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-04-29
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
     <div class="article-entry " itemprop="articleBody">
       
             
-            
+            <h2 id="Promise-规范及分析"><a href="#Promise-规范及分析" class="headerlink" title="Promise 规范及分析"></a>Promise 规范及分析</h2><p>Promise 所需要具备的方法:</p>
+<ol>
+<li>new Promise((resolve,reject)=&gt;{}) , 构造函数需要传入一个 fn ， 并且 fn 执行时需要传入 resolve &amp; reject 。</li>
+<li>Promise.resolve(value) , Promise.constructor 中有一个 resolve 方法， 需要将 value 值返回到 then 中 。</li>
+<li>Promise.reject(err) , 与 Promise.reject 类似。</li>
+<li>then , 对 fullfiled 状态的回调处理</li>
+<li>catch , 对 rejected 状态的回调处理</li>
+<li>Promise.all(promiseArray) , 对所有 Promise 状态都改变时进行处理</li>
+<li>Promise.race(promiseArray) , 当有一个 Promise 状态发生改变时进行处理</li>
+<li>构造函数中需要 state 标识状态 ， value 存储 fullfiled 的返回值 ， reason 存储失败原因</li>
+</ol>
+<p>Promise 类基本结构</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PENDING = <span class="string">"pending"</span>;</span><br><span class="line"><span class="keyword">const</span> FULFILLED = <span class="string">"fulfilled"</span>;</span><br><span class="line"><span class="keyword">const</span> REJECTED = <span class="string">"rejected"</span>;</span><br><span class="line"></span><br><span class="line">Class <span class="built_in">Promise</span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(fn)&#123;</span><br><span class="line">    <span class="keyword">this</span>.state = PENDING;</span><br><span class="line">    <span class="keyword">this</span>.value = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">this</span>.reason = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">this</span>.fulfilledHandlers = [];</span><br><span class="line">    <span class="keyword">this</span>.rejectedHandlers = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> resolve = <span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;;</span><br><span class="line">    <span class="keyword">const</span> reject = <span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">      fn(resolve,reject)</span><br><span class="line">    &#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">      reject(error)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  then()&#123;&#125;</span><br><span class="line">  <span class="keyword">catch</span>()&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.resovle=<span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;;</span><br><span class="line"><span class="built_in">Promise</span>.reject=<span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;;</span><br><span class="line"><span class="built_in">Promise</span>.all=<span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;;</span><br><span class="line"><span class="built_in">Promise</span>.race=<span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="resolve-reject-实现"><a href="#resolve-reject-实现" class="headerlink" title="resolve , reject 实现"></a>resolve , reject 实现</h3><blockquote>
+<p>resolve , reject 需要改变 state 并且异步执行 then catch 的回调</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> resolve = <span class="function"><span class="params">val</span> =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (_this.value === PENDING) &#123;</span><br><span class="line">      _this.value = val;</span><br><span class="line">      _this.state = FULFILLED;</span><br><span class="line">      _this.resolveHandlers.map(<span class="function"><span class="params">cb</span> =&gt;</span> cb(val));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> reject = <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (_this.value === PENDING) &#123;</span><br><span class="line">      _this.reason = err;</span><br><span class="line">      _this.state = REJECTED;</span><br><span class="line">      _this.rejectedHandlers.map(<span class="function"><span class="params">cb</span> =&gt;</span> cb(err));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.resolve = <span class="function"><span class="params">val</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (val <span class="keyword">instanceof</span> <span class="built_in">Promise</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> val.then(resolve, reject);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> resolve(val);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="then-catch-实现"><a href="#then-catch-实现" class="headerlink" title="then catch 实现"></a>then catch 实现</h3><!-- TODO: catch 实现 -->
+<blockquote>
+<p>then catch 返回一个 Promise 类型， 将状态的回调 push 到数组中 , 使用 <code>promise.then().then(res=&gt;{console.log(res)})</code> 的方式时，第一个 then 需要再次传递 onFulfilled 的值。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.prototype.then = <span class="function">(<span class="params">onFulfilled, onRejected</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> _this = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">var</span> resolveHandler, rejectHandler;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> onFulfilled === <span class="string">"function"</span>) &#123;</span><br><span class="line">    resolveHandler = onFulfilled;</span><br><span class="line">  &#125;</span><br><span class="line">  resolveHandler = <span class="function"><span class="params">val</span> =&gt;</span> val;</span><br><span class="line">  rejectHandler =</span><br><span class="line">    <span class="keyword">typeof</span> onRejected === <span class="string">"function"</span></span><br><span class="line">      ? onRejected</span><br><span class="line">      : <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">throw</span> err;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (_this.state === PENDING) &#123;</span><br><span class="line">    _this.resolveHandlers.push(onFulfilled);</span><br><span class="line">    _this.rejectedHandlers.push(onRejected);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (_this.state === FULFILLED) &#123;</span><br><span class="line">      resolve(_this.value);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      reject(_this.reason)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年02月22日 14:25</p>
-        <p>原始链接： <a class="post-url" href="/interview/01.html" title="">http://cumbermiao.github.io/interview/01.html</a></p>
+        <p>最后更新： 2019年04月30日 10:47</p>
+        <p>原始链接： <a class="post-url" href="/interview/01.html" title="手写Promise">http://cumbermiao.github.io/interview/01.html</a></p>
         <footer>
             <a href="http://cumbermiao.github.io">
                 <img src="/images/logo.png" alt="Cumbermiao">
@@ -170,7 +215,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/interview/01.html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/interview/01.html&title=《手写Promise》 — Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -180,7 +225,7 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/interview/01.html&title=Cumber's Blog&source=专注前端" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/interview/01.html&title=《手写Promise》 — Cumber's Blog&source=专注前端" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
@@ -190,7 +235,7 @@
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/interview/01.html&via=http://cumbermiao.github.io" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《手写Promise》 — Cumber's Blog&url=http://cumbermiao.github.io/interview/01.html&via=http://cumbermiao.github.io" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -221,6 +266,12 @@
 </article>
 
 
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Promise-规范及分析"><span class="post-toc-text">Promise 规范及分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#resolve-reject-实现"><span class="post-toc-text">resolve , reject 实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#then-catch-实现"><span class="post-toc-text">then catch 实现</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
 
 
 

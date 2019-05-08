@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="原文链接：https://www.jianshu.com/p/7c020c3e360a 探索React Native的bundle加载路径   羽纱 0.3 2017.04.01 18:06* 字数 1229 我们都知道在Debug模式下，会去加载JS Server服务的bundle。在Release模式下会去加载本地的bundle，原生中是如果确定bundle的加载路径的？什么时候会在Debug">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:url" content="http://cumbermiao.github.io/collection/rn/探索React Native的bundle加载路径.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="原文链接：https://www.jianshu.com/p/7c020c3e360a 探索React Native的bundle加载路径   羽纱 0.3 2017.04.01 18:06* 字数 1229 我们都知道在Debug模式下，会去加载JS Server服务的bundle。在Release模式下会去加载本地的bundle，原生中是如果确定bundle的加载路径的？什么时候会在Debug">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload.jianshu.io/users/upload_avatars/548793/0ff4456d-450a-40ea-b4ba-ceb0ee51b732.jpg?imageMogr2/auto-orient/strip%7CimageView2/1/w/96/h/96">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/548793-929bf909c25b564f.png">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/548793-12c28dab54510a6d.png">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/548793-fb0947a173ed66a4.png">
+<meta property="og:updated_time" content="2019-04-18T02:02:38.421Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cumber&#39;s Blog">
+<meta name="twitter:description" content="原文链接：https://www.jianshu.com/p/7c020c3e360a 探索React Native的bundle加载路径   羽纱 0.3 2017.04.01 18:06* 字数 1229 我们都知道在Debug模式下，会去加载JS Server服务的bundle。在Release模式下会去加载本地的bundle，原生中是如果确定bundle的加载路径的？什么时候会在Debug">
+<meta name="twitter:image" content="http://upload.jianshu.io/users/upload_avatars/548793/0ff4456d-450a-40ea-b4ba-ceb0ee51b732.jpg?imageMogr2/auto-orient/strip%7CimageView2/1/w/96/h/96">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <p>原文链接：<a href="https://www.jianshu.com/p/7c020c3e360a" target="_blank" rel="noopener">https://www.jianshu.com/p/7c020c3e360a</a></p>
+<h1 id="探索React-Native的bundle加载路径"><a href="#探索React-Native的bundle加载路径" class="headerlink" title="探索React Native的bundle加载路径"></a>探索React Native的bundle加载路径</h1><p> <a href="/u/b92ab7b3ab48"><img src="//upload.jianshu.io/users/upload_avatars/548793/0ff4456d-450a-40ea-b4ba-ceb0ee51b732.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96"></a> </p>
+<p><a href="/u/b92ab7b3ab48">羽纱</a></p>
+<p>0.3 2017.04.01 18:06* 字数 1229</p>
+<p>我们都知道在Debug模式下，会去加载JS Server服务的bundle。在Release模式下会去加载本地的bundle，原生中是如果确定bundle的加载路径的？什么时候会在Debug模式下加载本地的bundle？在下文中会分别对iOS和Android原生代码的中如何确定bundle加载路径进行分析。</p>
+<h3 id="iOS的bundle加载路径确认以及遇到的飘红-RCTRedBox"><a href="#iOS的bundle加载路径确认以及遇到的飘红-RCTRedBox" class="headerlink" title="iOS的bundle加载路径确认以及遇到的飘红(RCTRedBox)"></a>iOS的bundle加载路径确认以及遇到的飘红(RCTRedBox)</h3><hr>
+<p><strong>第一步：packageHost的确定</strong><br>在Debug模式下会去<code>guessPackagerHost</code>，没错，就是去猜packageHost，猜的步骤如下：</p>
+<ul>
+<li>查询是否有ip.txt文件在bundle中，有的话就把ip.txt的内容读出来，没有的话就是用localhost。</li>
+<li>然后是用host和port拼成<code>http://localhost:8081/status</code>发送请求，如果返回的是<code>packager-status:running</code>.代表packagerHost是可用的，会返回这个host，否则返回null。</li>
+</ul>
+<p>在Rlease模式下如果没有设置host在偏好设置中，则会返回null。</p>
+<p><strong>第二步：bundle路径（jsCodeLocation）的确定</strong><br>如果第一步的host不为null，则会拼成：<code>http://localhost:8081/index.ios.bundle?platform=ios&amp;dev=true&amp;minify=false</code>的url。如果第一步的host为空，则会去加载mainBundle（可以简略理解成本地的）中的main.jsbundle。</p>
+<blockquote>
+<p>注意：如果本地没有main.jsbundle则会返回null，这个会导致后面飘红。</p>
+</blockquote>
+<p><strong>第三步：bridge去加载jsCodeLocation</strong><br>前话：bundleURL不存在或加载过程中失败的飘红都是从这里出来的。</p>
+<pre><code>可以在这里打断点：
+RCTBatchedBridge.m-&gt;(void)stopLoadingWithError:
+</code></pre><p>1、第一个遇到的错误：</p>
+<pre><code>//RCTBatchBridge.m -&gt; (void)loadSource:_onSourceLoad:onProgress
+bundleURL must be non-nil when not implementing loadSourceForBridge
+</code></pre><p>如果飘了这个错误，证明bundleURL为空，这是就是第二步注意事项提到的，这时可以确定的是它连不上JS Server才导致它试图去找本地的main.jsbundle，但是很遗憾，本地也没找到，那么可以按以下步骤检查：</p>
+<ul>
+<li>是否开了JS Server</li>
+<li>是否科学上网了。</li>
+<li>是否在同一个局域网内。</li>
+<li>是否需要指定host（通过ip.txt），而不能使用localhost。</li>
+<li>或者你指定了ip（通过ip.txt），但是却重启路由之类的，导致ip改了。</li>
+</ul>
+<p>2、JS端的堆栈信息打印<br>会把文件名，方法名，行号打印出来，最后会把错误描述在最上面。<br>遇到这种错误是因为JS Server检查出了js方的错误，并返回了错误信息。此时对着错误调就好了，比较简单，调好后再reload。</p>
+<p><img src="//upload-images.jianshu.io/upload_images/548793-929bf909c25b564f.png" alt=""></p>
+<p>Paste_Image.png</p>
+<p>3、网络错误，如果确定网络正常，并且第1个错误的检查点都检查了，可以多刷几次。因为可能是超时，或偶尔出现的500。</p>
+<pre><code>Could not connect to development server
+Ensure the following
+- Node server is running and available on the same network - run &apos;npm start&apos; from react-native root
+- Node server URL is correctly set in AppDelegate
+
+URL: *****
+</code></pre><p><img src="//upload-images.jianshu.io/upload_images/548793-12c28dab54510a6d.png" alt=""></p>
+<p>Paste_Image.png</p>
+<p>4、Remote Debug JS 连接不上的错误<br>这种错误会报到RCTWebSocketExecutor上去，很有可能是在Debug模式下开了Remote Debug JS，却没开JS Server，然后加了到了本地的bundle。这时候需要打开JS Server，然后重启应用，关闭Remote Debug JS即可。</p>
+<pre><code>Connection to http://localhost:8081/debugger-proxy?role=client timed out.Are you running...
+</code></pre><p><img src="//upload-images.jianshu.io/upload_images/548793-fb0947a173ed66a4.png" alt=""></p>
+<p>Paste_Image.png</p>
+<p><strong>总结</strong><br>由上可以知道在Debug模式下，iOS会先会尝试连接它自己guess的host（使用ip.txt指定了，不然默认为localhost），如果没有获取到则会去尝试加载本地的main.jsbundle，当本地也没有bundle时就会报错了（本地的main.jsbundle何时存在可以参考这篇文章：<a href="https://www.jianshu.com/p/088be846270d" target="_blank" rel="noopener">探索react-native run-ios(android)</a>）。在Release模式下是不会去猜host的，直接去加载本地的jsbundle。</p>
+<h3 id="Android的bundle加载路径确认以及遇到的飘红"><a href="#Android的bundle加载路径确认以及遇到的飘红" class="headerlink" title="Android的bundle加载路径确认以及遇到的飘红"></a>Android的bundle加载路径确认以及遇到的飘红</h3><hr>
+<p>Android的bundle路径尝试方式与iOS完全相反，它的大致思路是无论是Release还是Debug模式下都尝试去加载本地的index.android.bundle，当在Debug模式下加载不到时会直接飘红，然后我们需要摇出开发者选项设置ip和端口，Reload后才能去加载JS Server的bundle。</p>
+<p>因为Android的自动打包bundle与iOS不一样（可以参考这篇文章：<a href="https://www.jianshu.com/p/088be846270d" target="_blank" rel="noopener">探索react-native run-ios(android)</a>），所以如果想在Debug模式下做原生开发，又不想开JS Server时，可以打个bundle放到assets下，这样它就不会去加载JS Server中的去了。</p>
+<h3 id="在项目中的应用"><a href="#在项目中的应用" class="headerlink" title="在项目中的应用"></a>在项目中的应用</h3><hr>
+<p>1、在混合开发时，可以给iOS和Android原生都打bundle包，这样原生就算在Debug模式下不开JS Server也不会有问题。不过这时js开发必须把Android中的index.android.bundle删了才能加载JS Server中的内容。<br>2、ios可以在项目中加入一个ip.txt文件（指定JS Server）然后再重编来重定向JS Server。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年04月18日 10:02</p>
+        <p>原始链接： <a class="post-url" href="/collection/rn/探索React Native的bundle加载路径.html" title="">http://cumbermiao.github.io/collection/rn/探索React Native的bundle加载路径.html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/collection/rn/探索React Native的bundle加载路径.html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/collection/rn/探索React Native的bundle加载路径.html&title=Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/collection/rn/探索React Native的bundle加载路径.html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/collection/rn/探索React Native的bundle加载路径.html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/collection/rn/探索React Native的bundle加载路径.html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/collection/rn/探索React Native的bundle加载路径.html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#探索React-Native的bundle加载路径"><span class="post-toc-text">探索React Native的bundle加载路径</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#iOS的bundle加载路径确认以及遇到的飘红-RCTRedBox"><span class="post-toc-text">iOS的bundle加载路径确认以及遇到的飘红(RCTRedBox)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android的bundle加载路径确认以及遇到的飘红"><span class="post-toc-text">Android的bundle加载路径确认以及遇到的飘红</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在项目中的应用"><span class="post-toc-text">在项目中的应用</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>数据类型 | Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="C 中的数据类型 C 的数据类型主要分为 基本类型（属于算术类型，包含整数类型和浮点类型）、枚举类型（属于算术类型,只能赋予其一定的离散整数值的变量）、void 类型、派生类型（指针、数组、结构、共用体、函数）。  整数类型   类型 大小 范围     char 1byte -128~127 \ 0~255   unsigned char 1byte 0~255   int 2\ 4bytes">
+<meta property="og:type" content="website">
+<meta property="og:title" content="数据类型">
+<meta property="og:url" content="http://cumbermiao.github.io/basicLearning/02.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="C 中的数据类型 C 的数据类型主要分为 基本类型（属于算术类型，包含整数类型和浮点类型）、枚举类型（属于算术类型,只能赋予其一定的离散整数值的变量）、void 类型、派生类型（指针、数组、结构、共用体、函数）。  整数类型   类型 大小 范围     char 1byte -128~127 \ 0~255   unsigned char 1byte 0~255   int 2\ 4bytes">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-05T01:48:51.434Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据类型">
+<meta name="twitter:description" content="C 中的数据类型 C 的数据类型主要分为 基本类型（属于算术类型，包含整数类型和浮点类型）、枚举类型（属于算术类型,只能赋予其一定的离散整数值的变量）、void 类型、派生类型（指针、数组、结构、共用体、函数）。  整数类型   类型 大小 范围     char 1byte -128~127 \ 0~255   unsigned char 1byte 0~255   int 2\ 4bytes">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      数据类型
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-04-26
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <h2 id="C-中的数据类型"><a href="#C-中的数据类型" class="headerlink" title="C 中的数据类型"></a>C 中的数据类型</h2><blockquote>
+<p>C 的数据类型主要分为 基本类型（属于算术类型，包含整数类型和浮点类型）、枚举类型（属于算术类型,只能赋予其一定的离散整数值的变量）、void 类型、派生类型（指针、数组、结构、共用体、函数）。</p>
+</blockquote>
+<h4 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>大小</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char</td>
+<td>1byte</td>
+<td>-128~127 \</td>
+<td>0~255</td>
+</tr>
+<tr>
+<td>unsigned char</td>
+<td>1byte</td>
+<td>0~255</td>
+</tr>
+<tr>
+<td>int</td>
+<td>2\</td>
+<td>4bytes</td>
+<td>-32,768~32,767 \</td>
+<td>-2,147,483,648~2,147,483,647</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td>2\</td>
+<td>4bytes</td>
+<td>0~65,535 \</td>
+<td>0~ 4,294,967,295</td>
+</tr>
+<tr>
+<td>short</td>
+<td>2 bytes</td>
+<td>-32,768~32,767</td>
+</tr>
+<tr>
+<td>unsigned short</td>
+<td>2 bytes</td>
+<td>0~65,535</td>
+</tr>
+<tr>
+<td>long</td>
+<td>4bytes</td>
+<td>-2,147,483,648~2,147,483,647</td>
+</tr>
+<tr>
+<td>unsigned long</td>
+<td>4bytes</td>
+<td>0 到 4,294,967,295</td>
+</tr>
+</tbody>
+</table>
+<h4 id="浮点类型"><a href="#浮点类型" class="headerlink" title="浮点类型"></a>浮点类型</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>大小</th>
+<th>范围</th>
+<th>精度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float</td>
+<td>4byte</td>
+<td>1.2E-38 ~ 3.4E+38</td>
+<td>6 位小数</td>
+</tr>
+<tr>
+<td>double</td>
+<td>8byte</td>
+<td>2.3E-308 ~ 1.7E+308</td>
+<td>15 位小数</td>
+</tr>
+<tr>
+<td>long double</td>
+<td>10byte</td>
+<td>3.4E-4932 ~ 1.1E+4932</td>
+<td>19 位小数</td>
+</tr>
+</tbody>
+</table>
+<h4 id="void-类型"><a href="#void-类型" class="headerlink" title="void 类型"></a>void 类型</h4><blockquote>
+<p>void 类型常被用于一下几种情况。</p>
+</blockquote>
+<ol>
+<li>函数返回为空</li>
+<li>函数参数为空</li>
+<li>指针指向 void</li>
+</ol>
+<h4 id="派生类型"><a href="#派生类型" class="headerlink" title="派生类型"></a>派生类型</h4><blockquote>
+<p>派生类型包括指针、数组、结构、共用体、函数。<br>指针类型的变量存储的是当前变量的内存地址， 使用 *name 的表示， 普通的变量可以使用 &amp; 获取内存地址。<br>数组类型的变量占用一块连续地址的内存， 可以通过对内存地址操作(地址+1)获取数组中的值。<br>结构体使用 struct 定义， 可以定义一个新的组合类型，类似于 ts 中的 interface ， struct 还有很多其他的用途，例如定义 位域（可以对每个成员设置占用的位的长度）。<br>共用体使用 union 定义， C 是一种强类型的语言， 变量需要声明类型， 声明之后该内存只会存储该类型的值， 共用体则可以定义多个类型， 但实际上共用体的内存地址是不变的， 每次修改类型或者值时， 前面的类型和值总是会被后面的赋值所覆盖。</p>
+</blockquote>
+<blockquote>
+<p>C 虽然是强类型， 但是在计算或者比较的时候也是会有类型转换的， 例如在做字符串的比较或者运算的时候， 但是最终存储的值是当时该变量声明的类型。</p>
+</blockquote>
+<h2 id="JAVA-中的数据类型"><a href="#JAVA-中的数据类型" class="headerlink" title="JAVA 中的数据类型"></a>JAVA 中的数据类型</h2><blockquote>
+<p>JAVA 中的数据类型分为内置数据类型和引用数据类型。</p>
+</blockquote>
+<h4 id="内置数据类型"><a href="#内置数据类型" class="headerlink" title="内置数据类型"></a>内置数据类型</h4><blockquote>
+<p>Java 语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。</p>
+</blockquote>
+<ol>
+<li><p>byte 数据类型是 8 位、有符号的，以二进制补码表示的整数；最小值是-128（-2^7）；最大值是 127（2^7-1）；</p>
+</li>
+<li><p>short 数据类型是 16 位、有符号的以二进制补码表示的整数； 最小值是-32768（-2^15）；最大值是 32767（2^15 - 1）；</p>
+</li>
+<li><p>int 数据类型是 32 位、有符号的以二进制补码表示的整数；</p>
+</li>
+<li><p>long 数据类型是 64 位、有符号的以二进制补码表示的整数；</p>
+</li>
+<li><p>float 数据类型是单精度、32 位、符合 IEEE 754 标准的浮点数；</p>
+</li>
+<li><p>double 数据类型是双精度、64 位、符合 IEEE 754 标准的浮点数；浮点数的默认类型为 double 类型；</p>
+</li>
+<li><p>boolean 数据类型表示一位的信息；</p>
+</li>
+<li><p>char 类型是一个单一的 16 位 Unicode 字符；最小值是’\u0000’（即为 0）；最大值是’\uffff’（即为 65,535）；</p>
+</li>
+</ol>
+<h4 id="引用数据类型"><a href="#引用数据类型" class="headerlink" title="引用数据类型"></a>引用数据类型</h4><blockquote>
+<p>包含对象、数组等类型</p>
+</blockquote>
+<h2 id="JS-中的数据类型"><a href="#JS-中的数据类型" class="headerlink" title="JS 中的数据类型"></a>JS 中的数据类型</h2><blockquote>
+<p>JS 中的基本数据类型（原始类型）： string number boolean undefined null symbol ， 这些基本类型都属于值引用类型 ， 而像数组、对象、Map 等都属于地址引用类型。对比其他语言也都有值引用和地址引用的概念。</p>
+</blockquote>
+<p>对于 JS 中的数据在进行算术运算或者是比较操作的时候， 如果比较的是对象会先调用 ToPrimitive 转成原始类型，ToPrimitive 对应逻辑调用的转换方法顺序： valueOf ， toString 。 如果调用了转换方法还是无法转成原始类型时则会报错。==比较时需要注意操作符的优先级。==</p>
+<h3 id="JS-中的-true-amp-false"><a href="#JS-中的-true-amp-false" class="headerlink" title="JS 中的 true &amp; false"></a>JS 中的 true &amp; false</h3><blockquote>
+<p>js 中的 true 和 false 比较特殊， 一般语言中 true 和 false 代表的就是 boolean 中的值， 但是在 js 中在判断其他数据类型的 _真假_ 时， 会对该类型进行转换。<br>相等和不相等操作符遵循下列基本规则:</p>
+</blockquote>
+<ul>
+<li>如果有一个操作数是布尔值，则在比较相等性之前先将其转换为数值——false 转换为 0，而 true 转换为 1；</li>
+<li>如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转换为数值；</li>
+<li>如果一个操作数是对象，另一个操作数不是，则调用对象的 toPrimitive 方法， 将对象转成原始值再进行比较。toPrimitive 逻辑：</li>
+<li><ul>
+<li>如果已经是原始类型了，那就不需要转换了；</li>
+</ul>
+</li>
+<li><ul>
+<li>调用 x.valueOf()，如果转换为基础类型，就返回转换的值；</li>
+</ul>
+</li>
+<li><ul>
+<li>调用 x.toString()，如果转换为基础类型，就返回转换的值；</li>
+</ul>
+</li>
+<li><ul>
+<li>如果都没有返回原始类型，就会报错；</li>
+</ul>
+</li>
+<li><p>NaN 不等于 NaN</p>
+</li>
+<li>null == undefined</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>布尔值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>undefined</td>
+<td>false</td>
+</tr>
+<tr>
+<td>null</td>
+<td>false</td>
+</tr>
+<tr>
+<td>数字</td>
+<td>+0、-0、NaN 为 false ， 其余为 true</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td>空字符串为 false ，其余为 true</td>
+</tr>
+<tr>
+<td>对象</td>
+<td>true</td>
+</tr>
+<tr>
+<td>数组</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<p>不同类型比较结果：</p>
+<table>
+<thead>
+<tr>
+<th>类型 x</th>
+<th>类型 y</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>null</td>
+<td>undefined</td>
+<td>true</td>
+</tr>
+<tr>
+<td>数字</td>
+<td>字符串</td>
+<td>x == toNumber(y)</td>
+</tr>
+<tr>
+<td>任意类型</td>
+<td>布尔值</td>
+<td>x == toNumber(y)</td>
+</tr>
+<tr>
+<td>字符串或数字</td>
+<td>对象</td>
+<td>x == toPrimitive(y)</td>
+</tr>
+</tbody>
+</table>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年05月05日 09:48</p>
+        <p>原始链接： <a class="post-url" href="/basicLearning/02.html" title="数据类型">http://cumbermiao.github.io/basicLearning/02.html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/basicLearning/02.html&title=《数据类型》 — Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/basicLearning/02.html&title=《数据类型》 — Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/basicLearning/02.html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据类型》 — Cumber's Blog&url=http://cumbermiao.github.io/basicLearning/02.html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/basicLearning/02.html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/basicLearning/02.html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C-中的数据类型"><span class="post-toc-text">C 中的数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#整数类型"><span class="post-toc-text">整数类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#浮点类型"><span class="post-toc-text">浮点类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#void-类型"><span class="post-toc-text">void 类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#派生类型"><span class="post-toc-text">派生类型</span></a></li></ol></li></ol><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JAVA-中的数据类型"><span class="post-toc-text">JAVA 中的数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#内置数据类型"><span class="post-toc-text">内置数据类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#引用数据类型"><span class="post-toc-text">引用数据类型</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JS-中的数据类型"><span class="post-toc-text">JS 中的数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JS-中的-true-amp-false"><span class="post-toc-text">JS 中的 true &amp; false</span></a></li></ol></li>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

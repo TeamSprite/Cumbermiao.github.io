@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="原文链接：https://segmentfault.com/a/1190000018450503 Webpack Loader 高手进阶(一)Webpack 系列文章： Webpack Loader 高手进阶（一）Webpack Loader 高手进阶（二）Webpack Loader 高手进阶（三）  Webpack loader 详解loader 的配置Webpack 对于一个 module">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:url" content="http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(一).html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="原文链接：https://segmentfault.com/a/1190000018450503 Webpack Loader 高手进阶(一)Webpack 系列文章： Webpack Loader 高手进阶（一）Webpack Loader 高手进阶（二）Webpack Loader 高手进阶（三）  Webpack loader 详解loader 的配置Webpack 对于一个 module">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://segmentfault.com/img/bVbpzYN?w=1302&h=1400">
+<meta property="og:updated_time" content="2019-05-05T06:46:16.386Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cumber&#39;s Blog">
+<meta name="twitter:description" content="原文链接：https://segmentfault.com/a/1190000018450503 Webpack Loader 高手进阶(一)Webpack 系列文章： Webpack Loader 高手进阶（一）Webpack Loader 高手进阶（二）Webpack Loader 高手进阶（三）  Webpack loader 详解loader 的配置Webpack 对于一个 module">
+<meta name="twitter:image" content="https://segmentfault.com/img/bVbpzYN?w=1302&h=1400">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <p>原文链接：<a href="https://segmentfault.com/a/1190000018450503" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018450503</a></p>
+<h1 id="Webpack-Loader-高手进阶-一"><a href="#Webpack-Loader-高手进阶-一" class="headerlink" title="Webpack Loader 高手进阶(一)"></a>Webpack Loader 高手进阶(一)</h1><p>Webpack 系列文章：</p>
+<p><a href="https://segmentfault.com/a/1190000018450503" target="_blank" rel="noopener">Webpack Loader 高手进阶（一）</a><br><a href="https://segmentfault.com/a/1190000018458388" target="_blank" rel="noopener">Webpack Loader 高手进阶（二）</a><br><a href="https://segmentfault.com/a/1190000018600714" target="_blank" rel="noopener">Webpack Loader 高手进阶（三）</a></p>
+<hr>
+<h2 id="Webpack-loader-详解"><a href="#Webpack-loader-详解" class="headerlink" title="Webpack loader 详解"></a>Webpack loader 详解</h2><h3 id="loader-的配置"><a href="#loader-的配置" class="headerlink" title="loader 的配置"></a>loader 的配置</h3><p>Webpack 对于一个 module 所使用的 loader 对开发者提供了2种使用方式：</p>
+<ol>
+<li><p>webpack config 配置形式，形如：</p>
+<p>// webpack.config.js<br>module.exports = {<br>  …<br>  module: {</p>
+<pre><code>rules: [{
+  test: /.vue$/,
+  loader: &apos;vue-loader&apos;
+}, {
+  test: /.scss$/,
+  use: [
+    &apos;vue-style-loader&apos;,
+    &apos;css-loader&apos;,
+    {
+      loader: &apos;sass-loader&apos;,
+      options: {
+        data: &apos;$color: red;&apos;
+      }
+    }
+  ]
+}]
+</code></pre><p>  }<br>  …<br>}</p>
+</li>
+<li><p>inline 内联形式</p>
+<p>// module</p>
+<p>import a from ‘raw-loader!../../utils.js’</p>
+</li>
+</ol>
+<p>2种不同的配置形式，在 webpack 内部有着不同的解析方式。此外，不同的配置方式也决定了最终在实际加载 module 过程中不同 loader 之间相互的执行顺序等。</p>
+<h3 id="loader-的匹配"><a href="#loader-的匹配" class="headerlink" title="loader 的匹配"></a>loader 的匹配</h3><p>在讲 loader 的匹配过程之前，首先从整体上了解下 loader 在整个 webpack 的 workflow 过程中出现的时机。</p>
+<p><img src="https://segmentfault.com/img/bVbpzYN?w=1302&amp;h=1400" alt="图片描述" title="图片描述"></p>
+<p>在一个 module 构建过程中，首先根据 module 的依赖类型(例如 NormalModuleFactory)调用对应的构造函数来创建对应的模块。在创建模块的过程中(<code>new NormalModuleFactory()</code>)，会根据开发者的 webpack.config 当中的 rules 以及 webpack 内置的 rules 规则实例化 RuleSet 匹配实例，这个 RuleSet 实例在 loader 的匹配过滤过程中非常的关键，具体的源码解析可参见<a href="https://github.com/CommanderXL/Biu-blog/issues/30" target="_blank" rel="noopener">Webpack Loader Ruleset 匹配规则解析</a>。实例化 RuleSet 后，还会注册2个钩子函数:</p>
+<pre><code>class NormalModuleFactory {
+  ...
+  // 内部嵌套 resolver 的钩子，完成相关的解析后，创建这个 normalModule
+  this.hooks.factory.tap(&apos;NormalModuleFactory&apos;, () =&gt; (result, callback) =&gt; { ... })
+
+  // 在 hooks.factory 的钩子内部进行调用，实际的作用为解析构建一共 module 所需要的 loaders 及这个 module 的相关构建信息(例如获取 module 的 packge.json等)
+  this.hooks.resolver.tap(&apos;NormalModuleFactory&apos;, () =&gt; (result, callback) =&gt; { ... })
+  ...
+}
+</code></pre><p>当 NormalModuleFactory 实例化完成后，并在 compilation 内部调用这个实例的 create 方法开始真实开始创建这个 normalModule。首先调用<code>hooks.factory</code>获取对应的钩子函数，接下来就调用 resolver 钩子(<code>hooks.resolver</code>)进入到了 resolve 的阶段，在真正开始 resolve loader 之前，首先就是需要匹配过滤找到构建这个 module 所需要使用的所有的 loaders。首先进行的是对于 inline loaders 的处理：</p>
+<pre><code>// NormalModuleFactory.js
+
+// 是否忽略 preLoader 以及 normalLoader
+const noPreAutoLoaders = requestWithoutMatchResource.startsWith(&quot;-!&quot;);
+// 是否忽略 normalLoader
+const noAutoLoaders =
+  noPreAutoLoaders || requestWithoutMatchResource.startsWith(&quot;!&quot;);
+// 忽略所有的 preLoader / normalLoader / postLoader
+const noPrePostAutoLoaders = requestWithoutMatchResource.startsWith(&quot;!!&quot;);
+
+// 首先解析出所需要的 loader，这种 loader 为内联的 loader
+let elements = requestWithoutMatchResource
+  .replace(/^-?!+/, &quot;&quot;)
+  .replace(/!!+/g, &quot;!&quot;)
+  .split(&quot;!&quot;);
+let resource = elements.pop(); // 获取资源的路径
+elements = elements.map(identToLoaderRequest); // 获取每个loader及对应的options配置（将inline loader的写法变更为module.rule的写法）
+</code></pre><p>首先是根据模块的路径规则，例如模块的路径是以这些符号开头的 <code>!</code> / <code>-!</code> / <code>!!</code> 来判断这个模块是否只是使用 inline loader，或者剔除掉 preLoader, postLoader 等规则：</p>
+<ul>
+<li><code>!</code> 忽略 webpack.config 配置当中符合规则的 normalLoader</li>
+<li><code>-!</code> 忽略 webpack.config 配置当中符合规则的 preLoader/normalLoader</li>
+<li><code>!!</code> 忽略 webpack.config 配置当中符合规则的 postLoader/preLoader/normalLoader</li>
+</ul>
+<p>这几个匹配规则主要适用于在 webpack.config 已经配置了对应模块使用的 loader，但是针对一些特殊的 module，你可能需要单独的定制化的 loader 去处理，而不是走常规的配置，因此可以使用这些规则来进行处理。</p>
+<p>接下来将所有的 inline loader 转化为数组的形式，例如：</p>
+<pre><code>import &apos;style-loader!css-loader!stylus-loader?a=b!../../common.styl&apos;
+</code></pre><p>最终 inline loader 统一格式输出为：</p>
+<pre><code>[{
+  loader: &apos;style-loader&apos;,
+  options: undefined
+}, {
+  loader: &apos;css-lodaer&apos;,
+  options: undefined
+}, {
+  loader: &apos;stylus-loader&apos;,
+  options: &apos;?a=b&apos;
+}]
+</code></pre><p>对于 inline loader 的处理便是直接对其进行 resolve，获取对应 loader 的相关信息：</p>
+<pre><code>asyncLib.parallel([
+  callback =&gt; 
+    this.resolveRequestArray(
+      contextInfo,
+      context,
+      elements,
+      loaderResolver,
+      callback
+    ),
+  callback =&gt; {
+    // 对这个 module 进行 resolve
+    ...
+    callack(null, {
+      resouceResolveData, // 模块的基础信息，包含 descriptionFilePath / descriptionFileData 等(即 package.json 等信息)
+      resource // 模块的绝对路径
+    })
+  }
+], (err, results) =&gt; {
+  const loaders = results[0] // 所有内联的 loaders
+  const resourceResolveData = results[1].resourceResolveData; // 获取模块的基本信息
+  resource = results[1].resource; // 模块的绝对路径
+  ...
+
+  // 接下来就要开始根据引入模块的路径开始匹配对应的 loaders
+  let resourcePath =
+    matchResource !== undefined ? matchResource : resource;
+  let resourceQuery = &quot;&quot;;
+  const queryIndex = resourcePath.indexOf(&quot;?&quot;);
+  if (queryIndex &gt;= 0) {
+    resourceQuery = resourcePath.substr(queryIndex);
+    resourcePath = resourcePath.substr(0, queryIndex);
+  }
+  // 获取符合条件配置的 loader，具体的 ruleset 是如何匹配的请参见 ruleset 解析(https://github.com/CommanderXL/Biu-blog/issues/30)
+  const result = this.ruleSet.exec({
+    resource: resourcePath, // module 的绝对路径
+    realResource:
+      matchResource !== undefined
+        ? resource.replace(/\?.*/, &quot;&quot;)
+        : resourcePath,
+    resourceQuery, // module 路径上所带的 query 参数
+    issuer: contextInfo.issuer, // 所解析的 module 的发布者
+    compiler: contextInfo.compiler 
+  });
+
+  // result 为最终根据 module 的路径及相关匹配规则过滤后得到的 loaders，为 webpack.config 进行配置的
+  // 输出的数据格式为：
+
+  /* [{
+    type: &apos;use&apos;,
+    value: {
+      loader: &apos;vue-style-loader&apos;,
+      options: {}
+    },
+    enforce: undefined // 可选值还有 pre/post  分别为 pre-loader 和 post-loader
+  }, {
+    type: &apos;use&apos;,
+    value: {
+      loader: &apos;css-loader&apos;,
+      options: {}
+    },
+    enforce: undefined
+  }, {
+    type: &apos;use&apos;,
+    value: {
+      loader: &apos;stylus-loader&apos;,
+      options: {
+        data: &apos;$color red&apos;
+      }
+    },
+    enforce: undefined 
+  }] */
+
+  const settings = {};
+  const useLoadersPost = []; // post loader
+  const useLoaders = []; // normal loader
+  const useLoadersPre = []; // pre loader
+  for (const r of result) {
+    if (r.type === &quot;use&quot;) {
+      // postLoader
+      if (r.enforce === &quot;post&quot; &amp;&amp; !noPrePostAutoLoaders) {
+        useLoadersPost.push(r.value);
+      } else if (
+        r.enforce === &quot;pre&quot; &amp;&amp;
+        !noPreAutoLoaders &amp;&amp;
+        !noPrePostAutoLoaders
+      ) {
+        // preLoader
+        useLoadersPre.push(r.value);
+      } else if (
+        !r.enforce &amp;&amp;
+        !noAutoLoaders &amp;&amp;
+        !noPrePostAutoLoaders
+      ) {
+        // normal loader
+        useLoaders.push(r.value);
+      }
+    } else if (
+      typeof r.value === &quot;object&quot; &amp;&amp;
+      r.value !== null &amp;&amp;
+      typeof settings[r.type] === &quot;object&quot; &amp;&amp;
+      settings[r.type] !== null
+    ) {
+      settings[r.type] = cachedMerge(settings[r.type], r.value);
+    } else {
+      settings[r.type] = r.value;
+    }
+
+    // 当获取到 webpack.config 当中配置的 loader 后，再根据 loader 的类型进行分组(enforce 配置类型)
+    // postLoader 存储到 useLoaders 内部
+    // preLoader 存储到 usePreLoaders 内部
+    // normalLoader 存储到 useLoaders 内部
+    // 这些分组最终会决定加载一个 module 时不同 loader 之间的调用顺序
+
+    // 当分组过程进行完之后，即开始 loader 模块的 resolve 过程
+    asyncLib.parallel([
+      [
+        // resolve postLoader
+        this.resolveRequestArray.bind(
+          this,
+          contextInfo,
+          this.context,
+          useLoadersPost,
+          loaderResolver
+        ),
+        // resove normal loaders
+        this.resolveRequestArray.bind(
+          this,
+          contextInfo,
+          this.context,
+          useLoaders,
+          loaderResolver
+        ),
+        // resolve preLoader
+        this.resolveRequestArray.bind(
+          this,
+          contextInfo,
+          this.context,
+          useLoadersPre,
+          loaderResolver
+        )
+      ],
+      (err, results) =&gt; {
+        ...
+        // results[0]  -&gt;  postLoader
+        // results[1]  -&gt;  normalLoader
+        // results[2]  -&gt;  preLoader
+        // 这里将构建 module 需要的所有类型的 loaders 按照一定顺序组合起来，对应于：
+        // [postLoader, inlineLoader, normalLoader, preLoader]
+        // 最终 loader 所执行的顺序对应为： preLoader -&gt; normalLoader -&gt; inlineLoader -&gt; postLoader
+        // 不同类型 loader 上的 pitch 方法执行的顺序为： postLoader.pitch -&gt; inlineLoader.pitch -&gt; normalLoader.pitch -&gt; preLoader.pitch (具体loader内部执行的机制后文会单独讲解)
+        loaders = results[0].concat(loaders, results[1], results[2]);
+
+        process.nextTick(() =&gt; {
+          ...
+          // 执行回调，创建 module
+        })
+      }
+    ])
+  }
+})
+</code></pre><p>简单总结下匹配的流程就是：</p>
+<p>首先处理 inlineLoaders，对其进行解析，获取对应的 loader 模块的信息，接下来利用 ruleset 实例上的匹配过滤方法对 webpack.config 中配置的相关 loaders 进行匹配过滤，获取构建这个 module 所需要的配置的的 loaders，并进行解析，这个过程完成后，便进行所有 loaders 的拼装工作，并传入创建 module 的回调中。</p>
+<hr>
+<p><strong>文章首发于个人github blog: <a href="https://github.com/CommanderXL/Biu-blog" target="_blank" rel="noopener">Biu-blog</a>，欢迎大家关注~</strong></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年05月05日 14:46</p>
+        <p>原始链接： <a class="post-url" href="/collection/webpack/Webpack Loader 高手进阶(一).html" title="">http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(一).html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(一).html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(一).html&title=Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(一).html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(一).html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(一).html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(一).html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Webpack-Loader-高手进阶-一"><span class="post-toc-text">Webpack Loader 高手进阶(一)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Webpack-loader-详解"><span class="post-toc-text">Webpack loader 详解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#loader-的配置"><span class="post-toc-text">loader 的配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#loader-的匹配"><span class="post-toc-text">loader 的匹配</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

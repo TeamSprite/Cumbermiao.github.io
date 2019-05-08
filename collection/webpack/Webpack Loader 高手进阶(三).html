@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="原文链接：https://segmentfault.com/a/1190000018600714 Webpack Loader 高手进阶(三)Webpack 系列文章： Webpack Loader 高手进阶（一）Webpack Loader 高手进阶（二）Webpack Loader 高手进阶（三）  Webpack Loader 详解前2篇文章主要通过源码分析了 loader 的配置，匹配和加">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:url" content="http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(三).html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="原文链接：https://segmentfault.com/a/1190000018600714 Webpack Loader 高手进阶(三)Webpack 系列文章： Webpack Loader 高手进阶（一）Webpack Loader 高手进阶（二）Webpack Loader 高手进阶（三）  Webpack Loader 详解前2篇文章主要通过源码分析了 loader 的配置，匹配和加">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://segmentfault.com/img/bVbqc2T?w=2034&h=946">
+<meta property="og:image" content="https://segmentfault.com/img/bVbqc20?w=2074&h=922">
+<meta property="og:updated_time" content="2019-05-05T06:46:11.461Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cumber&#39;s Blog">
+<meta name="twitter:description" content="原文链接：https://segmentfault.com/a/1190000018600714 Webpack Loader 高手进阶(三)Webpack 系列文章： Webpack Loader 高手进阶（一）Webpack Loader 高手进阶（二）Webpack Loader 高手进阶（三）  Webpack Loader 详解前2篇文章主要通过源码分析了 loader 的配置，匹配和加">
+<meta name="twitter:image" content="https://segmentfault.com/img/bVbqc2T?w=2034&h=946">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <p>原文链接：<a href="https://segmentfault.com/a/1190000018600714" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018600714</a></p>
+<h1 id="Webpack-Loader-高手进阶-三"><a href="#Webpack-Loader-高手进阶-三" class="headerlink" title="Webpack Loader 高手进阶(三)"></a>Webpack Loader 高手进阶(三)</h1><p>Webpack 系列文章：</p>
+<p><a href="https://segmentfault.com/a/1190000018450503" target="_blank" rel="noopener">Webpack Loader 高手进阶（一）</a><br><a href="https://segmentfault.com/a/1190000018458388" target="_blank" rel="noopener">Webpack Loader 高手进阶（二）</a><br><a href="https://segmentfault.com/a/1190000018600714" target="_blank" rel="noopener">Webpack Loader 高手进阶（三）</a></p>
+<hr>
+<h2 id="Webpack-Loader-详解"><a href="#Webpack-Loader-详解" class="headerlink" title="Webpack Loader 详解"></a>Webpack Loader 详解</h2><p>前2篇文章主要通过源码分析了 loader 的配置，匹配和加载，执行等内容，这篇文章会通过具体的实例来学习下如何去实现一个 loader。</p>
+<p>这里我们来看下 <a href="https://vue-loader.vuejs.org/zh/#vue-loader-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F" target="_blank" rel="noopener">vue-loader(v15)</a> 内部的相关内容，这里会讲解下有关 vue-loader 的大致处理流程，不会深入特别细节的地方。</p>
+<pre><code>git clone git@github.com:vuejs/vue-loader.git
+</code></pre><p>我们使用 vue-loader 官方仓库当中的 example 目录的内容作为整篇文章的示例。</p>
+<p>首先我们都知道 vue-loader 配合 webpack 给我们开发 Vue 应用提供了非常大的便利性，允许我们在 SFC(single file component) 中去写我们的 template/script/style，同时 v15 版本的 vue-loader 还允许开发在 SFC 当中写 custom block。最终一个 Vue SFC 通过 vue-loader 的处理，会将 template/script/style/custom block 拆解为独立的 block，每个 block 还可以再交给对应的 loader 去做进一步的处理，例如你的 template 是使用 pug 来书写的，那么首先使用 vue-loader 获取一个 SFC 内部 pug 模板的内容，然后再交给 pug 相关的 loader 处理，可以说 vue-loader 对于 Vue SFC 来说是一个入口处理器。</p>
+<p>在实际运用过程中，我们先来看下有关 Vue 的 webpack 配置：</p>
+<pre><code>const VueloaderPlugin = require(&apos;vue-loader/lib/plugin&apos;)
+
+module.exports = {
+  ...
+  module: {
+    rules: [
+      ...
+      {
+        test: /\.vue$/,
+        loader: &apos;vue-loader&apos;
+      }
+    ]
+  }
+
+  plugins: [
+    new VueloaderPlugin()
+  ]
+  ...
+}
+</code></pre><p>一个就是 module.rules 有关的配置，如果处理的 module 路径是以<code>.vue</code>形式结尾的，那么会交给 vue-loader 来处理，同时在 v15 版本<strong>必须</strong>要使用 vue-loader 内部提供的一个 plugin，它的职责是将你定义过的其它规则复制并应用到 <code>.vue</code> 文件里相应语言的块。例如，如果你有一条匹配 <code>/\.js$/</code> 的规则，那么它会应用到 <code>.vue</code> 文件里的 <code>&lt;script&gt;</code> 块，说到这里我们就一起先来看看这个 plugin 里面到底做了哪些工作。</p>
+<h3 id="VueLoaderPlugin"><a href="#VueLoaderPlugin" class="headerlink" title="VueLoaderPlugin"></a>VueLoaderPlugin</h3><p>我们都清楚 webpack plugin 的装载过程是在整个 webpack 编译周期中初始阶段，我们先来看下 VueLoaderPlugin 内部源码的实现：</p>
+<pre><code>// vue-loader/lib/plugin.js
+
+class VueLoaderPlugin {
+  apply() {
+    ...
+    // use webpack&apos;s RuleSet utility to normalize user rules
+    const rawRules = compiler.options.module.rules
+    const { rules } = new RuleSet(rawRules)
+
+    // find the rule that applies to vue files
+    // 判断是否有给`.vue`或`.vue.html`进行 module.rule 的配置
+    let vueRuleIndex = rawRules.findIndex(createMatcher(`foo.vue`))
+    if (vueRuleIndex &lt; 0) {
+      vueRuleIndex = rawRules.findIndex(createMatcher(`foo.vue.html`))
+    }
+    const vueRule = rules[vueRuleIndex]
+
+    ...
+
+    // 判断对于`.vue`或`.vue.html`配置的 module.rule 是否有 vue-loader
+    // get the normlized &quot;use&quot; for vue files
+    const vueUse = vueRule.use
+    // get vue-loader options
+    const vueLoaderUseIndex = vueUse.findIndex(u =&gt; {
+      return /^vue-loader|(\/|\\|@)vue-loader/.test(u.loader)
+    })
+    ...
+
+    // 创建 pitcher loader 的配置
+    const pitcher = {
+      loader: require.resolve(&apos;./loaders/pitcher&apos;),
+      resourceQuery: query =&gt; {
+        const parsed = qs.parse(query.slice(1))
+        return parsed.vue != null
+      },
+      options: {
+        cacheDirectory: vueLoaderUse.options.cacheDirectory,
+        cacheIdentifier: vueLoaderUse.options.cacheIdentifier
+      }
+    }
+
+    // 拓展开发者的 module.rule 配置，加入 vue-loader 内部提供的 pitcher loader
+    // replace original rules
+    compiler.options.module.rules = [
+      pitcher,
+      ...clonedRules,
+      ...rules
+    ]
+  }
+}
+</code></pre><p>这个 plugin 主要完成了以下三部分的工作：</p>
+<ol>
+<li>判断是否有给<code>.vue</code>或<code>.vue.html</code>进行 module.rule 的配置；</li>
+<li>判断对于<code>.vue</code>或<code>.vue.html</code>配置的 module.rule 是否有 vue-loader；</li>
+<li>拓展开发者的 module.rule 配置，加入 vue-loader 内部提供的 pitcher loader</li>
+</ol>
+<p>我们看到有关 pitcher loader 的 rule 匹配条件是通过<code>resourceQuery</code>方法来进行判断的，即判断 module path 上的 query 参数是否存在 vue，例如：</p>
+<pre><code>// 这种类型的 module path 就会匹配上
+&apos;./source.vue?vue&amp;type=template&amp;id=27e4e96e&amp;scoped=true&amp;lang=pug&amp;&apos;
+</code></pre><p>如果存在的话，那么就需要将这个 loader 加入到构建这个 module 的 loaders 数组当中。以上就是 VueLoaderPlugin 所做的工作，其中涉及到拓展后的 module rule 里面加入的 pitcher loader 具体做的工作后文会分析。</p>
+<h3 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h3><p>接下来我们看下 vue-loader 的内部实现。首先来看下入口文件的相关内容：</p>
+<pre><code>// vue-loader/lib/index.js
+...
+const { parse } = require(&apos;@vue/component-compiler-utils&apos;)
+
+function loadTemplateCompiler () {
+  try {
+    return require(&apos;vue-template-compiler&apos;)
+  } catch (e) {
+    throw new Error(
+      `[vue-loader] vue-template-compiler must be installed as a peer dependency, ` +
+      `or a compatible compiler implementation must be passed via options.`
+    )
+  }
+}
+
+module.exports = function(source) {
+  const loaderContext = this // 获取 loaderContext 对象
+
+  // 从 loaderContext 获取相关参数
+  const {
+    target, // webpack 构建目标，默认为 web
+    request, // module request 路径(由 path 和 query 组成)
+    minimize, // 构建模式
+    sourceMap, // 是否开启 sourceMap
+    rootContext, // 项目的根路径
+    resourcePath, // module 的 path 路径
+    resourceQuery // module 的 query 参数
+  } = loaderContext
+
+  // 接下来就是一系列对于参数和路径的处理
+  const rawQuery = resourceQuery.slice(1)
+  const inheritQuery = `&amp;${rawQuery}`
+  const incomingQuery = qs.parse(rawQuery)
+  const options = loaderUtils.getOptions(loaderContext) || {}
+
+  ...
+
+
+  // 开始解析 sfc，根据不同的 block 来拆解对应的内容
+  const descriptor = parse({
+    source,
+    compiler: options.compiler || loadTemplateCompiler(),
+    filename,
+    sourceRoot,
+    needMap: sourceMap
+  })
+
+  // 如果 query 参数上带了 block 的 type 类型，那么会直接返回对应 block 的内容
+  // 例如： foo.vue?vue&amp;type=template，那么会直接返回 template 的文本内容
+  if (incomingQuery.type) {
+    return selectBlock(
+      descriptor,
+      loaderContext,
+      incomingQuery,
+      !!options.appendExtension
+    )
+  }
+
+  ...
+
+  // template
+  let templateImport = `var render, staticRenderFns`
+  let templateRequest
+  if (descriptor.template) {
+    const src = descriptor.template.src || resourcePath
+    const idQuery = `&amp;id=${id}`
+    const scopedQuery = hasScoped ? `&amp;scoped=true` : ``
+    const attrsQuery = attrsToQuery(descriptor.template.attrs)
+    const query = `?vue&amp;type=template${idQuery}${scopedQuery}${attrsQuery}${inheritQuery}`
+    const request = templateRequest = stringifyRequest(src + query)
+    templateImport = `import { render, staticRenderFns } from ${request}`
+  }
+
+  // script
+  let scriptImport = `var script = {}`
+  if (descriptor.script) {
+    const src = descriptor.script.src || resourcePath
+    const attrsQuery = attrsToQuery(descriptor.script.attrs, &apos;js&apos;)
+    const query = `?vue&amp;type=script${attrsQuery}${inheritQuery}`
+    const request = stringifyRequest(src + query)
+    scriptImport = (
+      `import script from ${request}\n` +
+      `export * from ${request}` // support named exports
+    )
+  }
+
+  // styles
+  let stylesCode = ``
+  if (descriptor.styles.length) {
+    stylesCode = genStylesCode(
+      loaderContext,
+      descriptor.styles,
+      id,
+      resourcePath,
+      stringifyRequest,
+      needsHotReload,
+      isServer || isShadow // needs explicit injection?
+    )
+  }
+
+  let code = `
+${templateImport}
+${scriptImport}
+${stylesCode}
+
+/* normalize component */
+import normalizer from ${stringifyRequest(`!${componentNormalizerPath}`)}
+var component = normalizer(
+  script,
+  render,
+  staticRenderFns,
+  ${hasFunctional ? `true` : `false`},
+  ${/injectStyles/.test(stylesCode) ? `injectStyles` : `null`},
+  ${hasScoped ? JSON.stringify(id) : `null`},
+  ${isServer ? JSON.stringify(hash(request)) : `null`}
+  ${isShadow ? `,true` : ``}
+)
+  `.trim() + `\n`
+
+  if (descriptor.customBlocks &amp;&amp; descriptor.customBlocks.length) {
+    code += genCustomBlocksCode(
+      descriptor.customBlocks,
+      resourcePath,
+      resourceQuery,
+      stringifyRequest
+    )
+  }
+
+  ...
+
+  // Expose filename. This is used by the devtools and Vue runtime warnings.
+  code += `\ncomponent.options.__file = ${
+    isProduction
+      // For security reasons, only expose the file&apos;s basename in production.
+      ? JSON.stringify(filename)
+      // Expose the file&apos;s full path in development, so that it can be opened
+      // from the devtools.
+      : JSON.stringify(rawShortFilePath.replace(/\\/g, &apos;/&apos;))
+  }`
+
+  code += `\nexport default component.exports`
+  return code
+}
+</code></pre><p>以上就是 vue-loader 的入口文件(index.js)主要做的工作：对于 request 上不带 type 类型的 Vue SFC 进行 parse，获取每个 block 的相关内容，将不同类型的 block 组件的 Vue SFC 转化成 js module 字符串，具体的内容如下：</p>
+<pre><code>import { render, staticRenderFns } from &quot;./source.vue?vue&amp;type=template&amp;id=27e4e96e&amp;scoped=true&amp;lang=pug&amp;&quot;
+import script from &quot;./source.vue?vue&amp;type=script&amp;lang=js&amp;&quot;
+export * from &quot;./source.vue?vue&amp;type=script&amp;lang=js&amp;&quot;
+import style0 from &quot;./source.vue?vue&amp;type=style&amp;index=0&amp;id=27e4e96e&amp;scoped=true&amp;lang=css&amp;&quot;
+
+/* normalize component */
+import normalizer from &quot;!../lib/runtime/componentNormalizer.js&quot;
+var component = normalizer(
+  script,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  &quot;27e4e96e&quot;,
+  null
+)
+
+/* custom blocks */
+import block0 from &quot;./source.vue?vue&amp;type=custom&amp;index=0&amp;blockType=foo&quot;
+if (typeof block0 === &apos;function&apos;) block0(component)
+
+// 省略了有关 hotReload 的代码
+
+component.options.__file = &quot;example/source.vue&quot;
+export default component.exports
+</code></pre><p>从生成的 js module 字符串来看：将由 source.vue 提供 render函数/staticRenderFns，js script，style样式，并交由 normalizer 进行统一的格式化，最终导出 component.exports。</p>
+<h3 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h3><p>这样 vue-loader 处理的第一个阶段结束了，vue-loader 在这一阶段将 Vue SFC 转化为 js module 后，接下来进入到第二阶段，将新生成的 js module 加入到 webpack 的编译环节，即对这个 js module 进行 AST 的解析以及相关依赖的收集过程，这里我用每个 request 去标记每个被收集的 module(这里只说明和 Vue SFC 相关的模块内容)：</p>
+<pre><code>[
+ &apos;./source.vue?vue&amp;type=template&amp;id=27e4e96e&amp;scoped=true&amp;lang=pug&amp;&apos;,
+ &apos;./source.vue?vue&amp;type=script&amp;lang=js&amp;&apos;,
+ &apos;./source.vue?vue&amp;type=style&amp;index=0&amp;id=27e4e96e&amp;scoped=true&amp;lang=css&amp;&apos;,
+ &apos;./source.vue?vue&amp;type=custom&amp;index=0&amp;blockType=foo&apos;
+]
+</code></pre><p>我们看到通过 vue-loader 处理到得到的 module path 上的 query 参数都带有 vue 字段。这里便涉及到了我们在文章开篇提到的 VueLoaderPlugin 加入的 pitcher loader。如果遇到了 query 参数上带有 vue 字段的 module path，那么就会把 pitcher loader 加入到处理这个 module 的 loaders 数组当中。因此这个 module 最终也会经过 pitcher loader 的处理。此外在 loader 的配置顺序上，pitcher loader 为第一个，因此在处理 Vue SFC 模块的时候，最先也是交由 pitcher loader 来处理。</p>
+<p>事实上对一个 Vue SFC 处理的第二阶段就是刚才提到的，Vue SFC 会经由 pitcher loader 来做进一步的处理。那么我们就来看下 vue-loader 内部提供的 pitcher loader 主要是做了哪些工作呢：</p>
+<ol>
+<li>剔除 eslint loader；</li>
+<li>剔除 pitcher loader 自身；</li>
+<li><p>根据不同 type query 参数进行拦截处理，返回对应的内容，跳过后面的 loader 执行的阶段，进入到 module parse 阶段</p>
+<p>// vue-loader/lib/loaders/pitcher.js</p>
+<p>module.export = code =&gt; code</p>
+<p>module.pitch = function () {<br>  …<br>  const query = qs.parse(this.resourceQuery.slice(1))<br>  let loaders = this.loaders</p>
+<p>  // 剔除 eslint loader<br>  // if this is a language block request, eslint-loader may get matched<br>  // multiple times<br>  if (query.type) {</p>
+<pre><code>// if this is an inline block, since the whole file itself is being linted,
+// remove eslint-loader to avoid duplicate linting.
+if (/\.vue$/.test(this.resourcePath)) {
+  loaders = loaders.filter(l =&gt; !isESLintLoader(l))
+} else {
+  // This is a src import. Just make sure there&apos;s not more than 1 instance
+  // of eslint present.
+  loaders = dedupeESLintLoader(loaders)
+}
+</code></pre><p>  }</p>
+<p>  // 剔除 pitcher loader 自身<br>  // remove self<br>  loaders = loaders.filter(isPitcher)</p>
+<p>  if (query.type === ‘style’) {</p>
+<pre><code>const cssLoaderIndex = loaders.findIndex(isCSSLoader)
+if (cssLoaderIndex &gt; -1) {
+  const afterLoaders = loaders.slice(0, cssLoaderIndex + 1)
+  const beforeLoaders = loaders.slice(cssLoaderIndex + 1)
+  const request = genRequest([
+    ...afterLoaders,
+    stylePostLoaderPath,
+    ...beforeLoaders
+  ])
+  return `import mod from ${request}; export default mod; export * from ${request}`
+}
+</code></pre><p>  }</p>
+<p>  if (query.type === ‘template’) {</p>
+<pre><code>const path = require(&apos;path&apos;)
+const cacheLoader = cacheDirectory &amp;&amp; cacheIdentifier
+  ? [`cache-loader?${JSON.stringify({
+    // For some reason, webpack fails to generate consistent hash if we
+    // use absolute paths here, even though the path is only used in a
+    // comment. For now we have to ensure cacheDirectory is a relative path.
+    cacheDirectory: path.isAbsolute(cacheDirectory)
+      ? path.relative(process.cwd(), cacheDirectory)
+      : cacheDirectory,
+    cacheIdentifier: hash(cacheIdentifier) + &apos;-vue-loader-template&apos;
+  })}`]
+  : []
+const request = genRequest([
+  ...cacheLoader,
+  templateLoaderPath + `??vue-loader-options`,
+  ...loaders
+])
+// the template compiler uses esm exports
+return `export * from ${request}`
+</code></pre><p>  }</p>
+<p>  // if a custom block has no other matching loader other than vue-loader itself,<br>  // we should ignore it<br>  if (query.type === <code>custom</code> &amp;&amp;</p>
+<pre><code>  loaders.length === 1 &amp;&amp;
+  loaders[0].path === selfPath) {
+return ``
+</code></pre><p>  }</p>
+<p>  // When the user defines a rule that has only resourceQuery but no test,<br>  // both that rule and the cloned rule will match, resulting in duplicated<br>  // loaders. Therefore it is necessary to perform a dedupe here.<br>  const request = genRequest(loaders)<br>  return <code>import mod from ${request}; export default mod; export * from ${request}</code><br>}</p>
+</li>
+</ol>
+<p>对于 style block 的处理，首先判断是否有 css-loader，如果有的话就重新生成一个新的 request，这个 request 包含了 vue-loader 内部提供的 stylePostLoader，并返回一个 js module，根据 pitch 函数的规则，pitcher loader 后面的 loader 都会被跳过，这个时候开始编译这个返回的 js module。相关的内容为：</p>
+<pre><code>import mod from &quot;-!../node_modules/vue-style-loader/index.js!../node_modules/css-loader/index.js!../lib/loaders/stylePostLoader.js!../lib/index.js??vue-loader-options!./source.vue?vue&amp;type=style&amp;index=0&amp;id=27e4e96e&amp;scoped=true&amp;lang=css&amp;&quot;
+export default mod
+export * from &quot;-!../node_modules/vue-style-loader/index.js!../node_modules/css-loader/index.js!../lib/loaders/stylePostLoader.js!../lib/index.js??vue-loader-options!./source.vue?vue&amp;type=style&amp;index=0&amp;id=27e4e96e&amp;scoped=true&amp;lang=css&amp;&quot;  
+</code></pre><p>对于 template block 的处理流程类似，生成一个新的 request，这个 request 包含了 vue-loader 内部提供的 templateLoader，并返回一个 js module，并跳过后面的 loader，然后开始编译返回的 js module。相关的内容为：</p>
+<pre><code>export * from &quot;-!../lib/loaders/templateLoader.js??vue-loader-options!../node_modules/pug-plain-loader/index.js!../lib/index.js??vue-loader-options!./source.vue?vue&amp;type=template&amp;id=27e4e96e&amp;scoped=true&amp;lang=pug&amp;&quot;
+</code></pre><p>这样对于一个 Vue SFC 处理的第二阶段也就结束了，通过 pitcher loader 去拦截不同类型的 block，并返回新的 js module，跳过后面的 loader 的执行，同时在内部会剔除掉 pitcher loader，这样在进入到下一个处理阶段的时候，pitcher loader 不在使用的 loader 范围之内，因此下一阶段 Vue SFC 便不会经由 pitcher loader 来处理。</p>
+<h3 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h3><p>接下来进入到第三个阶段，编译返回的新的 js module，完成 AST 的解析和依赖收集工作，并开始处理不同类型的 block 的编译转换工作。就拿 Vue SFC 当中的 style / template block 来举例，</p>
+<p>style block 会经过以下的流程处理：</p>
+<p>source.vue?vue&amp;type=style -&gt; vue-loader(抽离 style block) -&gt; stylePostLoader(处理作用域 scoped css) -&gt; css-loader(处理相关资源引入路径) -&gt; vue-style-loader(动态创建 style 标签插入 css)</p>
+<p><img src="https://segmentfault.com/img/bVbqc2T?w=2034&amp;h=946" alt="图片描述" title="图片描述"></p>
+<p>template block 会经过以下的流程处理：</p>
+<p>source.vue?vue&amp;type=template -&gt; vue-loader(抽离 template block ) -&gt; pug-plain-loader(将 pug 模块转化为 html 字符串) -&gt; templateLoader(编译 html 模板字符串，生成 render/staticRenderFns 函数并暴露出去)</p>
+<p><img src="https://segmentfault.com/img/bVbqc20?w=2074&amp;h=922" alt="图片描述" title="图片描述"></p>
+<p>我们看到经过 vue-loader 处理时，会根据不同 module path 的类型(query 参数上的 type 字段)来抽离 SFC 当中不同类型的 block。这也是 vue-loader 内部定义的相关规则：</p>
+<pre><code>// vue-loader/lib/index.js
+
+const qs = require(&apos;querystring&apos;)
+const selectBlock = require(&apos;./select&apos;)
+...
+
+module.exports = function (source) {
+  ...
+  const rawQuery = resourceQuery.slice(1)
+  const inheritQuery = `&amp;${rawQuery}`
+  const incomingQuery = qs.parse(rawQuery)
+
+  ...
+  const descriptor = parse({
+    source,
+    compiler: options.compiler || loadTemplateCompiler(),
+    filename,
+    sourceRoot,
+    needMap: sourceMap
+  })
+
+  // if the query has a type field, this is a language block request
+  // e.g. foo.vue?type=template&amp;id=xxxxx
+  // and we will return early
+  if (incomingQuery.type) {
+    return selectBlock(
+      descriptor,
+      loaderContext,
+      incomingQuery,
+      !!options.appendExtension
+    )
+  }
+  ...
+}
+</code></pre><p>当 module path 上的 query 参数带有 type 字段，那么会直接调用 selectBlock 方法去获取 type 对应类型的 block 内容，跳过 vue-loader 后面的处理流程(这也是与 vue-loader 第一次处理这个 module时流程不一样的地方)，并进入到下一个 loader 的处理流程中，selectBlock 方法内部主要就是根据不同的 type 类型(template/script/style/custom)，来获取 descriptor 上对应类型的 content 内容并传入到下一个 loader 处理：</p>
+<pre><code>module.exports = function selectBlock (
+  descriptor,
+  loaderContext,
+  query,
+  appendExtension
+) {
+  // template
+  if (query.type === `template`) {
+    if (appendExtension) {
+      loaderContext.resourcePath += &apos;.&apos; + (descriptor.template.lang || &apos;html&apos;)
+    }
+    loaderContext.callback(
+      null,
+      descriptor.template.content,
+      descriptor.template.map
+    )
+    return
+  }
+
+  // script
+  if (query.type === `script`) {
+    if (appendExtension) {
+      loaderContext.resourcePath += &apos;.&apos; + (descriptor.script.lang || &apos;js&apos;)
+    }
+    loaderContext.callback(
+      null,
+      descriptor.script.content,
+      descriptor.script.map
+    )
+    return
+  }
+
+  // styles
+  if (query.type === `style` &amp;&amp; query.index != null) {
+    const style = descriptor.styles[query.index]
+    if (appendExtension) {
+      loaderContext.resourcePath += &apos;.&apos; + (style.lang || &apos;css&apos;)
+    }
+    loaderContext.callback(
+      null,
+      style.content,
+      style.map
+    )
+    return
+  }
+
+  // custom
+  if (query.type === &apos;custom&apos; &amp;&amp; query.index != null) {
+    const block = descriptor.customBlocks[query.index]
+    loaderContext.callback(
+      null,
+      block.content,
+      block.map
+    )
+    return
+  }
+}
+</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过 vue-loader 的源码我们看到一个 Vue SFC 在整个编译构建环节是怎么样一步一步处理的，这也是得益于 webpack 给开发这提供了这样一种 loader 的机制，使得开发者通过这样一种方式去对项目源码做对应的转换工作以满足相关的开发需求。结合之前的2篇有关 webpack loader 源码的分析，大家应该对 loader 有了更加深入的理解，也希望大家活学活用，利用 loader 机制去完成更多贴合实际需求的开发工作。</p>
+<p><strong>文章首发于个人github blog: <a href="https://github.com/CommanderXL/Biu-blog" target="_blank" rel="noopener">Biu-blog</a>，欢迎大家关注~</strong></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年05月05日 14:46</p>
+        <p>原始链接： <a class="post-url" href="/collection/webpack/Webpack Loader 高手进阶(三).html" title="">http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(三).html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(三).html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(三).html&title=Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(三).html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(三).html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(三).html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/collection/webpack/Webpack Loader 高手进阶(三).html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Webpack-Loader-高手进阶-三"><span class="post-toc-text">Webpack Loader 高手进阶(三)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Webpack-Loader-详解"><span class="post-toc-text">Webpack Loader 详解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#VueLoaderPlugin"><span class="post-toc-text">VueLoaderPlugin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Step-1"><span class="post-toc-text">Step 1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Step-2"><span class="post-toc-text">Step 2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Step-3"><span class="post-toc-text">Step 3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

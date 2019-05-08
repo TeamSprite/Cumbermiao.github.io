@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>链表 | Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="链表 链表存储有序的元素集合，但不同于数组，链表中的元素在内存中并不是连续放置的。每个元素由一个存储元素本身的节点和一个指向下一个元素的引用（也称指针或链接）组成。    数组的另一个细节是可以直接访问任何位置的任何元素，而要想访问链表中间的一个元素，需要从起点（表头）开始迭代列表直到找到所需的元素。  链表方法：  append(element)：向列表尾部添加一个新的项。 insert(pos">
+<meta property="og:type" content="website">
+<meta property="og:title" content="链表">
+<meta property="og:url" content="http://cumbermiao.github.io/algorithm/02.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="链表 链表存储有序的元素集合，但不同于数组，链表中的元素在内存中并不是连续放置的。每个元素由一个存储元素本身的节点和一个指向下一个元素的引用（也称指针或链接）组成。    数组的另一个细节是可以直接访问任何位置的任何元素，而要想访问链表中间的一个元素，需要从起点（表头）开始迭代列表直到找到所需的元素。  链表方法：  append(element)：向列表尾部添加一个新的项。 insert(pos">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557048539023&di=cf93214caab6e2e97f3921498d1f136f&imgtype=0&src=http%3A%2F%2Fp.ananas.chaoxing.com%2Fstar%2F1024_0%2F1389058938762wimfc.jpg">
+<meta property="og:updated_time" content="2019-05-06T02:10:16.911Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="链表">
+<meta name="twitter:description" content="链表 链表存储有序的元素集合，但不同于数组，链表中的元素在内存中并不是连续放置的。每个元素由一个存储元素本身的节点和一个指向下一个元素的引用（也称指针或链接）组成。    数组的另一个细节是可以直接访问任何位置的任何元素，而要想访问链表中间的一个元素，需要从起点（表头）开始迭代列表直到找到所需的元素。  链表方法：  append(element)：向列表尾部添加一个新的项。 insert(pos">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557048539023&di=cf93214caab6e2e97f3921498d1f136f&imgtype=0&src=http%3A%2F%2Fp.ananas.chaoxing.com%2Fstar%2F1024_0%2F1389058938762wimfc.jpg">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      链表
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-05-05
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><blockquote>
+<p>链表存储有序的元素集合，但不同于数组，链表中的元素在内存中并不是连续放置的。每个<br>元素由一个存储元素本身的节点和一个指向下一个元素的引用（也称指针或链接）组成。</p>
+</blockquote>
+<p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1557048539023&amp;di=cf93214caab6e2e97f3921498d1f136f&amp;imgtype=0&amp;src=http%3A%2F%2Fp.ananas.chaoxing.com%2Fstar%2F1024_0%2F1389058938762wimfc.jpg" alt="链表"></p>
+<blockquote>
+<p>数组的另一个细节是可以直接访问任何位置的任何元素，而要想访问链表中间的一个元素，需要从起点（表头）开始迭代列表直到找到所需的元素。</p>
+</blockquote>
+<p>链表方法：</p>
+<ul>
+<li>append(element)：向列表尾部添加一个新的项。</li>
+<li>insert(position, element)：向列表的特定位置插入一个新的项。</li>
+<li>remove(element)：从列表中移除一项。</li>
+<li>indexOf(element)：返回元素在列表中的索引。如果列表中没有该元素则返回-1。</li>
+<li>removeAt(position)：从列表的特定位置移除一项。</li>
+<li>isEmpty()：如果链表中不包含任何元素，返回 true，如果链表长度大于 0 则返回 false。</li>
+<li>size()：返回链表包含的元素个数。与数组的 length 属性类似。</li>
+<li>toString()：由于列表项使用了 Node 类，就需要重写继承自 JavaScript 对象默认的 toString 方法，让其只输出元素的值。</li>
+<li>getHead(): 返回 head 指向的对象节点。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(ele) &#123;</span><br><span class="line">    <span class="keyword">this</span>.element = ele;</span><br><span class="line">    <span class="keyword">this</span>.next = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.length = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">this</span>.head = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  append(ele) &#123;</span><br><span class="line">    <span class="keyword">let</span> element = <span class="keyword">new</span> Node(ele);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.head == <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.head = element;</span><br><span class="line">      <span class="keyword">this</span>.length++;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> current = <span class="keyword">this</span>.head;</span><br><span class="line">    <span class="keyword">while</span> (current.next) &#123;</span><br><span class="line">      current = current.next;</span><br><span class="line">    &#125;</span><br><span class="line">    current.next = element;</span><br><span class="line">    <span class="keyword">this</span>.length++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  insert(pos, ele) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.length &gt;= pos &amp;&amp; pos &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> element = <span class="keyword">new</span> Node(ele);</span><br><span class="line">      <span class="keyword">let</span> previous;</span><br><span class="line">      <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">let</span> current = <span class="keyword">this</span>.head;</span><br><span class="line">      <span class="keyword">if</span> (pos === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.head = element;</span><br><span class="line">        element.next = current;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; pos) &#123;</span><br><span class="line">          previous = current;</span><br><span class="line">          current = current.next;</span><br><span class="line">          i++;</span><br><span class="line">        &#125;</span><br><span class="line">        element.next = current;</span><br><span class="line">        previous.next = element;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.length++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  removeAt(pos) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.length &gt; pos &amp;&amp; pos &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> current = <span class="keyword">this</span>.head;</span><br><span class="line">      <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">let</span> previous;</span><br><span class="line">      <span class="keyword">if</span> (pos === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.head = <span class="keyword">this</span>.head.next;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (pos &gt; i) &#123;</span><br><span class="line">          previous = current;</span><br><span class="line">          current = current.next;</span><br><span class="line">          i++;</span><br><span class="line">        &#125;</span><br><span class="line">        previous.next = current.next;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.length--;</span><br><span class="line">      <span class="keyword">return</span> current.element;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  remove(ele) &#123;</span><br><span class="line">    <span class="keyword">let</span> idx = <span class="keyword">this</span>.indexOf(ele);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.removeAt(idx);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  indexOf(ele) &#123;</span><br><span class="line">    <span class="keyword">let</span> i = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">let</span> current = <span class="keyword">this</span>.head;</span><br><span class="line">    <span class="keyword">while</span> (current) &#123;</span><br><span class="line">      <span class="keyword">if</span> (current.element === ele) &#123;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">      &#125;</span><br><span class="line">      current = current.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  isEmpty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.length === <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  size() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.length;</span><br><span class="line">  &#125;</span><br><span class="line">  toString() &#123;</span><br><span class="line">    <span class="keyword">let</span> current = <span class="keyword">this</span>.head;</span><br><span class="line">    <span class="keyword">let</span> str = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">while</span> (current) &#123;</span><br><span class="line">      str = <span class="string">","</span> + current.element.toString();</span><br><span class="line">      current = current.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str.slice(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  getHead() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.head;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><blockquote>
+<p>相对于上面的单链表， 双向链表的节点多了一个 prev 指向前一个节点， 可以双向查找元素。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DoublyLinkedList</span> <span class="keyword">extends</span> <span class="title">LinkedList</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>.tail = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  append(ele) &#123;</span><br><span class="line">    <span class="keyword">let</span> element = <span class="keyword">new</span> Node(ele);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.head == <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.head = element;</span><br><span class="line">      <span class="keyword">this</span>.tail = element;</span><br><span class="line">      <span class="keyword">this</span>.length++;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> current = <span class="keyword">this</span>.head;</span><br><span class="line">    <span class="keyword">while</span> (current.next) &#123;</span><br><span class="line">      current = current.next;</span><br><span class="line">    &#125;</span><br><span class="line">    element.prev = current;</span><br><span class="line">    current.next = element;</span><br><span class="line">    <span class="keyword">this</span>.tail = element;</span><br><span class="line">    <span class="keyword">this</span>.length++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  insert(pos, ele) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.length &gt;= pos &amp;&amp; pos &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> element = <span class="keyword">new</span> Node(ele);</span><br><span class="line">      <span class="keyword">let</span> previous;</span><br><span class="line">      <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">let</span> current = <span class="keyword">this</span>.head;</span><br><span class="line">      <span class="keyword">if</span> (pos === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.head) &#123;</span><br><span class="line">          element.next = current;</span><br><span class="line">          current.prev = element;</span><br><span class="line">          <span class="keyword">this</span>.head = element;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.head = element;</span><br><span class="line">          <span class="keyword">this</span>.tail = element;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (pos === <span class="keyword">this</span>.length) &#123;</span><br><span class="line">        current = <span class="keyword">this</span>.tail;</span><br><span class="line">        current.next = element;</span><br><span class="line">        element.prev = current;</span><br><span class="line">        <span class="keyword">this</span>.tail = element;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; pos) &#123;</span><br><span class="line">          previous = current;</span><br><span class="line">          current = current.next;</span><br><span class="line">          i++;</span><br><span class="line">        &#125;</span><br><span class="line">        element.next = current;</span><br><span class="line">        element.prev = previous;</span><br><span class="line">        current.prev = element;</span><br><span class="line">        previous.next = element;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.length++;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  removeAt(pos) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.length &gt; pos &amp;&amp; pos &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> current = <span class="keyword">this</span>.head;</span><br><span class="line">      <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">let</span> previous;</span><br><span class="line">      <span class="keyword">if</span> (pos === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.head = current.next;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.length === <span class="number">1</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.tail = <span class="literal">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.head.prev = <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (pos === <span class="keyword">this</span>.length - <span class="number">1</span>) &#123;</span><br><span class="line">        current = <span class="keyword">this</span>.tail;</span><br><span class="line">        <span class="keyword">this</span>.tail = current.prev;</span><br><span class="line">        <span class="keyword">this</span>.tail.next = <span class="literal">null</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (pos &gt; i) &#123;</span><br><span class="line">          previous = current;</span><br><span class="line">          current = current.next;</span><br><span class="line">          i++;</span><br><span class="line">        &#125;</span><br><span class="line">        previous.next = current.next;</span><br><span class="line">        <span class="keyword">if</span> (current.next) &#123;</span><br><span class="line">          current.next.prev = previous;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.length--;</span><br><span class="line">      <span class="keyword">return</span> current.element;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><h4 id="单向引用"><a href="#单向引用" class="headerlink" title="单向引用"></a>单向引用</h4><p>与单链表基本类似，唯一区别在于最后一个节点 <code>tail</code> 的 <code>next</code> 不是 <code>null</code> 而是指向 <code>head</code> 。</p>
+<h4 id="双向引用"><a href="#双向引用" class="headerlink" title="双向引用"></a>双向引用</h4><p>与双向链表的区别在于 <code>head</code> 中的 <code>prev</code> 指向的是 <code>tail</code> ， <code>tail</code> 中的 <code>next</code> 指向的是 <code>head</code> 。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年05月06日 10:10</p>
+        <p>原始链接： <a class="post-url" href="/algorithm/02.html" title="链表">http://cumbermiao.github.io/algorithm/02.html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/algorithm/02.html&title=《链表》 — Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/algorithm/02.html&title=《链表》 — Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/algorithm/02.html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《链表》 — Cumber's Blog&url=http://cumbermiao.github.io/algorithm/02.html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/algorithm/02.html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/algorithm/02.html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链表"><span class="post-toc-text">链表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#双向链表"><span class="post-toc-text">双向链表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#循环链表"><span class="post-toc-text">循环链表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#单向引用"><span class="post-toc-text">单向引用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#双向引用"><span class="post-toc-text">双向引用</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="原文链接：https://segmentfault.com/a/1190000011008535 windows下终端神器之Cmder前言在windows下面其实大家很少用cmd，也很少人专门去学bat编程，实在是太不方便。那么一个黑糊糊的小窗口，界面比小霸王学习机还土，不能随意改变尺寸, 不支持多tab。久而久之，也没人关心在windows下面如何像linux下的terminal那样操作了。在网">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:url" content="http://cumbermiao.github.io/collection/tools/windows下终端神器之Cmder.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="原文链接：https://segmentfault.com/a/1190000011008535 windows下终端神器之Cmder前言在windows下面其实大家很少用cmd，也很少人专门去学bat编程，实在是太不方便。那么一个黑糊糊的小窗口，界面比小霸王学习机还土，不能随意改变尺寸, 不支持多tab。久而久之，也没人关心在windows下面如何像linux下的terminal那样操作了。在网">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://segmentfault.com/img/bVUlYF?w=421&h=496">
+<meta property="og:image" content="https://segmentfault.com/img/bVUlYI?w=281&h=189">
+<meta property="og:image" content="https://segmentfault.com/img/bVUlYJ?w=677&h=392">
+<meta property="og:image" content="https://segmentfault.com/img/bVUlYO?w=463&h=381">
+<meta property="og:image" content="https://segmentfault.com/img/bVUlYV?w=766&h=489">
+<meta property="og:image" content="https://segmentfault.com/img/bVUlYX?w=992&h=559">
+<meta property="og:image" content="https://segmentfault.com/img/bVUqAR?w=672&h=288">
+<meta property="og:updated_time" content="2019-04-19T11:06:36.825Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cumber&#39;s Blog">
+<meta name="twitter:description" content="原文链接：https://segmentfault.com/a/1190000011008535 windows下终端神器之Cmder前言在windows下面其实大家很少用cmd，也很少人专门去学bat编程，实在是太不方便。那么一个黑糊糊的小窗口，界面比小霸王学习机还土，不能随意改变尺寸, 不支持多tab。久而久之，也没人关心在windows下面如何像linux下的terminal那样操作了。在网">
+<meta name="twitter:image" content="https://segmentfault.com/img/bVUlYF?w=421&h=496">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <p>原文链接：<a href="https://segmentfault.com/a/1190000011008535" target="_blank" rel="noopener">https://segmentfault.com/a/1190000011008535</a></p>
+<h1 id="windows下终端神器之Cmder"><a href="#windows下终端神器之Cmder" class="headerlink" title="windows下终端神器之Cmder"></a>windows下终端神器之Cmder</h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在windows下面其实大家很少用cmd，也很少人专门去学bat编程，实在是太不方便。那么一个黑糊糊的小窗口，界面比小霸王学习机还土，不能随意改变尺寸, 不支持多tab。久而久之，也没人关心在windows下面如何像linux下的terminal那样操作了。在网上瞎逛时，偶尔看到有人提及cmder和conemu才知道有个近似linux下的bash的东西。装上cmder试了一下果然很酷，所以写点东西来推广一下。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装cmder有两种包可选择，一种是mini, 一种是full. cmder其实是包装了几种软件，主要是clink, git, conemu, 如果你要自己装git就可以选择mini, 否则安装full。<br>这里是<a href="http://cmder.net/" target="_blank" rel="noopener">官方主页</a>, 下载地址就在主页靠中间的位置。<br>建议安装full, 然后直接解压缩就可以用了<br>如果是安装的mini包，那么这里需要配置Git的安装目录。<br>因为我的Git是安装在D盘的Program Files下的，跨盘同时路径中有空格，我折腾了好久都没法在cmder的setting里配置好Task-&gt;bash的路径<br>后面想了个完美方法，就是在cmder安装目录下的vendor文件夹里建一个软链接到git的安装目录里<br>win7下可以用下面命令</p>
+<pre><code>C:\cmder\vendor&gt; mklink /D git-for-windows &quot;D:\Program Files\Git&quot;
+ symbolic link created for git-for-windows &lt;&lt;===&gt;&gt; D:\Program Files\Git
+</code></pre><h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h2><p>把cmder的目录加入到系统PATH里<br>右键我的电脑-&gt;属性-&gt;高级-&gt;环境变量-&gt;PATH-&gt;Edit<br>把cmder的目录添加到系统PATH里<br><img src="https://segmentfault.com/img/bVUlYF?w=421&amp;h=496" alt="图片描述" title="图片描述"></p>
+<h2 id="右键注册"><a href="#右键注册" class="headerlink" title="右键注册"></a>右键注册</h2><p>为了右键菜单有从这里打开cmder, 可以执行下面操作<br>打开administor权限的cmd.exe<br><img src="https://segmentfault.com/img/bVUlYI?w=281&amp;h=189" alt="图片描述" title="图片描述"><br>在打开的cmd.exe里执行下面命令<br><img src="https://segmentfault.com/img/bVUlYJ?w=677&amp;h=392" alt="图片描述" title="图片描述"></p>
+<p>执行完成之后，右键菜单如下<br><img src="https://segmentfault.com/img/bVUlYO?w=463&amp;h=381" alt="图片描述" title="图片描述"></p>
+<h2 id="ls中文支持"><a href="#ls中文支持" class="headerlink" title="ls中文支持"></a>ls中文支持</h2><p>默认安装好后，ls命令会显示中文乱码，需要打开setting窗口(win+alt+p)，设置LANG<br><img src="https://segmentfault.com/img/bVUlYV?w=766&amp;h=489" alt="图片描述" title="图片描述"></p>
+<h2 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h2><p>打开cmder的窗口如下<br><img src="https://segmentfault.com/img/bVUlYX?w=992&amp;h=559" alt="图片描述" title="图片描述"><br>可以看到界面非常舒服，并有不同颜色显示</p>
+<h2 id="提示符修改"><a href="#提示符修改" class="headerlink" title="提示符修改"></a>提示符修改</h2><p>如果喜欢用$做提示符，找到vendor/clink.lua</p>
+<pre><code>cmder_prompt = string.gsub(cmder_prompt, &quot;{cwd}&quot;, cwd)
+if env == nil then
+    lambda = &quot;λ&quot;
+else
+    lambda = &quot;(&quot;..env..&quot;) λ&quot;
+end
+clink.prompt.value = string.gsub(cmder_prompt, &quot;{lamb}&quot;, lambda)
+end
+</code></pre><p>把上面的λ替换成$重启cmder就行了，我觉得无所谓，所以没改</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p>cmder的快捷键和浏览器的很相近，如果要用爽cmder一定记住常用快捷键</p>
+<ul>
+<li>双击Tab, 可以路径补全</li>
+<li>可以用Ctrl+T新建Tab页</li>
+<li>利用Ctrl-W关闭当前Tab页</li>
+<li>使用Ctrl-n来切换到第n个Tab页</li>
+<li>Alt+Enter切换到全屏</li>
+<li>Alt+Shift+n开启你的settings-&gt;Tab下的terminals</li>
+<li>Ctrl-r反向搜索历史命令</li>
+<li>Win+Alt+p打开设置窗口</li>
+<li>Ctrl-u 删除文字到行首</li>
+<li>Ctrl-A 移动光标到行首</li>
+<li>Ctrl-E 移动光标到行尾</li>
+</ul>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ul>
+<li>双击选中，然后右键粘贴</li>
+<li>左键选中文字， Ctrl-V粘贴</li>
+</ul>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="ls时快时慢"><a href="#ls时快时慢" class="headerlink" title="ls时快时慢"></a>ls时快时慢</h2><p>ls是系统中用的最多的命令，但不幸的是，当我用softlink在vendor目录里建立到Git的链接后，在Cmder里输入ls后的返回时快时慢，慢的时候大于10秒，这绝对是不能容忍的。</p>
+<h3 id="解决方法一"><a href="#解决方法一" class="headerlink" title="解决方法一"></a>解决方法一</h3><p>后来我从u-tools里下载了windows下的ls， 地址为<a href="https://u-tools.com/download_prod.asp?download%5Fid=600&amp;Agree=1" target="_blank" rel="noopener">https://u-tools.com/download_…</a><br>解压后放到bin里，这样就没有问题了。<br>不过ls的输出有时不对齐<br><img src="https://segmentfault.com/img/bVUqAR?w=672&amp;h=288" alt="图片描述" title="图片描述"></p>
+<h3 id="解决方法二"><a href="#解决方法二" class="headerlink" title="解决方法二"></a>解决方法二</h3><p>再后来我把Git卸载重装后，ls的问题也好了。 Git里的command比msys2里的还新，用msys2里的ls替换Git里的也不会有ls返回时快时慢的问题<br>这个好像过一段时间又会出问题</p>
+<h3 id="解决方法三"><a href="#解决方法三" class="headerlink" title="解决方法三"></a>解决方法三</h3><p>可能和系统权限有关系，所以有下面的方法</p>
+<pre><code>mkpasswd -l -c &gt; C:\cmder\vendor\git-for-windows\etc\passwd
+mkgroup -l -c &gt; C:\cmder\vendor\git-for-windows\etc\group
+</code></pre><p>打开 C:cmdervendorgit-for-windowsetcnsswitch.conf</p>
+<pre><code># Begin /etc/nsswitch.conf
+
+passwd: files # db
+group: files # db
+
+db_enum: cache builtin
+
+db_home: env windows cygwin desc
+db_shell: env windows # cygwin desc
+db_gecos: env # cygwin desc
+
+# End /etc/nsswitch.conf
+</code></pre><p>主要是把group和passwd后面的db给注释掉</p>
+<h1 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h1><p>如果真的作为ssh终端工具，那么一个很严重的问题已经无法支持一些特殊字符，比如vim-airline的那些字符，或者是vim的一些theme, 希望以后cmder在这方面有大的改进</p>
+<h1 id="后言"><a href="#后言" class="headerlink" title="后言"></a>后言</h1><p>cmder集成了很多linux的命令以及git，使用起来非常方便。有了它，基本也可以像Linux下一样，利用它做很多操作和控制工作。具体的用法还需要大家自己去摸索，我在这里只是抛砖引玉，希望大家可以找到它的更多用处。<br>我找到的一个用途是用它来ssh到服务器。我觉得目前在windows上最好的ssh工具是xshell，不幸地是它不能用于商业用途，而Cmder可以凑和用作windows下的ssh工具，结合tmux的会话保存功能，还是很爽的。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年04月19日 19:06</p>
+        <p>原始链接： <a class="post-url" href="/collection/tools/windows下终端神器之Cmder.html" title="">http://cumbermiao.github.io/collection/tools/windows下终端神器之Cmder.html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/collection/tools/windows下终端神器之Cmder.html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/collection/tools/windows下终端神器之Cmder.html&title=Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/collection/tools/windows下终端神器之Cmder.html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/collection/tools/windows下终端神器之Cmder.html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/collection/tools/windows下终端神器之Cmder.html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/collection/tools/windows下终端神器之Cmder.html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#windows下终端神器之Cmder"><span class="post-toc-text">windows下终端神器之Cmder</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装"><span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置"><span class="post-toc-text">配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#路径"><span class="post-toc-text">路径</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#右键注册"><span class="post-toc-text">右键注册</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ls中文支持"><span class="post-toc-text">ls中文支持</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#界面"><span class="post-toc-text">界面</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#提示符修改"><span class="post-toc-text">提示符修改</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用"><span class="post-toc-text">使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#快捷键"><span class="post-toc-text">快捷键</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作"><span class="post-toc-text">操作</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#问题"><span class="post-toc-text">问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ls时快时慢"><span class="post-toc-text">ls时快时慢</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方法一"><span class="post-toc-text">解决方法一</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方法二"><span class="post-toc-text">解决方法二</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决方法三"><span class="post-toc-text">解决方法三</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#遗留问题"><span class="post-toc-text">遗留问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#后言"><span class="post-toc-text">后言</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
