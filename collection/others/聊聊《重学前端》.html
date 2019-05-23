@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="原文链接：https://zhuanlan.zhihu.com/p/54963444 聊聊《重学前端》这几天票圈被@Winter 大大在极客时间平台推出的《重学前端》刷屏了，而且在微信群和知乎上都有相关讨论。讨论中各种声音都有，可算是热闹了。今天我也凑个热闹，来聊聊我对这个课程的看法。 先来看个大纲整个系列包含三个部分，即构建 Web 应用程序或页面要用的最基本的三部分：HTML、CSS和Java">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:url" content="http://cumbermiao.github.io/collection/others/聊聊《重学前端》.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="原文链接：https://zhuanlan.zhihu.com/p/54963444 聊聊《重学前端》这几天票圈被@Winter 大大在极客时间平台推出的《重学前端》刷屏了，而且在微信群和知乎上都有相关讨论。讨论中各种声音都有，可算是热闹了。今天我也凑个热闹，来聊聊我对这个课程的看法。 先来看个大纲整个系列包含三个部分，即构建 Web 应用程序或页面要用的最基本的三部分：HTML、CSS和Java">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-ba414062394ff0919ced911ec47fda8c_b.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-ba414062394ff0919ced911ec47fda8c_hd.jpg">
+<meta property="og:updated_time" content="2019-05-23T03:30:07.330Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cumber&#39;s Blog">
+<meta name="twitter:description" content="原文链接：https://zhuanlan.zhihu.com/p/54963444 聊聊《重学前端》这几天票圈被@Winter 大大在极客时间平台推出的《重学前端》刷屏了，而且在微信群和知乎上都有相关讨论。讨论中各种声音都有，可算是热闹了。今天我也凑个热闹，来聊聊我对这个课程的看法。 先来看个大纲整个系列包含三个部分，即构建 Web 应用程序或页面要用的最基本的三部分：HTML、CSS和Java">
+<meta name="twitter:image" content="https://pic1.zhimg.com/v2-ba414062394ff0919ced911ec47fda8c_b.jpg">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <p>原文链接：<a href="https://zhuanlan.zhihu.com/p/54963444" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/54963444</a></p>
+<h1 id="聊聊《重学前端》"><a href="#聊聊《重学前端》" class="headerlink" title="聊聊《重学前端》"></a>聊聊《重学前端》</h1><p>这几天票圈被@Winter 大大在极客时间平台推出的《<a href="https://link.zhihu.com/?target=https%3A//time.geekbang.org/column/intro/154%3Fcode%3DtKn4oQGe3Pjf314jdc%252Fz8hZVdsBhZETREGyQKRVjeJQ%253D%26utm_term%3DzeusDB61Z%26utm_source%3Dwebsite%26utm_medium%3Dw3cplus%26utm_campaign%3D154-presell%26utm_content%3Dbanner" target="_blank" rel="noopener">重学前端</a>》刷屏了，而且在微信群和<a href="https://www.zhihu.com/question/309110848" target="_blank" rel="noopener">知乎</a>上都有相关讨论。讨论中各种声音都有，可算是热闹了。今天我也凑个热闹，来聊聊我对这个课程的看法。</p>
+<h2 id="先来看个大纲"><a href="#先来看个大纲" class="headerlink" title="先来看个大纲"></a>先来看个大纲</h2><p>整个系列包含三个部分，即构建 Web 应用程序或页面要用的最基本的三部分：<strong>HTML</strong>、<strong>CSS</strong>和<strong>JavaScript</strong>。</p>
+<h2 id="HTML-部分"><a href="#HTML-部分" class="headerlink" title="HTML 部分"></a>HTML 部分</h2><ul>
+<li>HTML 语义：只用<code>div</code>和<code>span</code>是不是就够了？</li>
+<li>HTML 语义：一篇 wiki 文章究竟会用到哪些语义元素？</li>
+<li>文档元信息：你知道<code>head</code>里一共能写哪几种标签吗？</li>
+<li>链接：除了<code>a</code>标签，还有标签叫链接？</li>
+<li>嵌入型元素：怎么<code>link</code>一个 CSS 要用<code>href</code>，而引入 JS 要用<code>src</code>呢？</li>
+<li>HTML 标签：标签总结</li>
+<li>HTML 语言：<code>dtd</code>到底是什么？</li>
+<li>ARIA：可访问性不止是给盲人用户的特性</li>
+</ul>
+<p>初看了一下提纲中的八个部分。细思了一下，原本自以为相对了解 HTML 的我，有几点还是不敢肯定、准确的说出答案。那么从我自己的角度来看这几点。</p>
+<h2 id="HTML-语义化"><a href="#HTML-语义化" class="headerlink" title="HTML 语义化"></a>HTML 语义化</h2><p>早期的前端开发者都会比较在意和注重这方面。随着时代的迁移，其实有很多同学开始不太在意这方面的细节。因此在很多网站通篇的只能看到<code>div</code>这样的标签元素。但事实上，像<code>div</code>和<code>span</code>这样的标签元素是没有任何语义化的，他们仅仅是只被运用于布局上。而且在任何浏览器中，都无法使用键盘让其获得焦点，另外也可访问性 API 也无法进行任何通信。事实上，构建一个具有语义化的页面或应用程序，我们除了使用具有语义化的 HTML 标签之外，还需要在结构做一些考量，比如说，<code>header</code>、<code>footer</code>、<code>main</code>、<code>aside</code>、<code>em</code>和<code>strong</code>标签，应该放在什么位置，应该在什么地方使用它们。</p>
+<p>在我的认知里，一个具有语义化的页面是要经得起<strong><a href="https://link.zhihu.com/?target=https%3A//validator.w3.org/" target="_blank" rel="noopener">HTML 标记验证服务</a></strong>的验证。另外还有一种更土的方式，那就是当你的 Web 页面在 CSS 裸奔的时候，结构清晰，而且不会影响用户对网站的浏览。更为高层次的呢？</p>
+<blockquote>
+<p>写出来的 HTML 结构要让机器可以读懂，也要能让人可以读懂！  </p>
+</blockquote>
+<p>有关于 HTML 语义化相关的讨论也较多，其中 <a href="https://www.zhihu.com/people/justineo" target="_blank" rel="noopener">@E0</a> 大大在<a href="https://www.zhihu.com/question/20455165/answer/15176745" target="_blank" rel="noopener">知乎上的回答就很详细</a>。有关于其他的讨论和文章，要是感兴趣的话，可以阅读下面的几篇文章：</p>
+<ul>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.brucelawson.co.uk/2018/the-practical-value-of-semantic-html/" target="_blank" rel="noopener">The practical value of semantic HTML</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//alistapart.com/article/semanticsinhtml5" target="_blank" rel="noopener">Semantics in HTML 5</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//internetingishard.com/html-and-css/semantic-html/" target="_blank" rel="noopener">semantic html</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.pluralsight.com/guides/semantic-html" target="_blank" rel="noopener">Semantic HTML</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//24ways.org/2017/accessibility-through-semantic-html/" target="_blank" rel="noopener">Accessibility Through Semantic HTML</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//html5doctor.com/lets-talk-about-semantics/" target="_blank" rel="noopener">Let’s Talk about Semantics</a></li>
+</ul>
+<h2 id="lt-head-gt-能放些什么标签"><a href="#lt-head-gt-能放些什么标签" class="headerlink" title="&lt;head&gt;能放些什么标签"></a><code>&lt;head&gt;</code>能放些什么标签</h2><p><code>&lt;head&gt;</code>标签是所有文档元素的容器，它包含了文档的全部信息。常见的信息主要包括：<code>&lt;meta&gt;</code>、<code>&lt;title&gt;</code>、<code>&lt;base&gt;</code>、<code>&lt;style&gt;</code>、<code>&lt;link&gt;</code>、<code>&lt;script&gt;</code>和<code>&lt;noscript&gt;</code>等标签。而其中<code>&lt;meta&gt;</code>的信息量是最大的。比如：</p>
+<pre><code>&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta http-equiv=&quot;refresh&quot; content=&quot;5;url=&quot; /&gt;
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+&lt;meta name=&quot;description&quot; content=&quot;150 words&quot; /&gt;
+&lt;meta name=&quot;keywords&quot; content=&quot;your tags&quot; /&gt;
+&lt;meta name=&quot;robots&quot; content=&quot;index,follow&quot; /&gt;
+&lt;meta name=&quot;author&quot; content=&quot;author name&quot; /&gt;
+&lt;meta name=&quot;google&quot; content=&quot;index,follow&quot; /&gt;
+&lt;meta name=&quot;googlebot&quot; content=&quot;index,follow&quot; /&gt;
+&lt;meta name=&quot;verify&quot; content=&quot;index,follow&quot; /&gt;
+&lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot; /&gt;
+&lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black-translucent&quot; /&gt;
+&lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;标题&quot;&gt;
+&lt;meta content=&quot;telephone=no&quot; name=&quot;format-detection&quot; /&gt;
+&lt;meta content=&quot;email=no&quot; name=&quot;format-detection&quot; /&gt;
+&lt;meta name=&quot;apple-itunes-app&quot; content=&quot;app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL&quot; /&gt;
+&lt;meta name=&quot;HandheldFriendly&quot; content=&quot;true&quot;&gt;
+&lt;meta name=&quot;MobileOptimized&quot; content=&quot;320&quot;&gt;
+&lt;meta name=&quot;screen-orientation&quot; content=&quot;portrait&quot;&gt;
+&lt;meta name=&quot;x5-orientation&quot; content=&quot;portrait&quot;&gt;
+&lt;meta name=&quot;full-screen&quot; content=&quot;yes&quot;&gt;
+&lt;meta name=&quot;x5-fullscreen&quot; content=&quot;true&quot;&gt;
+&lt;meta name=&quot;browsermode&quot; content=&quot;application&quot;&gt;
+&lt;meta name=&quot;x5-page-mode&quot; content=&quot;app&quot;&gt;
+&lt;meta name=&quot;msapplication-tap-highlight&quot; content=&quot;no&quot;&gt;
+</code></pre><p>有关于<code>meta</code>标签更详细的介绍可以阅读：</p>
+<ul>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.w3cplus.com/html5/meta-tags-and-seo.html" target="_blank" rel="noopener">Meta 标签与搜索引擎优化</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.cnblogs.com/libin-1/p/5979300.html" target="_blank" rel="noopener">meta 标签大全</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.fedlab.tech/archives/1242.html" target="_blank" rel="noopener">HTML Meta 标签知多少</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.link-assistant.com/news/html-meta-tags-for-seo.html" target="_blank" rel="noopener">HTML Tags for SEO: to use or not to use?</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//gist.github.com/kevinSuttle/1997924" target="_blank" rel="noopener">Complete list of html meta tags/</a></li>
+</ul>
+<h2 id="链接：除了a标签，还有标签叫链接？"><a href="#链接：除了a标签，还有标签叫链接？" class="headerlink" title="链接：除了a标签，还有标签叫链接？"></a>链接：除了<code>a</code>标签，还有标签叫链接？</h2><p>这个话题我比较期待。在 HTML 中除了<code>&lt;a&gt;</code>标签，还有什么标签叫链接？在我的印象中，<code>&lt;area&gt;</code>标签有点类似于<code>&lt;a&gt;</code>标签，可以做链接跳转。但是不是这个答案，我将期待着。</p>
+<h2 id="怎么link一个-CSS-要用href，而引入-JS-要用src呢？"><a href="#怎么link一个-CSS-要用href，而引入-JS-要用src呢？" class="headerlink" title="怎么link一个 CSS 要用href，而引入 JS 要用src呢？"></a>怎么<code>link</code>一个 CSS 要用<code>href</code>，而引入 JS 要用<code>src</code>呢？</h2><p>这个问题真没有细想过。前段时间刚好在哪翻到过这方面的讨论，可以找不到答案了。不过在<a href="https://link.zhihu.com/?target=https%3A//stackoverflow.com/questions/3395359/difference-between-src-and-href" target="_blank" rel="noopener">stackoverflow 网站上也有一个类似的问题</a>。看了一个点赞较高的答案：</p>
+<blockquote>
+<p>简单点说，使用<code>src</code>表达的是该无事的内容可以被替换，比如<code>img</code>、<code>script</code>、<code>iframe</code>元素；<code>href</code>表达的是超链接，与引用文档或外部资源建立关系，比如<code>a</code>，<code>link</code>等元素。  </p>
+</blockquote>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>另外几条，相对而言接触的比较多。特别是 ARIA 相关的方面。有关于 ARIA 相关的东西，在<a href="https://link.zhihu.com/?target=https%3A//www.24a11y.com/" target="_blank" rel="noopener">24 Accessibility 网站</a>有很多话题。另外在<a href="https://link.zhihu.com/?target=https%3A//www.w3.org/Translations/WCAG20-zh/" target="_blank" rel="noopener">Web 内容无障碍指南 2.0</a>是 ARIA 方面最新的规范指南。</p>
+<h2 id="CSS-部分"><a href="#CSS-部分" class="headerlink" title="CSS 部分"></a>CSS 部分</h2><ul>
+<li>媒体、分页、视口：除了属性和选择器，你还要知道这些带<code>@</code>的规则</li>
+<li>选择器：为什么只有子元素选择器，没有父元素选择器</li>
+<li>布局正常流：其实从毕升开始，你们就在用正常流</li>
+<li>布局弹性盒：垂直居中为什么这么难？</li>
+<li>文本：<code>baseline</code>到底是啥东西？</li>
+<li>颜色与形状：CSS 是如何绘制颜色与形状的？</li>
+<li>动画与交互：为什么动画要用贝塞尔曲线这么奇怪的东西？</li>
+<li>CSS 属性：CSS 总结</li>
+</ul>
+<p>对于 CSS 部分而言，自己相对接触的比较多一点，如果要把 CSS 方面的东西讲全，那足可以讲好久，甚至花一本书的章节来介绍，都不一定难阐述的完。简单的<a href="https://link.zhihu.com/?target=https%3A//airen.github.io/CSS3/%23/" target="_blank" rel="noopener">列了一个大纲，差不多有 26 章节的内容可聊</a>。自己也在<a href="https://link.zhihu.com/?target=https%3A//www.w3cplus.com/blog/tags/674.htmlhttps%3A//www.w3cplus.com/blog/tags/674.html" target="_blank" rel="noopener">根据这个大纲完善内容</a>。相比之下，我在完善的内容是怎么使用 CSS，而@winter 大大在聊的是为什么？比如其中：</p>
+<ul>
+<li>选择器：为什么只有子元素选择器，没有父元素选择器</li>
+<li>布局弹性盒：垂直居中为什么这么难？</li>
+<li>文本：<code>baseline</code>到底是啥东西？</li>
+<li>颜色与形状：CSS 是如何绘制颜色与形状的？</li>
+<li>动画与交互：为什么动画要用贝塞尔曲线这么奇怪的东西？</li>
+</ul>
+<p>上述几个问题？好几个都不知道是为什么？正好跟着大大的思路学习一下，大神是如何深入理解这些。这将为我以后深入学习 CSS 将会有很大的帮助。对于贝塞尔曲线和颜色，向大家推荐一篇文章，介绍的非常详细：</p>
+<ul>
+<li><a href="https://link.zhihu.com/?target=https%3A//jamie-wong.com/post/bezier-curves/" target="_blank" rel="noopener">Bezier Curves from the Ground Up</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//jamie-wong.com/post/color/" target="_blank" rel="noopener">Color: From Hexcodes to Eyeballs</a></li>
+</ul>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><ul>
+<li>类型：关于类型，有哪些你忽视的细节</li>
+<li>对象：JavaScript 是面向对象还是基于对象</li>
+<li>对象：JavaScript 中，我们真的需要模拟类吗</li>
+<li>函数：<code>this</code>有什么用？应该怎么用？</li>
+<li>函数：JavaScript 里的闭包到底要怎么用？适合用在哪里？</li>
+<li>事件循环与微任务：<code>Promise</code>里的代码为什么比<code>setTimeout</code>先执行</li>
+<li>语句：<code>try</code>里面放<code>return</code>，<code>finally</code>还会执行吗</li>
+<li>语句：为什么<code>1.toString</code>会报错</li>
+<li>运算符与表达式：新加入的<code>**</code>运算符，好像有哪里不一样</li>
+<li>语句，程序与表达式：在<code>script</code>标签里写<code>export</code>为什么会抛错</li>
+<li>分号自动补全：到底要不要写分号呢</li>
+</ul>
+<p>对于 JavaScript 部分，一直是我的弱项，今年立个 flag，希望能跟着把这方面的知识增强一些。</p>
+<h2 id="浏览器实现原与-API"><a href="#浏览器实现原与-API" class="headerlink" title="浏览器实现原与 API"></a>浏览器实现原与 API</h2><p>很早温大就跟我说，要好好把浏览器的原理方面的知识理解透，这将有益学习和理解一些深层次的东西。但一直以来没有进展。这次专栏中提到了：</p>
+<ul>
+<li>浏览器的工作原理：你最熟悉的浏览器，是怎么写出来的（上）</li>
+<li>浏览器的工作原理：你最熟悉的浏览器，是怎么写出来的（中）</li>
+<li>浏览器的工作原理：你最熟悉的浏览器，是怎么写出来的（下）</li>
+<li>DOM：如何用 JS 操作文档</li>
+<li>CSSOM：如何获取一个元素的准确位置</li>
+<li>事件：捕获模型和冒泡模型到底是怎么来的</li>
+<li>其它一些 API：API 总集合</li>
+</ul>
+<p>有关于浏览器原理相关的文章，在互联网上也相当的多，其中有几篇文章我觉得还是不错的，值得推荐给大家：</p>
+<ul>
+<li><a href="https://link.zhihu.com/?target=https%3A//coolshell.cn/articles/9666.html" target="_blank" rel="noopener">浏览器的渲染原理简介</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.10tiao.com/html/788/201811/2247489897/1.html" target="_blank" rel="noopener">图解浏览器的工作原理</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="noopener">浏览器的工作原理：新式网络浏览器幕后揭秘</a></li>
+</ul>
+<p>要 Google 开发者网站上，2018 年@Mariko Kosaka 也推出了四篇文章，深入的介绍了浏览器的工作原理：</p>
+<ul>
+<li><a href="https://link.zhihu.com/?target=https%3A//developers.google.com/web/updates/2018/09/inside-browser-part1" target="_blank" rel="noopener">Inside look at modern web browser (part 1)</a>【<a href="https://link.zhihu.com/?target=https%3A//juejin.im/post/5baca7616fb9a05d290eff2c" target="_blank" rel="noopener">译文</a>】</li>
+<li><a href="https://link.zhihu.com/?target=https%3A//developers.google.com/web/updates/2018/09/inside-browser-part2" target="_blank" rel="noopener">Inside look at modern web browser (part 2)</a>【<a href="https://link.zhihu.com/?target=https%3A//juejin.im/post/5baee9c46fb9a05ce95c6b4e" target="_blank" rel="noopener">译文</a>】</li>
+<li><a href="https://link.zhihu.com/?target=https%3A//developers.google.com/web/updates/2018/09/inside-browser-part3" target="_blank" rel="noopener">Inside look at modern web browser (part 3)</a>【<a href="https://link.zhihu.com/?target=https%3A//juejin.im/post/5bb08671e51d450e7210d23e" target="_blank" rel="noopener">译文</a>】</li>
+<li><a href="https://link.zhihu.com/?target=https%3A//developers.google.com/web/updates/2018/09/inside-browser-part4" target="_blank" rel="noopener">Inside look at modern web browser (part 4)</a></li>
+</ul>
+<p>对于<a href="https://link.zhihu.com/?target=https%3A//www.w3cplus.com/blog/tags/663.html" target="_blank" rel="noopener">DOM</a>和<a href="https://link.zhihu.com/?target=https%3A//www.w3cplus.com/javascript/cssom-css-typed-om.html" target="_blank" rel="noopener">CSSOM</a>，在 18 年还是花了不少时间在学习，其中还是有不少的收获，但我想听完这个课之后，再回过头来对比之前学习的笔记，我想也会有较大的收获吧。</p>
+<h2 id="前端综合应用"><a href="#前端综合应用" class="headerlink" title="前端综合应用"></a>前端综合应用</h2><ul>
+<li>性能：前端性能到底对业务数据有多大的影响</li>
+<li>工具链：什么样的工具链才能提升团队效率</li>
+<li>持续集成：几十个前端一起工作，怎么保证基本质量</li>
+<li>搭建系统：大量的低价值需求如何应付</li>
+<li>架构与基础库： 如何设计基础库</li>
+</ul>
+<p>这是专栏的第四部分，我也很感兴趣。期待专栏也早点出来，估计很多同学都对这一部分很感兴趣的吧。有关于性能方面的，我也推荐几篇文章：</p>
+<ul>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.smashingmagazine.com/2019/01/front-end-performance-checklist-2019-pdf-pages/" target="_blank" rel="noopener">Front-End Performance Checklist 2019 [PDF, Apple Pages, MS Word]</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.w3ctech.com/topic/2089v" target="_blank" rel="noopener">前端性能优化の备忘录（2018 版）</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.w3ctech.com/topic/1945" target="_blank" rel="noopener">前端性能优化の备忘录(2017 版)</a></li>
+</ul>
+<h2 id="最后说一点"><a href="#最后说一点" class="headerlink" title="最后说一点"></a>最后说一点</h2><p>不少同学在说：</p>
+<blockquote>
+<p>购买，这个课程是在交智商税  </p>
+</blockquote>
+<p>就此问题，@winter 也针对性的做了阐述。<a href="https://zhuanlan.zhihu.com/p/54836751" target="_blank" rel="noopener">感兴趣的可以点击这里</a>。我只想说，<strong>智者见知，仁者见仁</strong>。</p>
+<p>也有不少同学在说：</p>
+<blockquote>
+<p>这个专栏的内容太简单了。  </p>
+</blockquote>
+<p>对而我言，虽然”<strong>很基础</strong>“，但我还有很多都不知道，特别是其中的为什么？就拿我擅长的 CSS 来说吧，大纲中的八个，我就有一大半不知道为什么？这就是与大神的差距。</p>
+<p>另外，我记得前段时间在 Hacker News 上提出这样的一个问题”<strong><a href="https://link.zhihu.com/?target=https%3A//news.ycombinator.com/item%3Fid%3D18706785" target="_blank" rel="noopener">Stop Learning Frameworks</a></strong>“。平时也有同学问我，应该不应该去学习 JS 框架。其实就我个人而言，我更强调先把基础学好，如果工作是要用到框架，可以边学边用，但对于基础还是要扎实一点。</p>
+<p>不扯了，如果大家觉得这个课程不错，可以入手：</p>
+<p><img src="https://pic1.zhimg.com/v2-ba414062394ff0919ced911ec47fda8c_b.jpg" alt=""></p>
+<p><img src="https://pic1.zhimg.com/80/v2-ba414062394ff0919ced911ec47fda8c_hd.jpg" alt=""></p>
+<p>如需转载，烦请注明出处：<a href="https://link.zhihu.com/?target=https%3A//www.w3cplus.com/relearn-the-front-end-techniques.html" target="_blank" rel="noopener">https://www.w3cplus.com/relearn-the-front-end-techniques.html</a></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年05月23日 11:30</p>
+        <p>原始链接： <a class="post-url" href="/collection/others/聊聊《重学前端》.html" title="">http://cumbermiao.github.io/collection/others/聊聊《重学前端》.html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/collection/others/聊聊《重学前端》.html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/collection/others/聊聊《重学前端》.html&title=Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/collection/others/聊聊《重学前端》.html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/collection/others/聊聊《重学前端》.html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/collection/others/聊聊《重学前端》.html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/collection/others/聊聊《重学前端》.html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#聊聊《重学前端》"><span class="post-toc-text">聊聊《重学前端》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#先来看个大纲"><span class="post-toc-text">先来看个大纲</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#HTML-部分"><span class="post-toc-text">HTML 部分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#HTML-语义化"><span class="post-toc-text">HTML 语义化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lt-head-gt-能放些什么标签"><span class="post-toc-text">&lt;head&gt;能放些什么标签</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链接：除了a标签，还有标签叫链接？"><span class="post-toc-text">链接：除了a标签，还有标签叫链接？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#怎么link一个-CSS-要用href，而引入-JS-要用src呢？"><span class="post-toc-text">怎么link一个 CSS 要用href，而引入 JS 要用src呢？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他"><span class="post-toc-text">其他</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS-部分"><span class="post-toc-text">CSS 部分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JavaScript"><span class="post-toc-text">JavaScript</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#浏览器实现原与-API"><span class="post-toc-text">浏览器实现原与 API</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前端综合应用"><span class="post-toc-text">前端综合应用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最后说一点"><span class="post-toc-text">最后说一点</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
