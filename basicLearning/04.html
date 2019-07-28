@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>js中的类型与类型转换 | Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="数据类型 基础数据类型: Boolean Null Undefined Number String Symbol BigInt 引用数据类型: Object原本以为基础类型只用 6 中， 在 mdn 上面看了之后发现还有个 BigInt 类型， BigInt 是个什么东西呢？ 看看 mdn 上的介绍。 The BigInt type is a new numeric primitive in Ja">
+<meta property="og:type" content="website">
+<meta property="og:title" content="js中的类型与类型转换">
+<meta property="og:url" content="http://cumbermiao.github.io/basicLearning/04.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="数据类型 基础数据类型: Boolean Null Undefined Number String Symbol BigInt 引用数据类型: Object原本以为基础类型只用 6 中， 在 mdn 上面看了之后发现还有个 BigInt 类型， BigInt 是个什么东西呢？ 看看 mdn 上的介绍。 The BigInt type is a new numeric primitive in Ja">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-27T11:49:03.850Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js中的类型与类型转换">
+<meta name="twitter:description" content="数据类型 基础数据类型: Boolean Null Undefined Number String Symbol BigInt 引用数据类型: Object原本以为基础类型只用 6 中， 在 mdn 上面看了之后发现还有个 BigInt 类型， BigInt 是个什么东西呢？ 看看 mdn 上的介绍。 The BigInt type is a new numeric primitive in Ja">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      js中的类型与类型转换
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-06-27
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><ul>
+<li>基础数据类型: Boolean Null Undefined Number String Symbol BigInt</li>
+<li>引用数据类型: Object<br>原本以为基础类型只用 6 中， 在 mdn 上面看了之后发现还有个 BigInt 类型， BigInt 是个什么东西呢？ 看看 mdn 上的介绍。<blockquote>
+<p>The BigInt type is a new numeric primitive in JavaScript that can represent integers with arbitrary precision. With BigInts, you can safely store and operate on large integers even beyond the safe integer limit for Numbers. A BigInt is created by appending n to the end of the integer or by calling the constructor.</p>
+</blockquote>
+</li>
+</ul>
+<p>原来 BigInt 也是一个数字类型， 但是不同的是这个类型的可以操作存储超过安全限制的整数。 什么叫超过安全限制的整数?<br>Number 有一个 <code>MAX_SAFE_INTEGER</code> 属性， 看来 Number 类型的整数如果超过这个限制的时候存储和操作的时候可能就会发生数据丢失之类的。<br>那么 BigInt 怎么声明呢？ 很简单在数字后面加个n就行 ， 如 <figure class="highlight plain"><figcaption><span>a </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">### 类型转换</span><br><span class="line">日常中我们经常需要转换成的类型一般为 String , Boolean , Number 。 下面我们来看下转换规则。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 转成 String 类型</span><br><span class="line">&gt; 如何将其他类型转成 String 类型呢？ js 内置 String() 函数可将其他基础类型转成字符串，如`String(10) =&gt; &apos;10&apos;` , `Number(&apos;10&apos;) =&gt; 10`，这应该也是 js 类型转换所默认调用的方法。 当然还有其他方法可以转成字符串，除了 null, undefined 以及 Number 类型 ， 其他类型应该都能调用 toString 转成字符串。</span><br><span class="line">- Number 转 String : `NaN =&gt; &apos;NaN&apos;` , `1 =&gt; &apos;1&apos;` , `1e21 =&gt; &apos;1e+21&apos;`</span><br><span class="line">- BigInt 转 String : `1n =&gt; &apos;1&apos;`</span><br><span class="line">- Boolean 转 String : `true =&gt; &apos;true&apos;` , `false =&gt; &apos;false&apos;`</span><br><span class="line">- null 转 String : `null =&gt; &apos;null&apos;`</span><br><span class="line">- undefined 转 String : `undefined =&gt; &apos;undefined&apos;`</span><br><span class="line">- Array 转 String : `[1,2,3] =&gt; &apos;1,2,3&apos;`</span><br><span class="line">- Object 转 String : `&#123;a:1&#125; =&gt; &apos;[object Object]&apos;`</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 转成 Number 类型</span><br><span class="line">&gt; 与转 String 类型一样， 转成 Number 类型也只需要用 Number() 函数。</span><br><span class="line">- String 转 Number : `&apos;&apos; =&gt; 0` , `&apos;123&apos; =&gt; 123` , `&apos;1e3&apos; =&gt; 1000` , `&apos;1a&apos; =&gt; NaN` , `&apos;1n&apos; =&gt; NaN`</span><br><span class="line">- BigInt 转 Number : ` 1n =&gt; 1`</span><br><span class="line">- Boolean 转 Number : `true =&gt; 1` , `false =&gt; 0`</span><br><span class="line">- undefined 转 Number : `undefined =&gt; NaN`</span><br><span class="line">- null 转 Number : `null =&gt; 0`</span><br><span class="line"></span><br><span class="line">#### 转 Boolean 类型</span><br><span class="line">&gt; 使用 Boolean() 进行 Boolean 类型转换</span><br><span class="line">- 转成 false : undefined , null , +0 , -0 , NaN , &quot;&quot; ,</span><br><span class="line">- 转成 true : 逻辑上除了上面的情况其他的应该都是真值， 但是</span><br><span class="line"></span><br><span class="line">#### ToPrimitive</span><br><span class="line">对于引用类型的对象在类型转换时使用 toPrimitive 转换， toPrimitive 的处理逻辑：</span><br><span class="line">先检查对象是否有 valueOf 方法， 如果存在并且返回了基本类型的值，则使用返回值进行类型转换。</span><br><span class="line">如果没有 valueOf ，则检查是否存在 toString 方法， 如果存在且返回类基础类型的值， 则使用返回值进行类型转换。 </span><br><span class="line">如果以上条件都不符合， 那么返回 TypeError 错误。</span><br><span class="line"></span><br><span class="line">es5 中可以使用 `Object.create(null)` 来创建一个不带 `__proto__` 的对象, 那么该对象就没有 toString 和 valueOf 方法， 如果该对象进行类型转换就会报错。</span><br><span class="line">```js</span><br><span class="line">var a = Object.create(null);</span><br><span class="line">String(a); //Uncaught TypeError: Cannot convert object to primitive value</span><br><span class="line">Number(a); //Uncaught TypeError: Cannot convert object to primitive value</span><br></pre></td></tr></table></figure></p>
+<h3 id="转换规则场景"><a href="#转换规则场景" class="headerlink" title="转换规则场景"></a>转换规则场景</h3><h4 id="转成-String-类型"><a href="#转成-String-类型" class="headerlink" title="转成 String 类型"></a>转成 String 类型</h4><ul>
+<li>当字符串 + 另一个类型时， 另一个类型会转成字符类型。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  valueOf:<span class="function"><span class="params">()</span>=&gt;</span><span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="string">'10'</span>+a <span class="comment">// '1010'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'10'</span>+<span class="number">10</span> <span class="comment">//'1010'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'10'</span>+[<span class="number">10</span>,<span class="number">10</span>] <span class="comment">//'1010,10'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="转成-Number-类型"><a href="#转成-Number-类型" class="headerlink" title="转成 Number 类型"></a>转成 Number 类型</h4><ul>
+<li><p>有加法运算符，但是无String类型的时候，都会优先转换为Number类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span> + <span class="literal">true</span> <span class="comment">//2</span></span><br><span class="line"><span class="literal">true</span> + <span class="number">0</span> <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>除了加法运算， 其他运算都会自动转成Number 类型 , 需要注意的是 ==null 转成Number 为0 ， undefined 转成Number 为 NaN==</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'5'</span> - <span class="string">'2'</span> <span class="comment">// 3</span></span><br><span class="line"><span class="string">'5'</span> * <span class="string">'2'</span> <span class="comment">// 10</span></span><br><span class="line"><span class="literal">true</span> - <span class="number">1</span>  <span class="comment">// 0</span></span><br><span class="line"><span class="literal">false</span> - <span class="number">1</span> <span class="comment">// -1</span></span><br><span class="line"><span class="string">'1'</span> - <span class="number">1</span>   <span class="comment">// 0</span></span><br><span class="line"><span class="string">'5'</span> * []    <span class="comment">// 0</span></span><br><span class="line"><span class="literal">false</span> / <span class="string">'5'</span> <span class="comment">// 0</span></span><br><span class="line"><span class="string">'abc'</span> - <span class="number">1</span>   <span class="comment">// NaN</span></span><br><span class="line"><span class="literal">null</span> + <span class="number">1</span> <span class="comment">// 1</span></span><br><span class="line"><span class="literal">undefined</span> + <span class="number">1</span> <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Symbol-的转换坑"><a href="#Symbol-的转换坑" class="headerlink" title="Symbol 的转换坑"></a>Symbol 的转换坑</h4><p>ES6 中引入了 Symbol 类型， 其有个奇怪的地方 Symbol 类型可以使用 String() 显式的转成字符串， 但是在进行隐式转换时会报错.<br>按照以上总结的， Symbol 为基础类型， 使用 String() 转成字符串， 实际情况是可以的， 但是在隐式转换发生了 TypeError 的错误。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">Symbol</span>(<span class="string">'aaa'</span>);</span><br><span class="line"><span class="built_in">String</span>(a);<span class="comment">//"Symbol(aaa)"</span></span><br><span class="line">a.valueOf(); <span class="comment">//Symbol(aaa)</span></span><br><span class="line"><span class="string">' '</span>+a;<span class="comment">//Uncaught TypeError: Cannot convert a Symbol value to a string</span></span><br></pre></td></tr></table></figure></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年06月27日 19:49</p>
+        <p>原始链接： <a class="post-url" href="/basicLearning/04.html" title="js中的类型与类型转换">http://cumbermiao.github.io/basicLearning/04.html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/basicLearning/04.html&title=《js中的类型与类型转换》 — Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/basicLearning/04.html&title=《js中的类型与类型转换》 — Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/basicLearning/04.html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js中的类型与类型转换》 — Cumber's Blog&url=http://cumbermiao.github.io/basicLearning/04.html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/basicLearning/04.html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/basicLearning/04.html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据类型"><span class="post-toc-text">数据类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#转换规则场景"><span class="post-toc-text">转换规则场景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#转成-String-类型"><span class="post-toc-text">转成 String 类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#转成-Number-类型"><span class="post-toc-text">转成 Number 类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Symbol-的转换坑"><span class="post-toc-text">Symbol 的转换坑</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

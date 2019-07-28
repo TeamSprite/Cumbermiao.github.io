@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="原文链接：https://juejin.im/post/5d2ee123e51d4577614761f8 [ ](/user/5ba9ea3c5188255c8b6ef168) 陈煜仑 2019年07月17日阅读 13330 关注 20道JS原理题助你面试一臂之力！前言本文针对目前常见的面试题，仅提供了相应的核心原理及思路，部分边界细节未处理。后续会持续更新，希望对你有所帮助。 1. 实现一个ca">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:url" content="http://cumbermiao.github.io/collection/interview/20道JS原理题助你面试一臂之力！.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="原文链接：https://juejin.im/post/5d2ee123e51d4577614761f8 [ ](/user/5ba9ea3c5188255c8b6ef168) 陈煜仑 2019年07月17日阅读 13330 关注 20道JS原理题助你面试一臂之力！前言本文针对目前常见的面试题，仅提供了相应的核心原理及思路，部分边界细节未处理。后续会持续更新，希望对你有所帮助。 1. 实现一个ca">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://b-gold-cdn.xitu.io/v3/static/img/lv-3.e108c68.svg">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/12/21/167d05bdfff953ad?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:updated_time" content="2019-07-19T11:39:11.753Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cumber&#39;s Blog">
+<meta name="twitter:description" content="原文链接：https://juejin.im/post/5d2ee123e51d4577614761f8 [ ](/user/5ba9ea3c5188255c8b6ef168) 陈煜仑 2019年07月17日阅读 13330 关注 20道JS原理题助你面试一臂之力！前言本文针对目前常见的面试题，仅提供了相应的核心原理及思路，部分边界细节未处理。后续会持续更新，希望对你有所帮助。 1. 实现一个ca">
+<meta name="twitter:image" content="https://b-gold-cdn.xitu.io/v3/static/img/lv-3.e108c68.svg">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <p>原文链接：<a href="https://juejin.im/post/5d2ee123e51d4577614761f8" target="_blank" rel="noopener">https://juejin.im/post/5d2ee123e51d4577614761f8</a></p>
+<p>[</p>
+<p>](/user/5ba9ea3c5188255c8b6ef168)</p>
+<p><a href="/user/5ba9ea3c5188255c8b6ef168">陈煜仑</a><a href="/book/5c90640c5188252d7941f5bb/section/5c9065385188252da6320022"><img src="https://b-gold-cdn.xitu.io/v3/static/img/lv-3.e108c68.svg" alt="lv-3"></a></p>
+<p>2019年07月17日阅读 13330</p>
+<p>关注</p>
+<h1 id="20道JS原理题助你面试一臂之力！"><a href="#20道JS原理题助你面试一臂之力！" class="headerlink" title="20道JS原理题助你面试一臂之力！"></a>20道JS原理题助你面试一臂之力！</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文针对目前常见的面试题，仅提供了相应的核心原理及思路，部分边界细节未处理。后续会持续更新，希望对你有所帮助。</p>
+<h2 id="1-实现一个call函数"><a href="#1-实现一个call函数" class="headerlink" title="1. 实现一个call函数"></a>1. 实现一个call函数</h2><pre><code>// 思路：将要改变this指向的方法挂到目标this上执行并返回
+Function.prototype.mycall = function (context) {
+  if (typeof this !== &apos;function&apos;) {
+    throw new TypeError(&apos;not funciton&apos;)
+  }
+  context = context || window
+  context.fn = this
+  let arg = [...arguments].slice(1)
+  let result = context.fn(...arg)
+  delete context.fn
+  return result
+} 
+复制代码
+</code></pre><h2 id="2-实现一个apply函数"><a href="#2-实现一个apply函数" class="headerlink" title="2. 实现一个apply函数"></a>2. 实现一个apply函数</h2><pre><code>// 思路：将要改变this指向的方法挂到目标this上执行并返回
+Function.prototype.myapply = function (context) {
+  if (typeof this !== &apos;function&apos;) {
+    throw new TypeError(&apos;not funciton&apos;)
+  }
+  context = context || window
+  context.fn = this
+  let result
+  if (arguments[1]) {
+    result = context.fn(...arguments[1])
+  } else {
+    result = context.fn()
+  }
+  delete context.fn
+  return result
+}
+复制代码
+</code></pre><h2 id="3-实现一个bind函数"><a href="#3-实现一个bind函数" class="headerlink" title="3. 实现一个bind函数"></a>3. 实现一个bind函数</h2><pre><code>// 思路：类似call，但返回的是函数
+Function.prototype.mybind = function (context) {
+  if (typeof this !== &apos;function&apos;) {
+    throw new TypeError(&apos;Error&apos;)
+  }
+  let _this = this
+  let arg = [...arguments].slice(1)
+  return function F() {
+    // 处理函数使用new的情况
+    if (this instanceof F) {
+      return new _this(...arg, ...arguments)
+    } else {
+      return _this.apply(context, arg.concat(...arguments))
+    }
+  }
+}
+复制代码
+</code></pre><h2 id="4-instanceof的原理"><a href="#4-instanceof的原理" class="headerlink" title="4. instanceof的原理"></a>4. instanceof的原理</h2><pre><code>// 思路：右边变量的原型存在于左边变量的原型链上
+function instanceOf(left, right) {
+  let leftValue = left.__proto__
+  let rightValue = right.prototype
+  while (true) {
+    if (leftValue === null) {
+      return false
+    }
+    if (leftValue === rightValue) {
+      return true
+    }
+    leftValue = leftValue.__proto__
+  }
+}
+复制代码
+</code></pre><h2 id="5-Object-create的基本实现原理"><a href="#5-Object-create的基本实现原理" class="headerlink" title="5. Object.create的基本实现原理"></a>5. Object.create的基本实现原理</h2><pre><code>// 思路：将传入的对象作为原型
+function create(obj) {
+  function F() {}
+  F.prototype = obj
+  return new F()
+复制代码
+</code></pre><h2 id="6-new本质"><a href="#6-new本质" class="headerlink" title="6. new本质"></a>6. new本质</h2><pre><code>function myNew (fun) {
+  return function () {
+    // 创建一个新对象且将其隐式原型指向构造函数原型
+    let obj = {
+      __proto__ : fun.prototype
+    }
+    // 执行构造函数
+    fun.call(obj, ...arguments)
+    // 返回该对象
+    return obj
+  }
+}
+
+function person(name, age) {
+  this.name = name
+  this.age = age
+}
+let obj = myNew(person)(&apos;chen&apos;, 18) // {name: &quot;chen&quot;, age: 18}
+复制代码
+</code></pre><h2 id="7-实现一个基本的Promise"><a href="#7-实现一个基本的Promise" class="headerlink" title="7. 实现一个基本的Promise"></a>7. 实现一个基本的Promise</h2><pre><code>// 未添加异步处理等其他边界情况
+// ①自动执行函数，②三个状态，③then
+class Promise {
+  constructor (fn) {
+    // 三个状态
+    this.state = &apos;pending&apos;
+    this.value = undefined
+    this.reason = undefined
+    let resolve = value =&gt; {
+      if (this.state === &apos;pending&apos;) {
+        this.state = &apos;fulfilled&apos;
+        this.value = value
+      }
+    }
+    let reject = value =&gt; {
+      if (this.state === &apos;pending&apos;) {
+        this.state = &apos;rejected&apos;
+        this.reason = value
+      }
+    }
+    // 自动执行函数
+    try {
+      fn(resolve, reject)
+    } catch (e) {
+      reject(e)
+    }
+  }
+  // then
+  then(onFulfilled, onRejected) {
+    switch (this.state) {
+      case &apos;fulfilled&apos;:
+        onFulfilled()
+        break
+      case &apos;rejected&apos;:
+        onRejected()
+        break
+      default:
+    }
+  }
+}
+复制代码
+</code></pre><h2 id="8-实现浅拷贝"><a href="#8-实现浅拷贝" class="headerlink" title="8. 实现浅拷贝"></a>8. 实现浅拷贝</h2><pre><code>// 1. ...实现
+let copy1 = {...{x:1}}
+
+// 2. Object.assign实现
+
+let copy2 = Object.assign({}, {x:1})
+复制代码
+</code></pre><h2 id="9-实现一个基本的深拷贝"><a href="#9-实现一个基本的深拷贝" class="headerlink" title="9. 实现一个基本的深拷贝"></a>9. 实现一个基本的深拷贝</h2><pre><code>// 1. JOSN.stringify()/JSON.parse()
+let obj = {a: 1, b: {x: 3}}
+JSON.parse(JSON.stringify(obj))
+
+// 2. 递归拷贝
+function deepClone(obj) {
+  let copy = obj instanceof Array ? [] : {}
+  for (let i in obj) {
+    if (obj.hasOwnProperty(i)) {
+      copy[i] = typeof obj[i] === &apos;object&apos; ? deepClone(obj[i]) : obj[i]
+    }
+  }
+  return copy
+}
+复制代码
+</code></pre><h2 id="10-使用setTimeout模拟setInterval"><a href="#10-使用setTimeout模拟setInterval" class="headerlink" title="10. 使用setTimeout模拟setInterval"></a>10. 使用setTimeout模拟setInterval</h2><pre><code>// 可避免setInterval因执行时间导致的间隔执行时间不一致
+setTimeout (function () {
+  // do something
+  setTimeout (arguments.callee, 500)
+}, 500)
+复制代码
+</code></pre><h2 id="11-js实现一个继承方法"><a href="#11-js实现一个继承方法" class="headerlink" title="11. js实现一个继承方法"></a>11. js实现一个继承方法</h2><pre><code>// 借用构造函数继承实例属性
+function Child () {
+  Parent.call(this)
+}
+// 寄生继承原型属性
+(function () {
+  let Super = function () {}
+  Super.prototype = Parent.prototype
+  Child.prototype = new Super()
+})()
+复制代码
+</code></pre><h2 id="12-实现一个基本的Event-Bus"><a href="#12-实现一个基本的Event-Bus" class="headerlink" title="12. 实现一个基本的Event Bus"></a>12. 实现一个基本的Event Bus</h2><pre><code>// 组件通信，一个触发与监听的过程
+class EventEmitter {
+  constructor () {
+    // 存储事件
+    this.events = this.events || new Map()
+  }
+  // 监听事件
+  addListener (type, fn) {
+    if (!this.events.get(type)) {
+      this.events.set(type, fn)
+    }
+  }
+  // 触发事件
+  emit (type) {
+    let handle = this.events.get(type)
+    handle.apply(this, [...arguments].slice(1))
+  }
+}
+
+// 测试
+let emitter = new EventEmitter()
+// 监听事件
+emitter.addListener(&apos;ages&apos;, age =&gt; {
+  console.log(age)
+})
+// 触发事件
+emitter.emit(&apos;ages&apos;, 18)  // 18
+复制代码
+</code></pre><h2 id="13-实现一个双向数据绑定"><a href="#13-实现一个双向数据绑定" class="headerlink" title="13. 实现一个双向数据绑定"></a>13. 实现一个双向数据绑定</h2><pre><code>let obj = {}
+let input = document.getElementById(&apos;input&apos;)
+let span = document.getElementById(&apos;span&apos;)
+// 数据劫持
+Object.defineProperty(obj, &apos;text&apos;, {
+  configurable: true,
+  enumerable: true,
+  get() {
+    console.log(&apos;获取数据了&apos;)
+    return obj[&apos;text&apos;]
+  },
+  set(newVal) {
+    console.log(&apos;数据更新了&apos;)
+    input.value = newVal
+    span.innerHTML = newVal
+  }
+})
+// 输入监听
+input.addEventListener(&apos;keyup&apos;, function(e) {
+  obj.text = e.target.value
+})
+复制代码
+</code></pre><p>完整实现可前往之前写的：<a href="https://juejin.im/post/5d26e368e51d4577407b1dd7" target="_blank" rel="noopener">这应该是最详细的响应式系统讲解了</a></p>
+<h2 id="14-实现一个简单路由"><a href="#14-实现一个简单路由" class="headerlink" title="14. 实现一个简单路由"></a>14. 实现一个简单路由</h2><pre><code>// hash路由
+class Route{
+  constructor(){
+    // 路由存储对象
+    this.routes = {}
+    // 当前hash
+    this.currentHash = &apos;&apos;
+    // 绑定this，避免监听时this指向改变
+    this.freshRoute = this.freshRoute.bind(this)
+    // 监听
+    window.addEventListener(&apos;load&apos;, this.freshRoute, false)
+    window.addEventListener(&apos;hashchange&apos;, this.freshRoute, false)
+  }
+  // 存储
+  storeRoute (path, cb) {
+    this.routes[path] = cb || function () {}
+  }
+  // 更新
+  freshRoute () {
+    this.currentHash = location.hash.slice(1) || &apos;/&apos;
+    this.routes[this.currentHash]()
+  }   
+}
+复制代码
+</code></pre><h2 id="15-实现懒加载"><a href="#15-实现懒加载" class="headerlink" title="15. 实现懒加载"></a>15. 实现懒加载</h2><pre><code>&lt;ul&gt;
+  &lt;li&gt;&lt;img src=&quot;./imgs/default.png&quot; data=&quot;./imgs/1.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;./imgs/default.png&quot; data=&quot;./imgs/2.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;./imgs/default.png&quot; data=&quot;./imgs/3.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;./imgs/default.png&quot; data=&quot;./imgs/4.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;./imgs/default.png&quot; data=&quot;./imgs/5.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;./imgs/default.png&quot; data=&quot;./imgs/6.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;./imgs/default.png&quot; data=&quot;./imgs/7.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;./imgs/default.png&quot; data=&quot;./imgs/8.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;./imgs/default.png&quot; data=&quot;./imgs/9.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;./imgs/default.png&quot; data=&quot;./imgs/10.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+复制代码
+
+let imgs =  document.querySelectorAll(&apos;img&apos;)
+// 可视区高度
+let clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+function lazyLoad () {
+  // 滚动卷去的高度
+  let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+  for (let i = 0; i &lt; imgs.length; i ++) {
+    // 得到图片顶部距离可视区顶部的距离
+    let x = clientHeight + scrollTop - imgs[i].offsetTop
+    // 图片在可视区内
+    if (x &gt; 0 &amp;&amp; x &lt; clientHeight+imgs[i].height) {
+      imgs[i].src = imgs[i].getAttribute(&apos;data&apos;)
+    } 
+  }      
+}
+// addEventListener(&apos;scroll&apos;, lazyLoad) or setInterval(lazyLoad, 1000)
+复制代码
+</code></pre><h2 id="16-rem基本设置"><a href="#16-rem基本设置" class="headerlink" title="16. rem基本设置"></a>16. rem基本设置</h2><pre><code>// 原始配置
+function setRem () {
+  let doc = document.documentElement
+  let width = doc.getBoundingClientRect().width
+  // 假设设计稿为宽750，则1rem代表10px
+  let rem = width / 75
+  doc.style.fontSize = rem + &apos;px&apos;
+}
+// 监听窗口变化
+addEventListener(&quot;resize&quot;, setRem)
+复制代码
+</code></pre><h2 id="17-手写实现AJAX"><a href="#17-手写实现AJAX" class="headerlink" title="17. 手写实现AJAX"></a>17. 手写实现AJAX</h2><pre><code>// 1. 简单流程
+
+// 实例化
+let xhr = new XMLHttpRequest()
+// 初始化
+xhr.open(method, url, async)
+// 发送请求
+xhr.send(data)
+// 设置状态变化回调处理请求结果
+xhr.onreadystatechange = () =&gt; {
+  if (xhr.readyStatus === 4 &amp;&amp; xhr.status === 200) {
+    console.log(xhr.responseText)
+  }
+}
+
+// 2. 基于promise实现 
+
+function ajax (options) {
+  // 请求地址
+  const url = options.url
+  // 请求方法
+  const method = options.method.toLocaleLowerCase() || &apos;get&apos;
+  // 默认为异步true
+  const async = options.async
+  // 请求参数
+  const data = options.data
+  // 实例化
+  const xhr = new XMLHttpRequest()
+  // 请求超时
+  if (options.timeout &amp;&amp; options.timeout &gt; 0) {
+    xhr.timeout = options.timeout
+  }
+  // 返回一个Promise实例
+  return new Promise ((resolve, reject) =&gt; {
+    xhr.ontimeout = () =&gt; reject &amp;&amp; reject(&apos;请求超时&apos;)
+    // 监听状态变化回调
+    xhr.onreadystatechange = () =&gt; {
+      if (xhr.readyState == 4) {
+        // 200-300 之间表示请求成功，304资源未变，取缓存
+        if (xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300 || xhr.status == 304) {
+          resolve &amp;&amp; resolve(xhr.responseText)
+        } else {
+          reject &amp;&amp; reject()
+        }
+      }
+    }
+    // 错误回调
+    xhr.onerror = err =&gt; reject &amp;&amp; reject(err)
+    let paramArr = []
+    let encodeData
+    // 处理请求参数
+    if (data instanceof Object) {
+      for (let key in data) {
+        // 参数拼接需要通过 encodeURIComponent 进行编码
+        paramArr.push(encodeURIComponent(key) + &apos;=&apos; + encodeURIComponent(data[key]))
+      }
+      encodeData = paramArr.join(&apos;&amp;&apos;)
+    }
+    // get请求拼接参数
+    if (method === &apos;get&apos;) {
+      // 检测url中是否已存在 ? 及其位置
+      const index = url.indexOf(&apos;?&apos;)
+      if (index === -1) url += &apos;?&apos;
+      else if (index !== url.length -1) url += &apos;&amp;&apos;
+      // 拼接url
+      url += encodeData
+    }
+    // 初始化
+    xhr.open(method, url, async)
+    // 发送请求
+    if (method === &apos;get&apos;) xhr.send(null)
+    else {
+      // post 方式需要设置请求头
+      xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded;charset=UTF-8&apos;)
+      xhr.send(encodeData)
+    }
+  })
+}
+复制代码
+</code></pre><h2 id="18-实现拖拽"><a href="#18-实现拖拽" class="headerlink" title="18. 实现拖拽"></a>18. 实现拖拽</h2><pre><code>window.onload = function () {
+  // drag处于绝对定位状态
+  let drag = document.getElementById(&apos;box&apos;)
+  drag.onmousedown = function(e) {
+    var e = e || window.event
+    // 鼠标与拖拽元素边界的距离 = 鼠标与可视区边界的距离 - 拖拽元素与边界的距离
+    let diffX = e.clientX - drag.offsetLeft
+    let diffY = e.clientY - drag.offsetTop
+    drag.onmousemove = function (e) {
+      // 拖拽元素移动的距离 = 鼠标与可视区边界的距离 - 鼠标与拖拽元素边界的距离
+      let left = e.clientX - diffX
+      let top = e.clientY - diffY
+      // 避免拖拽出可视区
+      if (left &lt; 0) {
+        left = 0
+      } else if (left &gt; window.innerWidth - drag.offsetWidth) {
+        left = window.innerWidth - drag.offsetWidth
+      }
+      if (top &lt; 0) {
+        top = 0
+      } else if (top &gt; window.innerHeight - drag.offsetHeight) {
+        top = window.innerHeight - drag.offsetHeight
+      }
+      drag.style.left = left + &apos;px&apos;
+      drag.style.top = top + &apos;px&apos;
+    }
+    drag.onmouseup = function (e) {
+      this.onmousemove = null
+      this.onmouseup = null
+    }
+  }
+}
+复制代码
+</code></pre><h2 id="19-实现一个节流函数"><a href="#19-实现一个节流函数" class="headerlink" title="19. 实现一个节流函数"></a>19. 实现一个节流函数</h2><pre><code>// 思路：在规定时间内只触发一次
+function throttle (fn, delay) {
+  // 利用闭包保存时间
+  let prev = Date.now()
+  return function () {
+    let context = this
+    let arg = arguments
+    let now = Date.now()
+    if (now - prev &gt;= delay) {
+      fn.apply(context, arg)
+      prev = Date.now()
+    }
+  }
+}
+
+function fn () {
+  console.log(&apos;节流&apos;)
+}
+addEventListener(&apos;scroll&apos;, throttle(fn, 1000)) 
+复制代码
+</code></pre><h2 id="20-实现一个防抖函数"><a href="#20-实现一个防抖函数" class="headerlink" title="20. 实现一个防抖函数"></a>20. 实现一个防抖函数</h2><pre><code>// 思路:在规定时间内未触发第二次，则执行
+function debounce (fn, delay) {
+  // 利用闭包保存定时器
+  let timer = null
+  return function () {
+    let context = this
+    let arg = arguments
+    // 在规定时间内再次触发会先清除定时器后再重设定时器
+    clearTimeout(timer)
+    timer = setTimeout(function () {
+      fn.apply(context, arg)
+    }, delay)
+  }
+}
+
+function fn () {
+  console.log(&apos;防抖&apos;)
+}
+addEventListener(&apos;scroll&apos;, debounce(fn, 1000)) 
+复制代码
+</code></pre><h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>后续会持续更新，欢迎关注点个赞！</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/12/21/167d05bdfff953ad?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年07月19日 19:39</p>
+        <p>原始链接： <a class="post-url" href="/collection/interview/20道JS原理题助你面试一臂之力！.html" title="">http://cumbermiao.github.io/collection/interview/20道JS原理题助你面试一臂之力！.html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/collection/interview/20道JS原理题助你面试一臂之力！.html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/collection/interview/20道JS原理题助你面试一臂之力！.html&title=Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/collection/interview/20道JS原理题助你面试一臂之力！.html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/collection/interview/20道JS原理题助你面试一臂之力！.html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/collection/interview/20道JS原理题助你面试一臂之力！.html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/collection/interview/20道JS原理题助你面试一臂之力！.html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#20道JS原理题助你面试一臂之力！"><span class="post-toc-text">20道JS原理题助你面试一臂之力！</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-实现一个call函数"><span class="post-toc-text">1. 实现一个call函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-实现一个apply函数"><span class="post-toc-text">2. 实现一个apply函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-实现一个bind函数"><span class="post-toc-text">3. 实现一个bind函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-instanceof的原理"><span class="post-toc-text">4. instanceof的原理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-Object-create的基本实现原理"><span class="post-toc-text">5. Object.create的基本实现原理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-new本质"><span class="post-toc-text">6. new本质</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-实现一个基本的Promise"><span class="post-toc-text">7. 实现一个基本的Promise</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-实现浅拷贝"><span class="post-toc-text">8. 实现浅拷贝</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-实现一个基本的深拷贝"><span class="post-toc-text">9. 实现一个基本的深拷贝</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-使用setTimeout模拟setInterval"><span class="post-toc-text">10. 使用setTimeout模拟setInterval</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-js实现一个继承方法"><span class="post-toc-text">11. js实现一个继承方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#12-实现一个基本的Event-Bus"><span class="post-toc-text">12. 实现一个基本的Event Bus</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#13-实现一个双向数据绑定"><span class="post-toc-text">13. 实现一个双向数据绑定</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#14-实现一个简单路由"><span class="post-toc-text">14. 实现一个简单路由</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#15-实现懒加载"><span class="post-toc-text">15. 实现懒加载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#16-rem基本设置"><span class="post-toc-text">16. rem基本设置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#17-手写实现AJAX"><span class="post-toc-text">17. 手写实现AJAX</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#18-实现拖拽"><span class="post-toc-text">18. 实现拖拽</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#19-实现一个节流函数"><span class="post-toc-text">19. 实现一个节流函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#20-实现一个防抖函数"><span class="post-toc-text">20. 实现一个防抖函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最后"><span class="post-toc-text">最后</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

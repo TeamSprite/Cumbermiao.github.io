@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="原文链接：https://juejin.im/post/5c2797f8e51d45176760e2cf [ ](/user/57dfea705bbb50005e7005e8) 快乐平方 2018年12月29日阅读 1008 关注 Glob Patterns匹配模式使用前段时间在用workbox时，在做precache时，匹配模式基于的是Glob Pattern模式，于是就看了下相关文档。 下面翻">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:url" content="http://cumbermiao.github.io/collection/others/Glob Patterns匹配模式使用.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="原文链接：https://juejin.im/post/5c2797f8e51d45176760e2cf [ ](/user/57dfea705bbb50005e7005e8) 快乐平方 2018年12月29日阅读 1008 关注 Glob Patterns匹配模式使用前段时间在用workbox时，在做precache时，匹配模式基于的是Glob Pattern模式，于是就看了下相关文档。 下面翻">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://b-gold-cdn.xitu.io/v3/static/img/lv-2.f597b88.svg">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/12/29/167faa9b9ea0aced?imageslim">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/12/29/167faa9c0c91ec8b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:updated_time" content="2019-07-12T03:10:55.611Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cumber&#39;s Blog">
+<meta name="twitter:description" content="原文链接：https://juejin.im/post/5c2797f8e51d45176760e2cf [ ](/user/57dfea705bbb50005e7005e8) 快乐平方 2018年12月29日阅读 1008 关注 Glob Patterns匹配模式使用前段时间在用workbox时，在做precache时，匹配模式基于的是Glob Pattern模式，于是就看了下相关文档。 下面翻">
+<meta name="twitter:image" content="https://b-gold-cdn.xitu.io/v3/static/img/lv-2.f597b88.svg">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <p>原文链接：<a href="https://juejin.im/post/5c2797f8e51d45176760e2cf" target="_blank" rel="noopener">https://juejin.im/post/5c2797f8e51d45176760e2cf</a></p>
+<p>[</p>
+<p>](/user/57dfea705bbb50005e7005e8)</p>
+<p><a href="/user/57dfea705bbb50005e7005e8">快乐平方</a><a href="/book/5c90640c5188252d7941f5bb/section/5c9065385188252da6320022"><img src="https://b-gold-cdn.xitu.io/v3/static/img/lv-2.f597b88.svg" alt="lv-2"></a></p>
+<p>2018年12月29日阅读 1008</p>
+<p>关注</p>
+<h1 id="Glob-Patterns匹配模式使用"><a href="#Glob-Patterns匹配模式使用" class="headerlink" title="Glob Patterns匹配模式使用"></a>Glob Patterns匹配模式使用</h1><p>前段时间在用workbox时，在做precache时，匹配模式基于的是Glob Pattern模式，于是就看了下相关文档。</p>
+<p>下面翻译一下node-glob的使用，原文：<a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fisaacs%2Fnode-glob%23glob-primer" target="_blank" rel="noopener">github.com/isaacs/node…</a></p>
+<hr>
+<h2 id="Glob"><a href="#Glob" class="headerlink" title="Glob"></a>Glob</h2><p>像在shell里面，用<code>*</code>等匹配模式来匹配文件。</p>
+<p>Glob基于Javascript实现，使用<code>minimatch</code>库进行匹配。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/12/29/167faa9b9ea0aced?imageslim" alt=""></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>使用<code>npm</code>安装</p>
+<pre><code>npm i glob
+复制代码
+
+var glob = require(&quot;glob&quot;)
+
+// options可选
+glob(&quot;**/*.js&quot;, options, function (er, files) {
+  // files是匹配到的文件数组
+  // 如果`options`中的`nonull`为true, 当未发现时， files返回[&quot;**/*.js&quot;]
+  // `er`是一个错误对象或者null
+})
+复制代码
+</code></pre><h3 id="Glob-入门"><a href="#Glob-入门" class="headerlink" title="Glob 入门"></a>Glob 入门</h3><p>“Glob”是一种模式，类似于在命令行中输入<code>ls *.js</code>，或是在<code>.gitignore</code>文件中写<code>build/*</code>。</p>
+<p>在解析路径模式时，大括号内使用逗号进行分隔，分隔部分可以包含<code>/</code>，所以<code>a{/b/c,bcd}</code>会被展开为<code>a/b/c</code>和<code>abcd</code>。</p>
+<p>在匹配路径使用时，以下字符有一些特殊的作用：</p>
+<ul>
+<li><code>*</code>：匹配单路径下的 0 个或 多个 字符串。</li>
+<li><code>?</code>：匹配一个字符串。</li>
+<li><code>[...]</code>：匹配指定范围内的字符串，类似于正则表达式中的<code>[]</code>。如果<code>[]</code>中的第一个字符串是<code>!</code>或者<code>^</code>，则匹配不在范围内的任意字符串。</li>
+<li><code>!(pattern|pattern|pattern)</code>：匹配与提供模式中不匹配的内容。</li>
+<li><code>?(pattern|pattern|pattern)</code>：匹配提供模式中的 0次 或 1次。</li>
+<li><code>+(pattern|pattern|pattern)</code>：匹配提供模式中的 1次 或 多次。</li>
+<li><code>*(a|b|c)</code>：匹配提供模式中的 0次 或 多次。</li>
+<li><code>@(pattern|pat*|pat?erN)</code>：匹配与提供模式中完全匹配的。</li>
+<li><code>**</code>：和<code>*</code>一样，可以匹配路径中的 0个 或 多个，而且<code>**</code>可以匹配当前目录和子目录。但无法抓去符号链接的目录。</li>
+</ul>
+<h4 id="点"><a href="#点" class="headerlink" title=".点"></a><code>.</code>点</h4><p>如果匹配的文件或目录部分以<code>.</code>开头，除非匹配的路径也以<code>.</code>开头，否则不会匹配任何模式。</p>
+<p>例如 <code>a/.*/c</code>模式会匹配<code>a/.b/c</code>。然而<code>a/*/c</code>模式却不会进行匹配，因为<code>*</code>并不是以<code>.</code>开始的。</p>
+<p>你可以通过设置option <code>dot:true</code>，让Glob把<code>.</code>做为正常字符串。</p>
+<h4 id="Basename的匹配"><a href="#Basename的匹配" class="headerlink" title="Basename的匹配"></a>Basename的匹配</h4><p>如果你在 option中设置<code>matchBase:true</code>，当模式中没有<code>/</code>，它会在任意目录下去匹配。例如<code>*.js</code>会匹配到<code>test/simple/basic.js</code>。</p>
+<h4 id="空集"><a href="#空集" class="headerlink" title="空集"></a>空集</h4><p>如果没有匹配到任何文件，它会返回空数组<code>[]</code>。它与shell不一样，shell会在未匹配的情况下返回本身。例如：</p>
+<pre><code>$ echo a*s*d*f
+a*s*d*f
+复制代码
+</code></pre><p>可以通过设置option<code>nonull:true</code>，来获得和bash shell一样的效果。</p>
+<h3 id="glob-hasMagic-pattern-options"><a href="#glob-hasMagic-pattern-options" class="headerlink" title="glob.hasMagic(pattern, [options])"></a>glob.hasMagic(pattern, [options])</h3><p>如果<code>pattern</code>中有任何特殊字符串，则返回为<code>true</code>，否则返回为<code>false</code>。</p>
+<p>注意：<code>options</code>会影响结果。 如果options中设置<code>noext:true</code>，那么<code>+(a|b)</code>将不会视为魔术模式。 如果模式中支持<code>{}</code>表达式，那么也属于Magic，例如<code>a/{b/c,x/y}</code>。除非option设置<code>nobrace:true</code>。</p>
+<h3 id="glob-pattern-options-cb"><a href="#glob-pattern-options-cb" class="headerlink" title="glob(pattern, [options], cb)"></a>glob(pattern, [options], cb)</h3><ul>
+<li><code>pattern {String}</code>： 匹配模式。</li>
+<li><code>options {Object}</code></li>
+<li><code>cb {Function}</code><ul>
+<li><code>err {Error | null}</code></li>
+<li><code>matches {Array&lt;String&gt;}</code>： 匹配模式后的文件名数组。</li>
+</ul>
+</li>
+</ul>
+<p>执行异步全局搜索。</p>
+<h3 id="glob-sync-pattern-options"><a href="#glob-sync-pattern-options" class="headerlink" title="glob.sync(pattern, [options])"></a>glob.sync(pattern, [options])</h3><ul>
+<li><code>pattern {String}</code>：匹配模式。</li>
+<li><code>options {Object}</code></li>
+<li><code>return: {Array&lt;String&gt;}</code>：匹配模式下的文件名。</li>
+</ul>
+<p>执行异步全局搜索。</p>
+<h3 id="Class-glob-Glob"><a href="#Class-glob-Glob" class="headerlink" title="Class: glob.Glob"></a>Class: glob.Glob</h3><p>通过实例化<code>glob.Glob</code>来创建<code>Glob</code>对象。</p>
+<pre><code>var Glob = require(&quot;glob&quot;).Glob
+var mg = new Glob(pattern, options, cb)
+复制代码
+</code></pre><p>它是一个<code>EventEmitter</code>。它会立即执行遍历目录进行匹配。</p>
+<h4 id="new-glob-Glob-pattern-options-cb"><a href="#new-glob-Glob-pattern-options-cb" class="headerlink" title="new glob.Glob(pattern, [options], [cb])"></a>new glob.Glob(pattern, [options], [cb])</h4><ul>
+<li><code>pattern {String}</code>： 匹配模式。</li>
+<li><code>options {Object}</code></li>
+<li><code>cb {Function}</code>：成功或失败的回掉。<ul>
+<li><code>err {Error | null}</code></li>
+<li><code>matches {Array&lt;String&gt;}</code>： 匹配后的文件名数组。</li>
+</ul>
+</li>
+</ul>
+<p>注意 如果option设置<code>sync</code>标志, 那么匹配结果可以通过<code>g.found</code>获取。</p>
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><ul>
+<li><code>minimatch</code> ：glob使用的<code>minimatch</code>对象。</li>
+<li><code>options</code> ：传入的option对象。</li>
+<li><code>aborted</code> ：布尔值，在调用<code>abort()</code>时会设置为<code>true</code>。 在<code>abort()</code>后无法再进行全局搜索，但是可以通过重新设置<code>statCache</code>去避免重复系统调用。</li>
+<li><code>cache</code> ：Object，可能有以下值：<ul>
+<li><code>false</code> - 路径不存在。</li>
+<li><code>true</code> - 路径存在。</li>
+<li><code>&#39;FILE&#39;</code> - 路径存在，但不是目录。</li>
+<li><code>&#39;DIR&#39;</code> - 路径存在，是目录。</li>
+<li><code>[file, entries, ...]</code> - 路径存在，结果是数组，类似于<code>fs.readdir</code>的结果。</li>
+</ul>
+</li>
+<li><code>statCache</code>：<code>fs.stat</code>结果缓存，避免多次计算相同路径。</li>
+<li><code>symlinks</code> ：记录哪些路径是符号链接，与<code>**</code>模式相关。</li>
+<li><code>realpathCache</code> ：传递给<code>fs.realpath</code>的可选参数，避免不必要的系统调用。存储在Glob的实例对象上，可重复使用。</li>
+</ul>
+<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><ul>
+<li><code>end</code>：匹配完成后，收到匹配的结果。当<code>nonull</code>设置时，在没有匹配结果的情况下会在返回的数组中包含原匹配模式字符串，默认情况下匹配结果是被排序的, 除非设置<code>nosort</code>。</li>
+<li><code>match</code>： 每次发现匹配结果就会触发，结果中包含匹配的信息。它不会删除重复数据和解析的真实路径。</li>
+<li><code>error</code>：在发生意外错误时触发。 如果设置<code>options.strict</code>，那么任何<code>fs</code>的错误都会触发。</li>
+<li><code>abort</code>：<code>abort()</code>调用时触发。</li>
+</ul>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><code>pause</code>：暂时停止搜索。</li>
+<li><code>resume</code>：恢复搜索。</li>
+<li><code>abort</code>：终止搜索。</li>
+</ul>
+<h4 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h4><p>所有<code>Minimatch</code>的选项都可以传递给Glob去改变匹配模式，此外还添加了一些特有的<code>glob-specific</code>。</p>
+<p>除非另有说明，否则所有选项默认都为<code>false</code>。</p>
+<p>所有选项也会被添加到Glob对象上。</p>
+<p>如果正在运行多个glob操作，可以通过Glob对象的传递options给后面的操作使用，方便某些<code>stat</code>和<code>readdir</code>调用。可以通过共享<code>symlinks</code> <code>statCache</code> <code>realpathCache</code> <code>cache</code> option加快并行glob操作。</p>
+<ul>
+<li><code>cwd</code>：要搜索的当前目录。默认<code>process.cwd()</code>。</li>
+<li><code>root</code>：以<code>/</code>开始的挂载位置。默认是<code>path.resolve(options.cwd, &quot;/&quot;)</code>(Unix系统是<code>/</code>，其他的一些Windows系统是<code>C:\</code>)。</li>
+<li><code>dot</code>：在正常模式和<code>**</code>模式下包含<code>.</code>。注意，在模式字符串中定义的点将始终与<code>.</code>文件匹配。</li>
+<li><code>nomount</code>：默认匹配模式中以<code>/</code>开始的会转到根目录的挂载点，以便返回有效的文件路径。设置<code>debug</code>标志关闭此行为。</li>
+<li><code>mark</code>：在目录匹配中添加<code>/</code>。注意，这需要额外的<code>stat</code>调用。</li>
+<li><code>nosort</code>：结果不排序。</li>
+<li><code>stat</code>：设置<code>true</code>统计stat所有结果。它可能会降低性能，并且完全没必要, 除非<code>readdir</code>认为文件存在的不可靠标志。</li>
+<li><code>silent</code>：读取目录遇到异常错误，并向<code>stderr</code>打印报警信息。设置option<code>silent</code>，关闭警告信息。</li>
+<li><code>strict</code>：尝试读取目录遇到异常错误时，进行会继续搜索其他匹配项。设置<code>strict</code>后，当出现这些情况时会引发错误。</li>
+<li><code>cache</code> 可以看上同的<code>cache</code>属性。传入之前生成的缓存对象保存一些<code>fs</code>调用。</li>
+<li><code>statCache</code>：文件系统信息结果的缓存，防止不必要的<code>stat</code>调用。 通常不需要设置它，如果你知道文件系统不会在调用中改变，你可以将<code>statCache</code>从一个<code>glob()</code>中调用传递给另一个的options对象中。</li>
+<li><code>symlinks</code> 已知符号链接的缓存。在解析<code>**</code>匹配时，你可以传入上一次生成的符号链接对象用来保存<code>stat</code>调用。</li>
+<li><code>sync</code> 弃用：使用<code>glob.sync(pattern, opts)</code>替代。</li>
+<li><code>nounique</code>：在一些情况中，<code>{}</code>模式会导致同一个文件在结果中出现多次。默认情况下，它会防止结果中出现重复值。设置这个属性会关闭这个行为。</li>
+<li><code>nonull</code>：设置不返回空数组，而是返回一个包含模式本身的数组。这是<code>glob(3)</code>中的默认值。</li>
+<li><code>debug</code>：开启后会在<code>minimatch</code>和<code>glob</code>开启日志记录。</li>
+<li><code>nobrace</code>：不展开大括号，如<code>{a,b}</code>和<code>{1..3}</code>。</li>
+<li><code>noglobstar</code>：针对多个文件名不匹配<code>**</code>（即 会替换为正常的<code>*</code>）。</li>
+<li><code>noext</code>：不去匹配<code>+(a|b)</code>“extglob”模式。</li>
+<li><code>nocase</code>：不区分大小写的匹配。注意：在一些不区分大小写的系统中<code>no-magic</code>模式默认会被匹配，<code>stat</code>和<code>readir</code>将不会引发错误。</li>
+<li><code>matchBase</code>：如果模式中不包含<code>/</code>字符串，则执行仅基于basename匹配。也就是说<code>*.js</code>会被视为<code>**/*.js</code>，会匹配所有目录下的所有js。</li>
+<li><code>nodir</code>：只匹配文件，不匹配目录。 (注意：只匹配目录，只需要在模式的最后加上<code>/</code>)</li>
+<li><code>ignore</code>：添加模式或glob模式的数组去排除匹配。注意，<code>ignore</code>模式下总是<code>dot:true</code>，其他设置无效。</li>
+<li><code>follow</code>：<code>**</code>模式下，访问符号链接目录。注意 它可能会导致在出现循环链接时出现大量重复引用。</li>
+<li><code>realpath</code>：设置为<code>true</code>会在所有结果中调用<code>fs.realpath</code>。在无法解析的符号链接下，返回匹配结果的完整绝对路径。(虽然它通常是一个失效的符号链接)</li>
+<li><code>absolute</code>：设置为真，将会在匹配的结果中接收到绝对路径。与<code>realpath</code>不同，它也会影响<code>match</code>事件中的返回值。</li>
+</ul>
+<hr>
+<blockquote>
+<p>博客名称：<a href="https://link.juejin.im?target=http%3A%2F%2Fblog.lepingde.com%2F" target="_blank" rel="noopener">王乐平博客</a></p>
+<p>CSDN博客地址：<a href="https://link.juejin.im?target=http%3A%2F%2Fblog.csdn.net%2Flecepin" target="_blank" rel="noopener">blog.csdn.net/lecepin</a></p>
+</blockquote>
+<p><a href="https://link.juejin.im?target=http%3A%2F%2Fcreativecommons.org%2Flicenses%2Fby-nc-nd%2F4.0%2F" target="_blank" rel="noopener"><img src="https://user-gold-cdn.xitu.io/2018/12/29/167faa9c0c91ec8b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="知识共享许可协议"></a></p>
+<p>本作品采用<a href="https://link.juejin.im?target=http%3A%2F%2Fcreativecommons.org%2Flicenses%2Fby-nc-nd%2F4.0%2F" target="_blank" rel="noopener">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年07月12日 11:10</p>
+        <p>原始链接： <a class="post-url" href="/collection/others/Glob Patterns匹配模式使用.html" title="">http://cumbermiao.github.io/collection/others/Glob Patterns匹配模式使用.html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/collection/others/Glob Patterns匹配模式使用.html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/collection/others/Glob Patterns匹配模式使用.html&title=Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/collection/others/Glob Patterns匹配模式使用.html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/collection/others/Glob Patterns匹配模式使用.html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/collection/others/Glob Patterns匹配模式使用.html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/collection/others/Glob Patterns匹配模式使用.html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Glob-Patterns匹配模式使用"><span class="post-toc-text">Glob Patterns匹配模式使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Glob"><span class="post-toc-text">Glob</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用"><span class="post-toc-text">使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Glob-入门"><span class="post-toc-text">Glob 入门</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#点"><span class="post-toc-text">.点</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Basename的匹配"><span class="post-toc-text">Basename的匹配</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#空集"><span class="post-toc-text">空集</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#glob-hasMagic-pattern-options"><span class="post-toc-text">glob.hasMagic(pattern, [options])</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#glob-pattern-options-cb"><span class="post-toc-text">glob(pattern, [options], cb)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#glob-sync-pattern-options"><span class="post-toc-text">glob.sync(pattern, [options])</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Class-glob-Glob"><span class="post-toc-text">Class: glob.Glob</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#new-glob-Glob-pattern-options-cb"><span class="post-toc-text">new glob.Glob(pattern, [options], [cb])</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#属性"><span class="post-toc-text">属性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#事件"><span class="post-toc-text">事件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方法"><span class="post-toc-text">方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#选项"><span class="post-toc-text">选项</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

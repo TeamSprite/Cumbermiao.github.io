@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>ssh命令 | Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="SSHSSH 是一种通用的、功能强大的、基于软件的网络安全性解决方案。术语：  SSH 泛指SSH协议或者产品名为SSH的产品 SSH-1 SSH 协议版本1 ， SSH-1 SSH 协议版本2 SSH1 实现SSH-1协议的软件 ， SSH2 实现SSH-2协议的软件 ssh 运行安全终端回话和远程命令的客户端程序 OpenSSHift openBSD项目的产品，同时实现了 SSH-1协议和SS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssh命令">
+<meta property="og:url" content="http://cumbermiao.github.io/2019/06/21/ssh命令/index.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="SSHSSH 是一种通用的、功能强大的、基于软件的网络安全性解决方案。术语：  SSH 泛指SSH协议或者产品名为SSH的产品 SSH-1 SSH 协议版本1 ， SSH-1 SSH 协议版本2 SSH1 实现SSH-1协议的软件 ， SSH2 实现SSH-2协议的软件 ssh 运行安全终端回话和远程命令的客户端程序 OpenSSHift openBSD项目的产品，同时实现了 SSH-1协议和SS">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-21T03:25:18.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ssh命令">
+<meta name="twitter:description" content="SSHSSH 是一种通用的、功能强大的、基于软件的网络安全性解决方案。术语：  SSH 泛指SSH协议或者产品名为SSH的产品 SSH-1 SSH 协议版本1 ， SSH-1 SSH 协议版本2 SSH1 实现SSH-1协议的软件 ， SSH2 实现SSH-2协议的软件 ssh 运行安全终端回话和远程命令的客户端程序 OpenSSHift openBSD项目的产品，同时实现了 SSH-1协议和SS">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-ssh命令" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      ssh命令
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-06-21
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h2 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h2><p>SSH 是一种通用的、功能强大的、基于软件的网络安全性解决方案。<br>术语：</p>
+<ul>
+<li>SSH 泛指SSH协议或者产品名为SSH的产品</li>
+<li>SSH-1 SSH 协议版本1 ， SSH-1 SSH 协议版本2</li>
+<li>SSH1 实现SSH-1协议的软件 ， SSH2 实现SSH-2协议的软件</li>
+<li>ssh 运行安全终端回话和远程命令的客户端程序</li>
+<li>OpenSSHift openBSD项目的产品，同时实现了 SSH-1协议和SSH-2协议。</li>
+</ul>
+<h3 id="ssh-登录远程"><a href="#ssh-登录远程" class="headerlink" title="ssh 登录远程"></a>ssh 登录远程</h3><p>使用 user 用户登录到 <a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -l user www.test.com</span><br></pre></td></tr></table></figure></p>
+<p>也可以使用 user@host 代替 -l 选项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@www.test.com</span><br></pre></td></tr></table></figure></p>
+<h3 id="scp-传输文件"><a href="#scp-传输文件" class="headerlink" title="scp 传输文件"></a>scp 传输文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp sourcefile destination</span><br></pre></td></tr></table></figure>
+<p>例如将远程中的文件拷贝到本地<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp user@www.test.com:readme readme</span><br></pre></td></tr></table></figure></p>
+<h3 id="known-host"><a href="#known-host" class="headerlink" title="known host"></a>known host</h3><p>ssh 客户端首次碰到一个新远程主机时需要执行一些额外的工作并显示和下面类似的消息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -l user www.test.com</span><br><span class="line">Host key not found from the list of known hosts.</span><br><span class="line">Are you sure you want to <span class="built_in">continue</span> connecting (yes/no)?</span><br></pre></td></tr></table></figure></p>
+<h3 id="生成秘钥对"><a href="#生成秘钥对" class="headerlink" title="生成秘钥对"></a>生成秘钥对</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+<h3 id="ssh-代理"><a href="#ssh-代理" class="headerlink" title="ssh 代理"></a>ssh 代理</h3><p>用户每次使用公钥认证运行 ssh 或者 scp 命令都需要重新输入口令， 这种反复输入口令的操作会让人很反感， 为了只需要一次认证就可以让 ssh 和 scp 记住你的身份直到用户退出， ssh 代理就提供了这个功能。</p>
+<p>代理是一个程序，他可以把私钥保存在内存中， 并使用其来为 SSH客户端提供认证服务。如果用户在登录回话时启动了一个代理，那么以后的认证都不需要再重新输入密码， 知道用户结束代理为止。这个代理程序就是 ssh-agent 。</p>
+<p>将秘钥装入到代理中，可以使用 <code>ssh-add id_rsa</code> , 查看代理中的所有秘钥 <code>ssh-add -l</code> , 从代理中卸载一个秘钥 <code>ssh-add -d id_rsa</code> , 卸载代理中的所有秘钥 <code>ssh-add -D</code> .</p>
+<h3 id="代理转发"><a href="#代理转发" class="headerlink" title="代理转发"></a>代理转发</h3><p>当我们从本地执行命令 <code>scp user@www.test1.com:readme user@www.test2.com:readme</code> 复制文件时会失败。<br>当用户在本地机器运行 scp 命令时， 他连接到 <a href="http://www.test1.com" target="_blank" rel="noopener">www.test1.com</a> 并间接调用了另一个 scp 命令执行拷贝工作 ， 第二个 scp 命令也会要求秘钥出入口令， 由于远程主机上没有终端回话提示， 导致执行失败。 S<br>SH代理可以解决以上问题， 第二个 scp 命令只需要查询用户本地的 SSH 代理， 这样就不需要输入口令了。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年06月21日 11:25</p>
+        <p>原始链接： <a class="post-url" href="/2019/06/21/ssh命令/" title="ssh命令">http://cumbermiao.github.io/2019/06/21/ssh命令/</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/2019/06/21/ssh命令/&title=《ssh命令》 — Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/2019/06/21/ssh命令/&title=《ssh命令》 — Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/2019/06/21/ssh命令/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ssh命令》 — Cumber's Blog&url=http://cumbermiao.github.io/2019/06/21/ssh命令/&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/2019/06/21/ssh命令/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/2019/06/21/ssh命令/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SSH"><span class="post-toc-text">SSH</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ssh-登录远程"><span class="post-toc-text">ssh 登录远程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#scp-传输文件"><span class="post-toc-text">scp 传输文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#known-host"><span class="post-toc-text">known host</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#生成秘钥对"><span class="post-toc-text">生成秘钥对</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ssh-代理"><span class="post-toc-text">ssh 代理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代理转发"><span class="post-toc-text">代理转发</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2019/06/27/jasmine/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          Jasmine
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2019/06/19/记karma进行UI测试/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">记karma进行UI测试</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

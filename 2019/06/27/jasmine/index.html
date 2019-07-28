@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Jasmine | Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="原文链接：https://yq.aliyun.com/articles/53426 Jasmine中文指南jasmine是一款非常流行的测试框架,不依赖任何别的库,语法简单,本文是2.1版本的api中文指南. 运行条件 npm install -g jasmine  jasmine JASMINE_CONFIG_PATH=jasmine.json  jasmine.json配置文件可以随意命名,内">
+<meta name="keywords" content="Jasmine">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jasmine">
+<meta property="og:url" content="http://cumbermiao.github.io/2019/06/27/jasmine/index.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="原文链接：https://yq.aliyun.com/articles/53426 Jasmine中文指南jasmine是一款非常流行的测试框架,不依赖任何别的库,语法简单,本文是2.1版本的api中文指南. 运行条件 npm install -g jasmine  jasmine JASMINE_CONFIG_PATH=jasmine.json  jasmine.json配置文件可以随意命名,内">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-27T05:59:57.459Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jasmine">
+<meta name="twitter:description" content="原文链接：https://yq.aliyun.com/articles/53426 Jasmine中文指南jasmine是一款非常流行的测试框架,不依赖任何别的库,语法简单,本文是2.1版本的api中文指南. 运行条件 npm install -g jasmine  jasmine JASMINE_CONFIG_PATH=jasmine.json  jasmine.json配置文件可以随意命名,内">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-jasmine" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Jasmine
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-06-27
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>原文链接：<a href="https://yq.aliyun.com/articles/53426" target="_blank" rel="noopener">https://yq.aliyun.com/articles/53426</a></p>
+<h2 id="Jasmine中文指南"><a href="#Jasmine中文指南" class="headerlink" title="Jasmine中文指南"></a>Jasmine中文指南</h2><p><code>jasmine</code>是一款非常流行的测试框架,不依赖任何别的库,语法简单,本文是<code>2.1</code>版本的api中文指南.</p>
+<h3 id="运行条件"><a href="#运行条件" class="headerlink" title="运行条件"></a>运行条件</h3><ul>
+<li><p>npm install -g jasmine</p>
+</li>
+<li><p>jasmine <code>JASMINE_CONFIG_PATH=jasmine.json</code></p>
+</li>
+<li><p><code>jasmine.json</code>配置文件可以随意命名,内容格式如下</p>
+</li>
+</ul>
+<pre><code>{
+  &quot;spec_dir&quot;: &quot;jasminetest&quot;,
+  &quot;spec_files&quot;: [
+    &quot;*.js&quot;
+  ]
+}
+</code></pre><ul>
+<li><code>spec_dir</code>代表要测试用例的目录,<code>spec_files</code>代表要测试的文件信息</li>
+</ul>
+<p>一个简单的<code>jasmine</code>测试用例总是以<code>describe</code>开始的,它代表一组相似的测试用例,然后具体的测试用例以<code>it</code>开始,先看看下面简单的例子</p>
+<pre><code>describe(&apos; test some code &apos;, function(){
+    var foo = &apos;foo&apos;;
+
+    it(&apos; expect foo equal foo &apos;, function(){
+        expect(foo).toEqual(&apos;foo&apos;);
+    });
+
+})
+</code></pre><p>下面是<code>jasmine</code>的常用断言方法,在任何断言方法前面加上<code>not</code>,代表相反的意思.</p>
+<h3 id="toBe"><a href="#toBe" class="headerlink" title="toBe"></a>toBe</h3><pre><code>类似于`===`
+
+
+expect(true).toBe(true);
+</code></pre><h3 id="toEqual"><a href="#toEqual" class="headerlink" title="toEqual"></a>toEqual</h3><pre><code>比较变量字面量的值
+
+
+expect({ foo: &apos;foo&apos;}).toEqual( {foo: &apos;foo&apos;} );
+</code></pre><h3 id="toMatch"><a href="#toMatch" class="headerlink" title="toMatch"></a>toMatch</h3><pre><code>匹配值与正则表达式
+
+
+expect(&apos;foo&apos;).toMatch(/foo/);
+</code></pre><h3 id="toBeDefined"><a href="#toBeDefined" class="headerlink" title="toBeDefined"></a>toBeDefined</h3><pre><code>检验变量是否定义
+
+
+var foo = {
+    bar: &apos;foo&apos;
+};
+expect(foo.bar).toBeDefined();
+</code></pre><h3 id="toBeNull"><a href="#toBeNull" class="headerlink" title="toBeNull"></a>toBeNull</h3><pre><code>检验变量是否为`null`
+
+
+var foo = null;
+expect(foo).toBeNull();
+</code></pre><h3 id="toBeTruthy"><a href="#toBeTruthy" class="headerlink" title="toBeTruthy"></a>toBeTruthy</h3><pre><code>检查变量值是否能转换成布尔型`真`值
+
+
+expect({}).toBeTruthy();
+</code></pre><h3 id="toBeFalsy"><a href="#toBeFalsy" class="headerlink" title="toBeFalsy"></a>toBeFalsy</h3><pre><code>检查变量值是否能转换成布尔型`假`值
+
+
+expect(&apos;&apos;).toBeFalsy();
+</code></pre><h3 id="toContain"><a href="#toContain" class="headerlink" title="toContain"></a>toContain</h3><pre><code>检查在数组中是否包含某个元素
+
+
+expect([1,2,4]).toContain(1);
+</code></pre><h3 id="toBeLessThan"><a href="#toBeLessThan" class="headerlink" title="toBeLessThan"></a>toBeLessThan</h3><pre><code>检查变量是否小于某个数字
+
+
+expect(2).toBeLessThan(10);
+</code></pre><h3 id="toBeGreaterThan"><a href="#toBeGreaterThan" class="headerlink" title="toBeGreaterThan"></a>toBeGreaterThan</h3><pre><code>检查变量是否大于某个数字或者变量
+
+
+expect(2).toBeGreaterThan(1);
+</code></pre><h3 id="toBeCloseTo"><a href="#toBeCloseTo" class="headerlink" title="toBeCloseTo"></a>toBeCloseTo</h3><pre><code>比较两个数在保留几位小数位之后，是否相等,用于数字的精确比较
+
+
+expect(3.1).toBeCloseTo(3, 0);
+</code></pre><h3 id="toThrow"><a href="#toThrow" class="headerlink" title="toThrow"></a>toThrow</h3><pre><code>检查一个函数是否会throw异常
+
+
+expect(function(){ return a + 1;}).toThrow();  // true
+expect(function(){ return a + 1;}).not.toThrow(); // false
+</code></pre><h3 id="toHaveBeenCalled"><a href="#toHaveBeenCalled" class="headerlink" title="toHaveBeenCalled"></a>toHaveBeenCalled</h3><pre><code>检查一个监听函数是否被调用过
+</code></pre><ul>
+<li>代码见下面的监听函数部分</li>
+</ul>
+<h3 id="toHaveBeenCalledWith"><a href="#toHaveBeenCalledWith" class="headerlink" title="toHaveBeenCalledWith"></a>toHaveBeenCalledWith</h3><pre><code>检查监听函数调用时的参数匹配信息
+</code></pre><ul>
+<li>代码见下面的监听函数部分</li>
+</ul>
+<h3 id="测试前后注入"><a href="#测试前后注入" class="headerlink" title="测试前后注入"></a>测试前后注入</h3><ul>
+<li><p>beforeEach</p>
+<p>在describe里的每个it执行前调用</p>
+</li>
+</ul>
+<pre><code>describe(&apos;test code inject&apos;, function(){
+    var foo;
+
+    // 每次给foo加1
+    beforeEach(function(){
+        foo += 1;
+    });
+
+    it(&apos;expect foo toBe 1 &apos;, function(){
+        expect(foo).toBe(1);
+    });
+
+    it(&apos;expect foo toEqual 2 &apos;, function(){
+        expect(foo).toEqual(2);
+    });
+
+});
+</code></pre><ul>
+<li><p>afterEach</p>
+<p>在describe里的每个it执行后调用</p>
+</li>
+</ul>
+<pre><code>describe(&apos;test code inject&apos;, function(){
+    var foo;
+
+    // 每次给foo加1
+    beforeEach(function(){
+        foo += 1;
+    });
+
+    // 重置变量foo
+    afterEach(function(){
+        foo = 0;
+    });
+
+    it(&apos;expect foo toBe 1 &apos;, function(){
+        expect(foo).toBe(1);
+    });
+
+    it(&apos;expect foo toEqual 1 &apos;, function(){
+        expect(foo).toEqual(1);
+    });
+
+});
+</code></pre><ul>
+<li><p>beforeAll</p>
+<p>保证在describe里所有的it执行之前调用</p>
+</li>
+</ul>
+<pre><code>describe(&apos;test beforeAll &apos;, function(){
+    var foo;
+
+    // 只执行一次,保证在it执行之前执行
+    beforeAll(function(){
+        foo += 1;
+    });
+
+
+    it(&apos;expect foo toBe 1 &apos;, function(){
+        expect(foo).toBe(1);
+    });
+
+    it(&apos;expect foo toEqual 1 &apos;, function(){
+        expect(foo).toEqual(1);
+    });
+
+});
+</code></pre><ul>
+<li><p>afterAll</p>
+<p>保证在describe里所有的it执行完成之后调用</p>
+</li>
+</ul>
+<pre><code>describe(&apos;test beforeAll &apos;, function(){
+    var foo;
+
+    // 只执行一次,保证在it执行之前执行
+    beforeAll(function(){
+        foo += 1;
+    });
+
+    afterAll(function(){
+        foo = 0;
+    });
+
+
+    it(&apos;expect foo toBe 1 &apos;, function(){
+        expect(foo).toBe(1);
+        foo += 1;
+    });
+
+    it(&apos;expect foo toEqual 2 &apos;, function(){
+        expect(foo).toEqual(2);
+    });
+
+    // foo 0
+
+});
+</code></pre><h3 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h3><ul>
+<li><p>describe里的每个<code>beforeEach</code>,<code>it</code>,<code>afterEach</code>的<code>this</code>都是相同的.</p>
+<p>describe(‘test this context’, function(){</p>
+</li>
+</ul>
+<pre><code>    beforeEach(function(){
+        this.bar = &apos;yicai&apos;;
+    });
+
+    afterEach(function(){
+        console.log(this.bar); // yicai
+    });
+
+    it(&apos;expect this.bar yicai &apos;, function(){
+        console.log(this.bar); // yicai
+    });
+
+    it(&apos;expect this.bar yicai &apos;, function(){
+        console.log(this.bar); // yicai
+    });
+
+});
+</code></pre><h3 id="嵌套describe"><a href="#嵌套describe" class="headerlink" title="嵌套describe"></a>嵌套describe</h3><ul>
+<li><p>不同层次的it执行时，会按从外到内依次执行beforeEach，每个it执行结束时,会按从<code>内到外</code>依次执行afterEach.</p>
+<pre><code>describe(&apos;test nesting describe &apos;, function(){
+
+    var foo = 0;
+
+    beforeEach(function(){
+        foo += 1;
+    });
+    afterEach(function(){
+        foo = 0;
+        console.log(&apos;second invoke parent afterEach&apos;);
+    })
+
+    it(&apos;expect foo toBe 1&apos;, function(){
+        expect(foo).toBe(1);
+    });
+
+    describe(&apos;child describe &apos;, function(){
+        beforeEach(function(){
+            foo += 1;
+        })
+        afterEach(function(){
+            console.log(&apos;first invoke child afterEach&apos;);
+        })
+
+        it(&apos;expect foo toEqual 2&apos;, function(){
+            expect(foo).toEqual(2);
+        });
+    })
+});
+</code></pre></li>
+</ul>
+<h3 id="禁用describe与it"><a href="#禁用describe与it" class="headerlink" title="禁用describe与it"></a>禁用describe与it</h3><ul>
+<li><p>当在<code>describe</code>和<code>it</code>前面加上<code>x</code>前缀时,可以禁掉当前describe和it测试</p>
+</li>
+<li><p>当使用<code>xit</code>或者<code>it</code>里不包含函数体时,测试结果会显示<code>挂起</code>spec字样</p>
+</li>
+</ul>
+<h3 id="spy监视函数执行"><a href="#spy监视函数执行" class="headerlink" title="spy监视函数执行"></a>spy监视函数执行</h3><ul>
+<li><p><code>spyOn</code>方法可以添加对某个对象下的函数执行情况的监控</p>
+<pre><code>describe(&apos;test spy &apos;, function(){
+    var  spyobj, bar = null;
+    beforeEach(function(){
+        spyobj = {
+            setBar: function(val){
+                bar = val;
+            }
+        }
+        spyOn(spyobj, &apos;setBar&apos;);
+        spyobj.setBar(&apos;123&apos;);
+        spyobj.setBar(&apos;1&apos;, &apos;2&apos;);
+    });
+
+    it(&apos;check spyobj invoke track&apos;, function(){
+        // 检查是否监听函数是否调用过
+        expect(spyobj.setBar).toHaveBeenCalled();
+        // 检查监听函数参数调用情况
+        expect(spyobj.setBar).toHaveBeenCalledWith(&apos;123&apos;);
+        expect(spyobj.setBar).toHaveBeenCalledWith(&apos;1&apos;, &apos;2&apos;);
+        // bar变量值默认是不会保存的
+        expect(bar).toBeNull();
+    })
+});
+</code></pre></li>
+</ul>
+<ul>
+<li><p><code>and.callThrough</code>方法可以让监听的方法返回值保留下来</p>
+<pre><code>describe(&apos;test spy &apos;, function(){
+    var  spyobj, bar = null;
+    beforeEach(function(){
+        spyobj = {
+            setBar: function(val){
+                bar = val;
+            }
+        }
+        spyOn(spyobj, &apos;setBar&apos;).and.callThrough();
+        spyobj.setBar(&apos;123&apos;);
+        spyobj.setBar(&apos;1&apos;, &apos;2&apos;);
+    });
+
+    it(&apos;check spyobj invoke track&apos;, function(){
+        // bar变量此次保存了下来
+        expect(bar).toEqual(&apos;1&apos;);
+    })
+});
+</code></pre></li>
+</ul>
+<ul>
+<li><p><code>and.returnValue</code>方法可以指定监听的方法返回值</p>
+<pre><code>describe(&apos;test spy &apos;, function(){
+    var  spyobj, bar = null, foo;
+    beforeEach(function(){
+        spyobj = {
+            setBar: function(val){
+                bar = val;
+            },
+            getBar: function(){
+                return bar;
+            }
+        }
+        spyOn(spyobj, &quot;getBar&quot;).and.returnValue(&apos;1&apos;);
+        spyobj.setBar(&apos;123&apos;);
+        foo = spyobj.getBar();
+    });
+
+    it(&apos;check spyobj invoke track&apos;, function(){
+
+        expect(bar).toEqual(&apos;123&apos;);
+        // returnValue改变了原先的setBar方法设置的值
+        expect(foo).toEqual(&apos;1&apos;);
+    })
+});
+</code></pre></li>
+</ul>
+<ul>
+<li><p><code>and.callFake</code>方法可以伪造监听的方法返回值，通过一个自定义函数</p>
+<pre><code>describe(&apos;test spy &apos;, function(){
+    var  spyobj, bar = null, foo;
+    beforeEach(function(){
+        spyobj = {
+            setBar: function(val){
+                bar = val;
+            },
+            getBar: function(){
+                return bar;
+            }
+        }
+        spyOn(spyobj, &quot;getBar&quot;).and.callFake(function(){
+            return &apos;yicai&apos;;
+        });
+        spyobj.setBar(&apos;123&apos;);
+        foo = spyobj.getBar();
+    });
+
+    it(&apos;check spyobj invoke track&apos;, function(){
+
+        expect(bar).toEqual(&apos;123&apos;);
+        // callFake改变了原先的setBar方法设置的值
+        expect(foo).toEqual(&apos;yicai&apos;);
+    })
+});
+</code></pre></li>
+</ul>
+<ul>
+<li><p><code>and.throwError</code>方法可以让监听方法执行之后返回一个错误信息,可以通过<code>toThrowError</code>来适配</p>
+<pre><code>describe(&apos;test spy &apos;, function(){
+    var  spyobj, bar = null;
+    beforeEach(function(){
+        spyobj = {
+            setBar: function(val){
+                bar = val;
+            },
+            getBar: function(){
+                return bar;
+            }
+        }
+        spyOn(spyobj, &quot;setBar&quot;).and.throwError(&apos;error&apos;);
+    });
+
+    it(&apos;check spyobj invoke track&apos;, function(){
+        expect(function(){
+            spyobj.setBar();
+        }).toThrowError(&apos;error&apos;);
+    })
+});
+</code></pre></li>
+</ul>
+<ul>
+<li><p><code>and.stub</code>方法可以还原监听方法的返回值</p>
+<pre><code>describe(&apos;test spy &apos;, function(){
+    var  spyobj, bar = null;
+    beforeEach(function(){
+        spyobj = {
+            setBar: function(val){
+                bar = val;
+            },
+            getBar: function(){
+                return bar;
+            }
+        }
+        spyOn(spyobj, &quot;setBar&quot;).and.callThrough();
+    });
+
+    it(&apos;check spyobj invoke track&apos;, function(){
+        spyobj.setBar(&apos;123&apos;);
+        expect(bar).toEqual(&apos;123&apos;);
+        spyobj.setBar.and.stub();
+        bar = null;
+        spyobj.setBar(&apos;123&apos;);
+        expect(bar).toBe(null);
+    })
+});
+</code></pre></li>
+</ul>
+<ul>
+<li><p><code>calls</code>这里包含很多监听过程中的属性信息</p>
+<ul>
+<li><code>.calls.any()</code>,一次都没调用,则返回<code>false</code>,否则返回<code>true</code></li>
+<li><code>.calls.count()</code>,返回监听函数调用的次数</li>
+<li><code>.calls.argsFor(index)</code>,返回监听函数调用过程中传递的所有参数信息,index代表调用的索引数</li>
+<li><code>.calls.allArgs()</code>,返回监听函数调用过程中的所以参数信息,是一个数组,每一项代表一次调用传参信息</li>
+<li><code>.calls.all()</code>,返回监听函数调用过程中的所有信息,除了参数信息还包含<code>this</code>上下文信息</li>
+<li><code>.calls.mostRecent()</code>,返回监听函数最后一次调用的相关信息,除了参数还包含<code>this</code>上下文信息</li>
+<li><code>.calls.first()</code>,返回第一次调用监听函数的相关信息,除了参数还包含<code>this</code>上下文信息</li>
+<li><code>.calls.reset()</code>,清除监听函数调用信息,<code>.calls.any()</code>将返回<code>false</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>下面以一个例子来说明,在访问监听函数上的<code>calls</code>属性时的信息</p>
+</blockquote>
+<pre><code>describe(&apos;test spy &apos;, function(){
+    var  spyobj, bar = null;
+    beforeEach(function(){
+        spyobj = {
+            setBar: function(val){
+                bar = val;
+            },
+            getBar: function(){
+                return bar;
+            }
+        }
+        spyOn(spyobj, &quot;setBar&quot;);
+    });
+
+    it(&apos;check spyobj invoke track&apos;, function(){
+
+        // 监听函数没调用过,则返回false
+        expect(spyobj.setBar.calls.any()).toBe(false);
+
+        spyobj.setBar(&apos;1&apos;);
+        spyobj.setBar(&apos;2&apos;, &apos;4&apos;);
+        // 上面调用了2次
+        expect(spyobj.setBar.calls.count()).toEqual(2);
+
+        // 分别获取上面调用两次时的入参信息,索引就是调用顺序
+        expect(spyobj.setBar.calls.argsFor(0)).toEqual([&apos;1&apos;]);
+        expect(spyobj.setBar.calls.argsFor(1)).toEqual([&apos;2&apos;, &apos;4&apos;]);
+
+        // 获取所有调用时的入参信息
+        expect(spyobj.setBar.calls.allArgs()).toEqual([ [&apos;1&apos;], [&apos;2&apos;, &apos;4&apos;] ]);
+
+        // 获取所有调用信息,包括this上下文信息
+        expect(spyobj.setBar.calls.all()).toEqual([
+        {
+            object: spyobj, args: [&apos;1&apos;], returnValue: undefined
+        },
+        {
+            object: spyobj, args: [&apos;2&apos;,&apos;4&apos;], returnValue: undefined
+        }
+        ]);
+
+        // 获取最近一次调用的信息
+        expect(spyobj.setBar.calls.mostRecent()).toEqual({object: spyobj, args: [&apos;2&apos;, &apos;4&apos;], returnValue: undefined});
+
+        // 获取第一次调用的信息
+        expect(spyobj.setBar.calls.first()).toEqual({object: spyobj, args: [&apos;1&apos;], returnValue: undefined});
+
+        // 清除监听函数调用信息
+        spyobj.setBar.calls.reset();
+
+        expect(spyobj.setBar.calls.any()).toBe(false);
+    })
+});
+</code></pre><blockquote>
+<p>注意,当在<code>calls</code>对象上调用<code>all()</code>,<code>mostRecent()</code>,<code>first()</code>,返回的<code>object</code>属性指向的是<code>this</code>上下文信息</p>
+</blockquote>
+<ul>
+<li><p><code>createSpy</code>,可以创建一个命名的监听函数</p>
+<pre><code>describe(&apos;test spy &apos;, function(){
+    var  spyobj, bar = null;
+    beforeEach(function(){
+        spyobj = jasmine.createSpy(&apos;spyobj&apos;);
+        spyobj(&apos;1&apos;, &apos;2&apos;);
+    });
+
+    it(&apos;check spyobj invoke track&apos;, function(){
+
+        expect(spyobj.and.identity()).toEqual(&apos;spyobj&apos;);
+
+        expect(spyobj.calls.any()).toBe(true);
+
+        expect(spyobj.calls.count()).toEqual(1);
+
+        expect(spyobj).toHaveBeenCalledWith(&apos;1&apos;, &apos;2&apos;);
+
+        expect(spyobj.calls.mostRecent().args[0]).toEqual(&apos;1&apos;);
+    })
+});
+</code></pre></li>
+</ul>
+<ul>
+<li><p><code>createSpyObj</code>,可以批量创建监听函数</p>
+<pre><code>describe(&apos;test spy &apos;, function(){
+    var  spyobj, bar = null;
+    beforeEach(function(){
+        spyobj = jasmine.createSpyObj(&apos;spyobj&apos;, [&apos;play&apos;, &apos;pause&apos;, &apos;stop&apos;, &apos;rewind&apos;]);
+        spyobj.play();
+        spyobj.pause(&apos;1&apos;);
+    });
+
+    it(&apos;check spyobj invoke track&apos;, function(){
+
+        expect(spyobj.rewind.and.identity()).toEqual(&apos;spyobj.rewind&apos;);
+
+        expect(spyobj.play.calls.any()).toBe(true);
+
+        expect(spyobj.stop.calls.any()).toBe(false);
+
+        expect(spyobj.pause.calls.count()).toEqual(1);
+
+        expect(spyobj.pause.calls.mostRecent().args[0]).toEqual(&apos;1&apos;);
+    })
+});
+</code></pre></li>
+</ul>
+<h3 id="jasmine-any"><a href="#jasmine-any" class="headerlink" title="jasmine.any"></a>jasmine.any</h3><pre><code>检验变量是否匹配相关类型
+
+
+describe(&quot;jasmine.any&quot;, function() {
+  it(&quot;matches any value&quot;, function() {
+    expect({}).toEqual(jasmine.any(Object));
+    expect(12).toEqual(jasmine.any(Number));
+  });
+
+  describe(&quot;when used with a spy&quot;, function() {
+    it(&quot;is useful for comparing arguments&quot;, function() {
+      var foo = jasmine.createSpy(&apos;foo&apos;);
+      foo(12, function() {
+        return true;
+      });
+
+      expect(foo).toHaveBeenCalledWith(jasmine.any(Number), jasmine.any(Function));
+    });
+  });
+});
+</code></pre><h3 id="jasmine-objectContaining"><a href="#jasmine-objectContaining" class="headerlink" title="jasmine.objectContaining"></a>jasmine.objectContaining</h3><pre><code>检验对象是否包含某个`key/value`
+
+
+describe(&quot;jasmine.objectContaining&quot;, function() {
+  var foo;
+
+  beforeEach(function() {
+    foo = {
+      a: 1,
+      b: 2,
+      bar: &quot;baz&quot;
+    };
+  });
+
+  it(&quot;matches objects with the expect key/value pairs&quot;, function() {
+    expect(foo).toEqual(jasmine.objectContaining({
+      bar: &quot;baz&quot;
+    }));
+    expect(foo).not.toEqual(jasmine.objectContaining({
+      c: 37
+    }));
+  });
+
+  describe(&quot;when used with a spy&quot;, function() {
+    it(&quot;is useful for comparing arguments&quot;, function() {
+      var callback = jasmine.createSpy(&apos;callback&apos;);
+
+      callback({
+        bar: &quot;baz&quot;
+      });
+
+      expect(callback).toHaveBeenCalledWith(jasmine.objectContaining({
+        bar: &quot;baz&quot;
+      }));
+      expect(callback).not.toHaveBeenCalledWith(jasmine.objectContaining({
+        c: 37
+      }));
+    });
+  });
+});
+</code></pre><h3 id="jasmine-clock"><a href="#jasmine-clock" class="headerlink" title="jasmine.clock"></a>jasmine.clock</h3><pre><code>jasmine的时钟
+</code></pre><ul>
+<li><p>jasmine.clock().install(), 启动时钟控制</p>
+</li>
+<li><p>jasmine.clock().uninstall(), 停止时钟控制</p>
+</li>
+<li><p>jasmine.clock().tick, 让时钟往前走多少秒</p>
+</li>
+<li><p>jasmine.clock().mockDate, 可以根据传入的date来设置当前时间</p>
+</li>
+</ul>
+<blockquote>
+<p>下面以一个完整的例子来说明</p>
+</blockquote>
+<pre><code>describe(&apos;test jasmine.clock&apos;, function(){
+    var timecallback;
+
+    beforeEach(function(){
+        timecallback = jasmine.createSpy(&apos;timecallback&apos;);
+        jasmine.clock().install();
+    });
+
+    afterEach(function(){
+        jasmine.clock().uninstall();
+    })
+
+    it(&apos;mock setTimeout clock &apos;, function(){
+        setTimeout(function(){
+            timecallback();
+        }, 100);
+        expect(timecallback).not.toHaveBeenCalled();
+        jasmine.clock().tick(101);
+        expect(timecallback).toHaveBeenCalled();
+    })
+
+    it(&apos;mock setInterval clock &apos;, function(){
+        setInterval(function(){
+            timecallback();
+        }, 100);
+        expect(timecallback).not.toHaveBeenCalled();
+        jasmine.clock().tick(101);
+        expect(timecallback.calls.count()).toEqual(1);
+        jasmine.clock().tick(50);
+        expect(timecallback.calls.count()).toEqual(1);
+        jasmine.clock().tick(50);
+        expect(timecallback.calls.count()).toEqual(2);
+    })
+
+    it(&apos;mock date clock &apos;, function(){
+        var baseTime = new Date(2013, 9, 23);
+        jasmine.clock().mockDate(baseTime);
+        jasmine.clock().tick(50);
+        expect(new Date().getTime()).toEqual(baseTime.getTime() + 50);
+    })
+
+})
+</code></pre><h3 id="jasmine异步支持"><a href="#jasmine异步支持" class="headerlink" title="jasmine异步支持"></a>jasmine异步支持</h3><ul>
+<li><p><code>beforeEach</code>, <code>it</code>,包装的函数传入<code>done</code>参数,只有当<code>done</code>函数执行完成之后,<code>beforeEach, it</code>才算执行完成</p>
+</li>
+<li><p><code>jasmine.DEFAULT_TIMEOUT_INTERVAL</code>, 默认是5秒之后就超时,可以修改这个超时时间</p>
+</li>
+</ul>
+<blockquote>
+<p>下面以一个完整的例子来说<code>jasmine</code>中异步操作</p>
+</blockquote>
+<pre><code>describe(&apos;test asynchonous &apos;, function(){
+    var value = 0, originalTimeout;
+
+    beforeEach(function(done){
+        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+        // 设置jasmine超时时间为10秒
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+        setTimeout(function(){
+            value += 1;
+            // 只有执行done函数,后面的it才会执行
+            done();
+        }, 200);
+    });
+
+    afterEach(function(){
+        // 还原jasmine超时时间
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+    })
+
+    it(&apos;expect value toEqual 1&apos;, function(done){
+        setTimeout(function(){
+            expect(value).toEqual(1);
+            // 只有执行这个,后面的it才会执行
+            done();
+        }, 9000);
+    });
+
+    it(&apos;until above spec complete &apos;, function(){
+        expect(value).toBe(2);
+    });
+
+
+})
+</code></pre><h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><p><a href="/go/articleRenderRedirect?url=http://jasmine.github.io/2.1/introduction.html">Jasmine 2.1 英文api文档</a></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年06月27日 13:59</p>
+        <p>原始链接： <a class="post-url" href="/2019/06/27/jasmine/" title="Jasmine">http://cumbermiao.github.io/2019/06/27/jasmine/</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/2019/06/27/jasmine/&title=《Jasmine》 — Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/2019/06/27/jasmine/&title=《Jasmine》 — Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/2019/06/27/jasmine/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Jasmine》 — Cumber's Blog&url=http://cumbermiao.github.io/2019/06/27/jasmine/&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/2019/06/27/jasmine/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/2019/06/27/jasmine/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Jasmine/" class="color3">Jasmine</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Jasmine中文指南"><span class="post-toc-text">Jasmine中文指南</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#运行条件"><span class="post-toc-text">运行条件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toBe"><span class="post-toc-text">toBe</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toEqual"><span class="post-toc-text">toEqual</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toMatch"><span class="post-toc-text">toMatch</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toBeDefined"><span class="post-toc-text">toBeDefined</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toBeNull"><span class="post-toc-text">toBeNull</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toBeTruthy"><span class="post-toc-text">toBeTruthy</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toBeFalsy"><span class="post-toc-text">toBeFalsy</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toContain"><span class="post-toc-text">toContain</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toBeLessThan"><span class="post-toc-text">toBeLessThan</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toBeGreaterThan"><span class="post-toc-text">toBeGreaterThan</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toBeCloseTo"><span class="post-toc-text">toBeCloseTo</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toThrow"><span class="post-toc-text">toThrow</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toHaveBeenCalled"><span class="post-toc-text">toHaveBeenCalled</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#toHaveBeenCalledWith"><span class="post-toc-text">toHaveBeenCalledWith</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试前后注入"><span class="post-toc-text">测试前后注入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#this关键字"><span class="post-toc-text">this关键字</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#嵌套describe"><span class="post-toc-text">嵌套describe</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#禁用describe与it"><span class="post-toc-text">禁用describe与it</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#spy监视函数执行"><span class="post-toc-text">spy监视函数执行</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#jasmine-any"><span class="post-toc-text">jasmine.any</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#jasmine-objectContaining"><span class="post-toc-text">jasmine.objectContaining</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#jasmine-clock"><span class="post-toc-text">jasmine.clock</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#jasmine异步支持"><span class="post-toc-text">jasmine异步支持</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#相关链接"><span class="post-toc-text">相关链接</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/21/ssh命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">ssh命令</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
