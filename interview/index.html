@@ -8,17 +8,17 @@
   
     <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
   
-  <meta name="description" content="实践 手写 Promise 手写 Call、apply、bind new 实现过程 &amp;amp; instanceof 实现 你真的理解跨域吗  面试经跨域问题从输入 url 到打开页面中间都经历了什么Redux 源码解读手写 Promise手写 eventEmitterdom diffast异步队列：微队列、宏队列node 中的 Event Loop 与 浏览器的区别timer =&amp;gt; i/o">
+  <meta name="description" content="实践 手写 Promise 手写 Call、apply、bind new 实现过程 &amp;amp; instanceof 实现 跨域处理demo Redux源码  面试经跨域问题从输入 url 到打开页面中间都经历了什么Redux 源码解读手写 Promise手写 eventEmitterdom diffast异步队列：微队列、宏队列node 中的 Event Loop 与 浏览器的区别timer =">
 <meta property="og:type" content="website">
 <meta property="og:title" content="面试经">
 <meta property="og:url" content="http://cumbermiao.github.io/interview/index.html">
 <meta property="og:site_name" content="Cumber&#39;s Blog">
-<meta property="og:description" content="实践 手写 Promise 手写 Call、apply、bind new 实现过程 &amp;amp; instanceof 实现 你真的理解跨域吗  面试经跨域问题从输入 url 到打开页面中间都经历了什么Redux 源码解读手写 Promise手写 eventEmitterdom diffast异步队列：微队列、宏队列node 中的 Event Loop 与 浏览器的区别timer =&amp;gt; i/o">
+<meta property="og:description" content="实践 手写 Promise 手写 Call、apply、bind new 实现过程 &amp;amp; instanceof 实现 跨域处理demo Redux源码  面试经跨域问题从输入 url 到打开页面中间都经历了什么Redux 源码解读手写 Promise手写 eventEmitterdom diffast异步队列：微队列、宏队列node 中的 Event Loop 与 浏览器的区别timer =">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-25T01:51:51.540Z">
+<meta property="og:updated_time" content="2019-07-29T07:29:19.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试经">
-<meta name="twitter:description" content="实践 手写 Promise 手写 Call、apply、bind new 实现过程 &amp;amp; instanceof 实现 你真的理解跨域吗  面试经跨域问题从输入 url 到打开页面中间都经历了什么Redux 源码解读手写 Promise手写 eventEmitterdom diffast异步队列：微队列、宏队列node 中的 Event Loop 与 浏览器的区别timer =&amp;gt; i/o">
+<meta name="twitter:description" content="实践 手写 Promise 手写 Call、apply、bind new 实现过程 &amp;amp; instanceof 实现 跨域处理demo Redux源码  面试经跨域问题从输入 url 到打开页面中间都经历了什么Redux 源码解读手写 Promise手写 eventEmitterdom diffast异步队列：微队列、宏队列node 中的 Event Loop 与 浏览器的区别timer =">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -136,7 +136,8 @@
 <li><a href="http://cumbermiao.github.io/interview/01.html">手写 Promise</a></li>
 <li><a href="http://cumbermiao.github.io/interview/02.html">手写 Call、apply、bind</a></li>
 <li><a href="http://cumbermiao.github.io/interview/03.html">new 实现过程 &amp; instanceof 实现</a></li>
-<li><a href="http://cumbermiao.github.io/interview/04.html">你真的理解跨域吗</a></li>
+<li><a href="http://cumbermiao.github.io/interview/04.html">跨域处理demo</a></li>
+<li><a href="http://cumbermiao.github.io/interview/05.html">Redux源码</a></li>
 </ul>
 <h1 id="面试经"><a href="#面试经" class="headerlink" title="面试经"></a>面试经</h1><h2 id="跨域问题"><a href="#跨域问题" class="headerlink" title="跨域问题"></a>跨域问题</h2><h2 id="从输入-url-到打开页面中间都经历了什么"><a href="#从输入-url-到打开页面中间都经历了什么" class="headerlink" title="从输入 url 到打开页面中间都经历了什么"></a>从输入 url 到打开页面中间都经历了什么</h2><h2 id="Redux-源码解读"><a href="#Redux-源码解读" class="headerlink" title="Redux 源码解读"></a>Redux 源码解读</h2><h2 id="手写-Promise"><a href="#手写-Promise" class="headerlink" title="手写 Promise"></a>手写 Promise</h2><h2 id="手写-eventEmitter"><a href="#手写-eventEmitter" class="headerlink" title="手写 eventEmitter"></a>手写 eventEmitter</h2><h2 id="dom-diff"><a href="#dom-diff" class="headerlink" title="dom diff"></a>dom diff</h2><h2 id="ast"><a href="#ast" class="headerlink" title="ast"></a>ast</h2><h2 id="异步队列：微队列、宏队列"><a href="#异步队列：微队列、宏队列" class="headerlink" title="异步队列：微队列、宏队列"></a>异步队列：微队列、宏队列</h2><h2 id="node-中的-Event-Loop-与-浏览器的区别"><a href="#node-中的-Event-Loop-与-浏览器的区别" class="headerlink" title="node 中的 Event Loop 与 浏览器的区别"></a>node 中的 Event Loop 与 浏览器的区别</h2><p>timer =&gt; i/o =&gt; idle,prepare =&gt; poll =&gt; check =&gt; close callbacks</p>
 <h2 id="GC-新生代算法与老生代算法"><a href="#GC-新生代算法与老生代算法" class="headerlink" title="GC 新生代算法与老生代算法"></a>GC 新生代算法与老生代算法</h2><h2 id="console-控制台-0"><a href="#console-控制台-0" class="headerlink" title="console 控制台 \$0"></a>console 控制台 \$0</h2><h2 id="Vue-系列"><a href="#Vue-系列" class="headerlink" title="Vue 系列"></a>Vue 系列</h2><ul>
@@ -170,7 +171,7 @@
 <h4 id="MessageChannel-，-如果你所需拷贝的对象含有内置类型并且不包含函数，可以使用-MessageChannel-进行深拷贝"><a href="#MessageChannel-，-如果你所需拷贝的对象含有内置类型并且不包含函数，可以使用-MessageChannel-进行深拷贝" class="headerlink" title="MessageChannel ， 如果你所需拷贝的对象含有内置类型并且不包含函数，可以使用 MessageChannel 进行深拷贝"></a>MessageChannel ， 如果你所需拷贝的对象含有内置类型并且不包含函数，可以使用 MessageChannel 进行深拷贝</h4><h4 id="CommonJS-中-require-实现原理"><a href="#CommonJS-中-require-实现原理" class="headerlink" title="CommonJS 中 require 实现原理"></a>CommonJS 中 require 实现原理</h4>
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年07月25日 09:51</p>
+        <p>最后更新： 2019年07月29日 15:29</p>
         <p>原始链接： <a class="post-url" href="/interview/index.html" title="面试经">http://cumbermiao.github.io/interview/index.html</a></p>
         <footer>
             <a href="http://cumbermiao.github.io">
