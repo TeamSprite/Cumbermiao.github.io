@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="原文链接：https://juejin.im/post/5c9c66075188251dab07413d [ ](/post/5c9c66075188251dab07413d)  2019年03月28日阅读 1561 [译] 浏览器帧原理剖析  原文地址：The Anatomy of a Frame 原文作者：Paul 译文出自：掘金翻译计划 本文永久链接：github.com/xitu/gold">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cumber&#39;s Blog">
+<meta property="og:url" content="http://cumbermiao.github.io/collection/others/[译] 浏览器帧原理剖析.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="原文链接：https://juejin.im/post/5c9c66075188251dab07413d [ ](/post/5c9c66075188251dab07413d)  2019年03月28日阅读 1561 [译] 浏览器帧原理剖析  原文地址：The Anatomy of a Frame 原文作者：Paul 译文出自：掘金翻译计划 本文永久链接：github.com/xitu/gold">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/3/28/169c2eee4b229522?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/3/28/169c2eee44136fac?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/3/28/169c2eee4db41a38?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:updated_time" content="2019-11-11T03:02:35.400Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cumber&#39;s Blog">
+<meta name="twitter:description" content="原文链接：https://juejin.im/post/5c9c66075188251dab07413d [ ](/post/5c9c66075188251dab07413d)  2019年03月28日阅读 1561 [译] 浏览器帧原理剖析  原文地址：The Anatomy of a Frame 原文作者：Paul 译文出自：掘金翻译计划 本文永久链接：github.com/xitu/gold">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2019/3/28/169c2eee4b229522?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+            
+            <p>原文链接：<a href="https://juejin.im/post/5c9c66075188251dab07413d" target="_blank" rel="noopener">https://juejin.im/post/5c9c66075188251dab07413d</a></p>
+<p>[</p>
+<p>](/post/5c9c66075188251dab07413d)</p>
+<p><a href="/post/5c9c66075188251dab07413d"></a></p>
+<p>2019年03月28日阅读 1561</p>
+<h1 id="译-浏览器帧原理剖析"><a href="#译-浏览器帧原理剖析" class="headerlink" title="[译] 浏览器帧原理剖析"></a>[译] 浏览器帧原理剖析</h1><blockquote>
+<ul>
+<li>原文地址：<a href="https://aerotwist.com/blog/the-anatomy-of-a-frame/" target="_blank" rel="noopener">The Anatomy of a Frame</a></li>
+<li>原文作者：<a href="https://twitter.com/aerotwist" target="_blank" rel="noopener">Paul</a></li>
+<li>译文出自：<a href="https://github.com/xitu/gold-miner" target="_blank" rel="noopener">掘金翻译计划</a></li>
+<li>本文永久链接：<a href="https://github.com/xitu/gold-miner/blob/master/TODO1/the-anatomy-of-a-frame.md" target="_blank" rel="noopener">github.com/xitu/gold-m…</a></li>
+<li>译者：<a href="https://github.com/WangLeto" target="_blank" rel="noopener">WangLeto</a></li>
+<li>校对者：<a href="https://github.com/Xuyuey" target="_blank" rel="noopener">Xuyuey</a>, <a href="https://github.com/Fengziyin1234" target="_blank" rel="noopener">Fengziyin1234</a>, <a href="https://github.com/L9m" target="_blank" rel="noopener">L9m</a></li>
+</ul>
+</blockquote>
+<h1 id="浏览器帧原理剖析"><a href="#浏览器帧原理剖析" class="headerlink" title="浏览器帧原理剖析"></a>浏览器帧原理剖析</h1><p>开发者常常问我关于像素工作流程的某些部分，什么时候、为什么、发生了什么。所以我感觉值得提供一些参考，有关于将像素显示在屏幕上的过程里发生了什么。</p>
+<p>警告：文本是 Blink（译注：Chrome 使用的排版引擎，是 webkit 的分支）和 Chrome 的视角。主线程的大部分任务以某种方式被所有第三方（vendors）任务“共享”，比如布局和样式计算结果，但是总的架构可能不是这样。</p>
+<h2 id="一图胜千言"><a href="#一图胜千言" class="headerlink" title="一图胜千言"></a>一图胜千言</h2><p>这是真的，让我们先看一张图：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/3/28/169c2eee4b229522?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="The process of getting pixels to screen."></p>
+<p>将像素放到屏幕上的完整过程。</p>
+<p><a href="https://aerotwist.com/static/blog/the-anatomy-of-a-frame/anatomy-of-a-frame.zip" target="_blank" rel="noopener">下载图片</a></p>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>这张小图上放了太多内容，所以让我们详细看些定义。将上图与这些定义结合起来可能会有帮助。</p>
+<p>让我们从进程开始看：</p>
+<ul>
+<li><strong>渲染进程</strong>。包裹标签页的容器。包含了多个线程，这些线程一起负责了页面显示到屏幕上的各个方面。这些线程有<strong>合成线程（Compositor）</strong>，<strong>图块栅格化线程（Tile Worker）</strong>，和<strong>主线程</strong>。</li>
+<li><strong>GPU 进程</strong>。这是一个单一的进程，为所有标签页和浏览器周边进程服务。当帧被提交时，GPU 进程会将分为图块的位图和其他数据（比如四边形顶点和矩阵）上传到 GPU 中，真正将像素显示到屏幕上。GPU 进程只有一个的线程，叫 GPU 线程，实际上是它做了这些工作。</li>
+</ul>
+<h2 id="渲染进程中的线程"><a href="#渲染进程中的线程" class="headerlink" title="渲染进程中的线程"></a>渲染进程中的线程</h2><p>现在看一下渲染进程中的线程。</p>
+<ul>
+<li><strong>合成线程（Compositor Thread）</strong>。这是最先被告知垂直同步事件（vsync event，操作系统告知浏览器刷新一帧图像的信号）的线程。它接收所有的输入事件。如果可能，合成线程会避免进入主线程，自己尝试将输入的事件（比如滚动）转换为屏幕的移动。它会更新图层的位置，并经由 GPU 线程直接向 GPU 提交帧来完成这个操作。如果输入事件需要进行处理，或者有其他的显示工作，它将无法直接完成该过程，这就需要主线程了。</li>
+<li><strong>主线程</strong>。在这里浏览器执行我们熟知和喜欢的那些任务：JavaScript，样式，布局和绘制。（这一点以后会变化，有了 <a href="https://surma.link/things/houdini-intro/" target="_blank" rel="noopener">Houdini</a>，我们可以在合成线程中运行一些代码）主线程荣获“最容易导致 jank 奖”，很大程度上是因为它要做的事情太多了这个事实。（译注：jank 指页面内容抖动卡顿，由于页面内容的更新频率跟不上屏幕刷新频率导致）</li>
+<li><strong>合成图块栅格化线程（Compositor Tile Worker）</strong>。由合成线程派生的一个或多个线程，用于处理栅格化任务。我们稍后再讨论。</li>
+</ul>
+<p>在许多方面，你都应该把合成线程看做“老大”。虽然这个线程不运行 JavaScript，不进行布局、绘制内容或者其他任务，但是它全权负责启动主线程工作，并将帧运送到屏幕上。如果合成线程不用等待输入事件的处理，就可以在等待主线程完成工作时把帧发送出去。</p>
+<p>你也可以想象 <strong>Service Worker</strong> 和 <strong>Web Worker</strong> 存在于渲染进程中，虽然我把他们排除在外了，因为他们把事情弄得很复杂。</p>
+<h2 id="运作过程"><a href="#运作过程" class="headerlink" title="运作过程"></a>运作过程</h2><p><img src="https://user-gold-cdn.xitu.io/2019/3/28/169c2eee44136fac?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="The main thread in all its glory."></p>
+<p>主线程风貌全览。<a href="https://aerotwist.com/static/blog/the-anatomy-of-a-frame/anatomy-of-a-frame.zip" target="_blank" rel="noopener">下载图片</a></p>
+<p>让我们从垂直同步信号到像素，逐步分析这个过程，然后讨论一下在完全版本中事件是怎么工作的。记住这一点：浏览器<strong>并不需要执行所有步骤</strong>，具体情况取决于哪些步骤是必需的。例如，如果没有新的 HTML 要解析，那么解析 HTML 的步骤就不会触发。事实上，通常<a href="https://developers.google.com/web/fundamentals/performance/rendering/#the-pixel-pipeline" target="_blank" rel="noopener">提升性能的最佳方法</a>，只是简单地移除流程中部分步骤被触发的需要！</p>
+<p>同样值得注意的是，上图中 RecalcStyles 和 Layout 下方指向 <code>requestAnimationFrame</code> 的红色箭头。在代码中恰好触发这两个情况是完全可能的。这种情况叫做强制同步布局（或强制同步样式，Forced Synchronous Layout 和 Forced Synchronous Styles），通常于性能不利。</p>
+<ol>
+<li><p><strong>开始新的一帧</strong>。垂直同步信号触发，开始渲染新的一帧图像。</p>
+</li>
+<li><p><strong>输入事件的处理</strong>。从合成线程将输入的数据，传递到主线程的事件处理函数。所有的事件处理函数（<code>touchmove</code>，<code>scroll</code>，<code>click</code>）都应该最先触发，每帧触发一次，但也不一定这样；调度程序会尽力尝试，但是是否真的每帧触发因操作系统而异。从用户交互事件，到事件被交付主线程，二者之间也存在延迟。</p>
+</li>
+<li><p><strong><code>requestAnimationFrame</code></strong>。这是更新屏幕显示内容的理想位置，因为现在有全新的输入数据，又非常接近即将到来的垂直同步信号。其他的可视化任务，比如样式计算，因为是在本次任务<strong>之后</strong>，所以现在是变更元素的理想位置。如果你改变了 —— 比如说 100 个类的样式，这不会引起 100 次样式计算；它们会在稍后被批量处理。唯一需要注意的是，不要查询进行计算才能得到的样式或者布局属性（比如 <code>el.style.backgroundImage</code> 或 <code>el.style.offsetWidth</code>）。如果你<strong>这样做了</strong>，会导致重新计算样式，或者布局，或者二者都发生，进一步导致<a href="https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing?hl=en#avoid-layout-thrashing" target="_blank" rel="noopener">强制同步布局，乃至布局颠簸</a>。</p>
+</li>
+<li><p><strong>解析 HTML（Parse HTML）</strong>。处理新添加的 HTML，创建 DOM 元素。在页面加载过程中，或者进行 <code>appendChild</code> 操作后，你可能看到更多的此过程发生。</p>
+</li>
+<li><p><strong>重新计算样式（Recalc Styles）</strong>。为新添加或变更的内容计算样式。可能要计算整个 DOM 树，也可能缩小范围，取决于具体更改了什么。例如，更改 body 的类名影响可能很大，但是值得注意的是浏览器已经足够智能了，可以自动限制重新计算样式的范围。</p>
+</li>
+<li><p><strong>布局（Layout）</strong>。计算每个可见元素的几何信息（每个元素的位置和大小）。一般作用于整个文档，计算成本通常和 DOM 元素的大小成比例。</p>
+</li>
+<li><p><strong>更新图层树（Update Layer Tree）</strong>。这一步创建层叠上下文，为元素的深度进行排序。</p>
+</li>
+<li><p><strong>Paint</strong>。过程分为两步：第一步，对所有新加入的元素，或进行改变显示状态的元素，记录 draw 调用（这里填充矩形，那里写点字）；第二步是<strong>栅格化</strong>（Rasterization，见后文），在这一步实际执行了 draw 的调用，并进行纹理填充。Paint 过程记录 draw 调用，一般比栅格化要快，但是两部分通常被统称为“painting”。</p>
+</li>
+<li><p><strong>合成（Composite）</strong>：图层和图块信息计算完成后，被传回合成线程进行处理。这将包括 <code>will-change</code>、重叠元素和硬件加速的 canvas 等。</p>
+</li>
+<li><p><strong>栅格化规划（Raster Scheduled）</strong>和<strong>栅格化（Rasterize）</strong>：在 Paint 任务中记录的 draw 调用现在执行。过程是在<strong>合成图块栅格化线程</strong>（Compositor Tile Workers）中进行，线程的数量取决于平台和设备性能。例如，在 Android 设备上，通常有一个线程，而在桌面设备上有时有 4 个。栅格化根据图层来完成，每层都被分成块。</p>
+</li>
+<li><p><strong>帧结束</strong>：各个层的所有的块都被栅格化成位图后，新的块和输入数据（可能在事件处理程序中被更改过）被提交给 GPU 线程。</p>
+</li>
+<li><p><strong>发送帧</strong>：最后，但同样很重要的是，图块被 GPU 线程上传到 GPU。GPU 使用四边形和矩阵（所有常用的 GL 数据类型）将图块 draw 在屏幕上。</p>
+</li>
+</ol>
+<h3 id="福利时间"><a href="#福利时间" class="headerlink" title="福利时间"></a>福利时间</h3><ul>
+<li><strong>requestIdleCallback</strong>：如果在帧结束时，主线程还有点时间，<code>requestIdleCallback</code> 可能会被触发。这是做些非必要工作的好机会，比如标记分析数据。如果你不熟悉 <code>requestIdleCallback</code>，<a href="https://developers.google.com/web/updates/2015/08/using-requestidlecallback?hl=en" target="_blank" rel="noopener">Google Developers 上的入门知识</a>能帮到你。</li>
+</ul>
+<h2 id="两种图层"><a href="#两种图层" class="headerlink" title="两种图层"></a>两种图层</h2><p>在工作流程中深度的排序有两种版本。</p>
+<p>首先是层叠上下文，比如有 2 个绝对定位的重叠的 div。<strong>更新图层树（Update Layer Tree）</strong> 是流程的一部分，保证 <code>z-index</code> 和类似的属性受到重视。</p>
+<p>然后是合成图层，在上述流程较后的位置，多用于绘制元素。可以使用空 transform 技巧（译注：指使用 <code>translateZ(0,0)</code> 强制开启硬件加速），或者 <code>will-change: transform</code> 将一个元素提升为合成图层，这样就能轻松地使用 transform 动画（有利于动画效果！）。但是如果存在重叠元素，浏览器也可能需要创建额外的合成图层，来保持由 <code>z-index</code> 或者其他属性指定的深度顺序。有趣！</p>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p>实质上，上面概述的过程<strong>都是在 CPU 中完成的</strong>。只有最后一部分，图块被上传和移动的过程，是在 GPU 中完成的。</p>
+<p>然而，在 Android 上，像素流在栅格化时有所不同：GPU 用得更多一些。在 GPU 着色器上用 GL 命令执行 draw 调用，而不是在合成图块栅格化线程中进行栅格化。</p>
+<p>这就是所谓的 <strong>GPU 栅格化</strong>，是一种降低绘制（paint）成本的方法。在 Chrome DevTools 中启用 FPS Meter（FPS 计数），你可以查看页面是否使用了 GPU 栅格化。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/3/28/169c2eee4db41a38?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="The FPS meter indicating GPU Rasterization is in use."></p>
+<p>FPS 计数面板显示了正在使用 GPU 栅格化。</p>
+<h2 id="其他资源"><a href="#其他资源" class="headerlink" title="其他资源"></a>其他资源</h2><p>如果你希望深入研究，还有很多的资料，比如如何避免在主线程工作，或者浏览器渲染更深入的运作机理。希望这些资料能帮到你：</p>
+<ul>
+<li><strong><a href="https://www.youtube.com/watch?v=Lpk1dYdo62o" target="_blank" rel="noopener">Compositing in Blink &amp; WebKit</a></strong>. A little old now, but still worth a watch.</li>
+<li><strong><a href="https://developers.google.com/web/fundamentals/performance/rendering/" target="_blank" rel="noopener">Browser Rendering Performance</a></strong> - Google Developers</li>
+<li><strong><a href="https://www.udacity.com/courses/ud860" target="_blank" rel="noopener">Browser Rendering Performance</a></strong> - Udacity Course (totally free!).</li>
+<li><strong><a href="https://surma.link/things/houdini-intro/" target="_blank" rel="noopener">Houdini</a></strong> - The future, where you get to add more script to more parts of the flow.</li>
+</ul>
+<blockquote>
+<p>如果发现译文存在错误或其他需要改进的地方，欢迎到 <a href="https://github.com/xitu/gold-miner" target="_blank" rel="noopener">掘金翻译计划</a> 对译文进行修改并 PR，也可获得相应奖励积分。文章开头的 <strong>本文永久链接</strong> 即为本文在 GitHub 上的 MarkDown 链接。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><a href="https://github.com/xitu/gold-miner" target="_blank" rel="noopener">掘金翻译计划</a> 是一个翻译优质互联网技术文章的社区，文章来源为 <a href="https://juejin.im" target="_blank" rel="noopener">掘金</a> 上的英文分享文章。内容覆盖 <a href="https://github.com/xitu/gold-miner#android" target="_blank" rel="noopener">Android</a>、<a href="https://github.com/xitu/gold-miner#ios" target="_blank" rel="noopener">iOS</a>、<a href="https://github.com/xitu/gold-miner#%E5%89%8D%E7%AB%AF" target="_blank" rel="noopener">前端</a>、<a href="https://github.com/xitu/gold-miner#%E5%90%8E%E7%AB%AF" target="_blank" rel="noopener">后端</a>、<a href="https://github.com/xitu/gold-miner#%E5%8C%BA%E5%9D%97%E9%93%BE" target="_blank" rel="noopener">区块链</a>、<a href="https://github.com/xitu/gold-miner#%E4%BA%A7%E5%93%81" target="_blank" rel="noopener">产品</a>、<a href="https://github.com/xitu/gold-miner#%E8%AE%BE%E8%AE%A1" target="_blank" rel="noopener">设计</a>、<a href="https://github.com/xitu/gold-miner#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD" target="_blank" rel="noopener">人工智能</a>等领域，想要查看更多优质译文请持续关注 <a href="https://github.com/xitu/gold-miner" target="_blank" rel="noopener">掘金翻译计划</a>、<a href="http://weibo.com/juejinfanyi" target="_blank" rel="noopener">官方微博</a>、<a href="https://zhuanlan.zhihu.com/juejinfanyi" target="_blank" rel="noopener">知乎专栏</a>。</p>
+</blockquote>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年11月11日 11:02</p>
+        <p>原始链接： <a class="post-url" href="/collection/others/[译] 浏览器帧原理剖析.html" title="">http://cumbermiao.github.io/collection/others/[译] 浏览器帧原理剖析.html</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/collection/others/[译] 浏览器帧原理剖析.html&title=Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/collection/others/[译] 浏览器帧原理剖析.html&title=Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/collection/others/[译] 浏览器帧原理剖析.html" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Cumber's Blog&url=http://cumbermiao.github.io/collection/others/[译] 浏览器帧原理剖析.html&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/collection/others/[译] 浏览器帧原理剖析.html" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/collection/others/[译] 浏览器帧原理剖析.html" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#译-浏览器帧原理剖析"><span class="post-toc-text">[译] 浏览器帧原理剖析</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#浏览器帧原理剖析"><span class="post-toc-text">浏览器帧原理剖析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一图胜千言"><span class="post-toc-text">一图胜千言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程"><span class="post-toc-text">进程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#渲染进程中的线程"><span class="post-toc-text">渲染进程中的线程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#运作过程"><span class="post-toc-text">运作过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#福利时间"><span class="post-toc-text">福利时间</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#两种图层"><span class="post-toc-text">两种图层</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#扩展阅读"><span class="post-toc-text">扩展阅读</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他资源"><span class="post-toc-text">其他资源</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

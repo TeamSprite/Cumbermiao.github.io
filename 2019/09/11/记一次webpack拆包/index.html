@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Cumber&#39;s Blog">
 <meta property="og:description" content="最近部门对买家vo管理系统准备使用 react + webpack 进行工程化管理和重构， 本次开发的新功能账期便直接上了， 主要用了 react + react-router-dom + antd 。在最终打包的时候遇到了一个问题： 使用 splitChunk 将 node_modules 中的三方包全部拆分到一个 vendor chunk 里面体积较大， 达到了 1.34m 。分析了打包结构之">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-11T08:25:34.413Z">
+<meta property="og:updated_time" content="2019-09-12T02:42:58.990Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次webpack拆包">
 <meta name="twitter:description" content="最近部门对买家vo管理系统准备使用 react + webpack 进行工程化管理和重构， 本次开发的新功能账期便直接上了， 主要用了 react + react-router-dom + antd 。在最终打包的时候遇到了一个问题： 使用 splitChunk 将 node_modules 中的三方包全部拆分到一个 vendor chunk 里面体积较大， 达到了 1.34m 。分析了打包结构之">
@@ -135,13 +135,19 @@
             <p>最近部门对买家vo管理系统准备使用 react + webpack 进行工程化管理和重构， 本次开发的新功能账期便直接上了， 主要用了 react + react-router-dom + antd 。<br>在最终打包的时候遇到了一个问题： 使用 splitChunk 将 node_modules 中的三方包全部拆分到一个 vendor chunk 里面体积较大， 达到了 1.34m 。<br>分析了打包结构之后， 发现 antd 占了很大比重， 想到以后开发其他模块也是基于 antd 于是就决定将 antd 单独拆分出来， 其他的 react 等三方库还是放在同一个chunk里。</p>
 <p>以下是 splitChunk 配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">splitChunks: &#123;</span><br><span class="line">  cacheGroups: &#123;</span><br><span class="line">    vendor: &#123;</span><br><span class="line">        test: <span class="regexp">/node_modules/</span>,</span><br><span class="line">        chunks: <span class="string">'initial'</span>,</span><br><span class="line">        name: <span class="function">(<span class="params"><span class="built_in">module</span></span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">const</span> packageName = <span class="built_in">module</span>.context.match(<span class="regexp">/[\\/]node_modules[\\/](.*?)([\\/]|$)/</span>)[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>(packageName.match(<span class="regexp">/(ant\-design|antd)/</span>))<span class="keyword">return</span> <span class="string">'common-ui'</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">'common'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>上面的配置会将 ant-design 和 ant 的模块拆分到 common-ui 里面， 其中 css 也需要单独提取出来，需要注意打包的文件名<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> MiniCssExtractPlugin(&#123;</span><br><span class="line">  filename: <span class="string">'[name]/[name].css'</span>,</span><br><span class="line">  chunkFilename: <span class="string">'[name]/[name].css'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>最终拆分的目录结构如下：<br>common        common.js common.css<br>common-ui     common-ui.js common-ui.js<br>credit        credit.js credit.css</p>
+<p>最终拆分的目录结构如下：<br>common        common.js common.css<br>common-ui     common-ui.js common-ui.css<br>credit        credit.js credit.css</p>
 <p>由于对 antd 的主题进行了定制， 最终打出来的样式文件 credit.css 好像包含了 antd 中的样式， 后面还需要对其进行优化。</p>
 <p>随着各个模块的不断加入， 开发时候的热更新肯定会越来越慢， 到时候需要使用 dll 进行优化， 对于打包速度到时候看情况， 对于一些三方模块可以使用开发时候的缓存，不再重新打包减少打包时长。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>以上打包只是固定拆分了 antd 库， 其中在实践过程中遇到了一些问题。</p>
+<p>由于需要定制主题， 所以使用 ant.less 改变了主题颜色， 如下：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ant.less</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@import</span> <span class="string">"~antd/dist/antd.less"</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">@primary-color:</span> <span class="number">#1470CC</span>; <span class="comment">// 全局主色</span></span><br><span class="line"><span class="variable">@link-color:</span> <span class="number">#1470CC</span>; <span class="comment">// 链接色</span></span><br><span class="line"><span class="variable">@success-color:</span> <span class="number">#00b300</span>; <span class="comment">// 成功色</span></span><br><span class="line"><span class="variable">@warning-color:</span> <span class="number">#FF7733</span>; <span class="comment">// 警告色</span></span><br><span class="line"><span class="variable">@error-color:</span> <span class="number">#E64545</span>; <span class="comment">// 错误色</span></span><br><span class="line"><span class="variable">@font-size-base:</span> <span class="number">14px</span>; <span class="comment">// 主字号</span></span><br><span class="line"><span class="variable">@heading-color:</span><span class="number">#222</span>; <span class="comment">// 标题色</span></span><br><span class="line"><span class="variable">@text-color:</span> <span class="number">#555</span>; <span class="comment">// 主文本色</span></span><br><span class="line"><span class="variable">@text-color-secondary:</span><span class="number">#888</span>; <span class="comment">// 次文本色</span></span><br><span class="line"><span class="variable">@disabled-color :</span> <span class="number">#b3b3b3</span>; <span class="comment">// 失效色</span></span><br><span class="line"><span class="variable">@border-radius-base:</span> <span class="number">6px</span>; <span class="comment">// 组件/浮层圆角</span></span><br><span class="line"><span class="variable">@border-color-base:</span> <span class="number">#ced3d9</span>; <span class="comment">// 边框色</span></span><br><span class="line"><span class="variable">@box-shadow-base:</span> none; <span class="comment">// 浮层阴影</span></span><br></pre></td></tr></table></figure></p>
+<p>在多页中引入 ant.less 和 各自的样式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//page1</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'ant.less'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'index.scss'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//page2</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'ant.less'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>不知道是由于 scss 的原因， 使用以上写法打包之后 page1.css 和 page2.css 中还是包含了 ant 的样式， 虽然 common-ui 也提取了 ant 的样式。</p>
+<p>最终还是改了写法， ant 中只定义覆盖主题的变量， 在 js 中引入 antd.less， 如下:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'antd/dist/antd.less'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'ant.less'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'index.scss'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//page2</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'antd/dist/antd.less'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'ant.less'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>以上只是对 antd 提取， 在多页中还有通用组件， 如果组件较多也需要进行提取。</p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年09月11日 16:25</p>
+        <p>最后更新： 2019年09月12日 10:42</p>
         <p>原始链接： <a class="post-url" href="/2019/09/11/记一次webpack拆包/" title="记一次webpack拆包">http://cumbermiao.github.io/2019/09/11/记一次webpack拆包/</a></p>
         <footer>
             <a href="http://cumbermiao.github.io">
@@ -250,8 +256,24 @@
 </article>
 
 
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后记"><span class="post-toc-text">后记</span></a></li></ol>
+        </nav>
+    </aside>
+    
 
 <nav id="article-nav">
+  
+    <a href="/2019/11/12/浏览器的进程与线程/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          浏览器的进程与线程
+        
+      </span>
+    </a>
   
   
     <a href="/2019/06/27/jasmine/" id="article-nav-older" class="article-nav-link-wrap">

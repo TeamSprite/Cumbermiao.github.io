@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>浏览器的进程与线程 | Cumber&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Cumber,Cumbermiao,Cumber's Blog">
+  
+  <meta name="description" content="inside browser 系列 Frame 解析 js 主线程 进程与线程 牢记一个进程可以由多个线程组成。进程是 cpu 资源分配的最小单位，可以拥有内存和独立运行的最小单位。 可以理解为一个工厂。  线程是 cpu 调度的最小单位， 即给工厂打工的工人。 cpu 可以调度工人给工厂工作，  且同一个工厂的工厂在同一块区域，即共享资源。 浏览器的多进程 浏览器是基于多进程的， 每个 tab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器的进程与线程">
+<meta property="og:url" content="http://cumbermiao.github.io/2019/11/12/浏览器的进程与线程/index.html">
+<meta property="og:site_name" content="Cumber&#39;s Blog">
+<meta property="og:description" content="inside browser 系列 Frame 解析 js 主线程 进程与线程 牢记一个进程可以由多个线程组成。进程是 cpu 资源分配的最小单位，可以拥有内存和独立运行的最小单位。 可以理解为一个工厂。  线程是 cpu 调度的最小单位， 即给工厂打工的工人。 cpu 可以调度工人给工厂工作，  且同一个工厂的工厂在同一块区域，即共享资源。 浏览器的多进程 浏览器是基于多进程的， 每个 tab">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/9981C9BF2B7741CAB26BB59AE94F097F?method=download&shareKey=d59ea04f63e30e62343b0688891c0785">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/4C8C97130D784A1987586082011C5353?method=download&shareKey=5e3499aeca6993c1c53826196026c818">
+<meta property="og:updated_time" content="2019-11-12T07:54:14.666Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器的进程与线程">
+<meta name="twitter:description" content="inside browser 系列 Frame 解析 js 主线程 进程与线程 牢记一个进程可以由多个线程组成。进程是 cpu 资源分配的最小单位，可以拥有内存和独立运行的最小单位。 可以理解为一个工厂。  线程是 cpu 调度的最小单位， 即给工厂打工的工人。 cpu 可以调度工人给工厂工作，  且同一个工厂的工厂在同一块区域，即共享资源。 浏览器的多进程 浏览器是基于多进程的， 每个 tab">
+<meta name="twitter:image" content="https://note.youdao.com/yws/api/personal/file/9981C9BF2B7741CAB26BB59AE94F097F?method=download&shareKey=d59ea04f63e30e62343b0688891c0785">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Cumber&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Cumber&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注前端发展
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Cumbermiao" target="_blank" href="//cumbermiao.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/cumbermiao">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-浏览器的进程与线程" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      浏览器的进程与线程
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-11-12
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <!-- UNDONE: 参考文章中有些地方矛盾， html parse 和 style calc 是否同步执行？ main thread 的详细过程？  是否存在 paint 步骤还是直接调用 compositor thread -->
+<p><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part2" target="_blank" rel="noopener">inside browser 系列</a></p>
+<p><a href="https://medium.com/@francesco_rizzi/javascript-main-thread-dissected-43c85fce7e23" target="_blank" rel="noopener">Frame 解析</a></p>
+<p><a href="https://medium.com/@francesco_rizzi/javascript-main-thread-dissected-43c85fce7e23" target="_blank" rel="noopener">js 主线程</a></p>
+<h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><blockquote>
+<p>牢记一个进程可以由多个线程组成。<br>进程是 cpu 资源分配的最小单位，可以拥有内存和独立运行的最小单位。 可以理解为一个工厂。</p>
+</blockquote>
+<p>线程是 cpu 调度的最小单位， 即给工厂打工的工人。 cpu 可以调度工人给工厂工作，  且同一个工厂的工厂在同一块区域，即共享资源。</p>
+<h2 id="浏览器的多进程"><a href="#浏览器的多进程" class="headerlink" title="浏览器的多进程"></a>浏览器的多进程</h2><blockquote>
+<p>浏览器是基于多进程的， 每个 tab 页或者插件都是一个单独的进程， 除此之外还有主进程、 GPU 进程等，此处只解释主要的几个进程。</p>
+</blockquote>
+<ul>
+<li><p>browser 进程： 该进程是浏览器的主进程，处理除了 tab 页之外的功能， 如：地址栏、标签、前进后退、网络资源管理等。</p>
+</li>
+<li><p>renderer 进程: 默认每个 tab 页面一个进程， 负责该 tab 页所有展示的内容。</p>
+</li>
+<li><p>GPU 进程： 用于处理 GPU 任务。</p>
+</li>
+<li><p>plugin 进程： 处理插件相关的任务， 如 flash </p>
+</li>
+<li><p>extension 进程： 处理谷歌插件的任务。</p>
+</li>
+</ul>
+<p>chrome 浏览器对每个 tab 页都申请一个单独的 render process ， 好处在于某个 tab 的 render process 崩溃时不会影响其他的 tab 页， 甚至 chrome 现在对每个 iframe 都申请了一个 render process。<br>坏处就在于 tab 页一多， 那么浏览器就会占据较大的内存资源。</p>
+<p>browser process 拥有 UI thread 用于绘制 button 等元素， network thread 用于请求资源， storage thread 控制文件读写权限。</p>
+<h2 id="简单分析一个简单请求的过程"><a href="#简单分析一个简单请求的过程" class="headerlink" title="简单分析一个简单请求的过程"></a>简单分析一个简单请求的过程</h2><p>从浏览器地址栏输入 url ， 浏览器请求获取数据并且展示在页面上， 这个过程调用了哪些线程？</p>
+<p>首先当你输入 url 的时候， UI thread 会判断这个是一个 搜索问题还是一个 url ， 如果是搜索问题则请求搜索引擎否则请求 url。</p>
+<p>确认之后，  UI thread 会发起一个网络请求， 此时 network thread 会使用对应的协议建立请求。此时， netowrk thread 可能会收到 301 中状态码， 此时会告诉 UI thread 资源被重定向， UI thread 重新发起请求。</p>
+<p>network thread 得到响应之后会根据响应数据的类型进行不同的处理， 如果响应的数据是 html 文件， network thread 会将 html 数据传递给 renderer process 。如果是 zip 文件这种就会传递数据给下载管理器。如果不符合浏览器的安全策略，如发生了跨域此时就会报错，不需要调用 renderer process。</p>
+<p>如果 network thread 认为浏览器需要跳转至对应的页面， 它会告诉 UI thread 数据已经准备好， UI thread 会找一个 renderer process 并传递数据。<br>在 network thread 请求数据的同时， UI thread 就已经开始请求 renderer process 了， 在 network thread 告诉 UI thread 数据已经获取时， renderer process 已经待命了。</p>
+<p>由于 UI thread 是属于 browser process 的， 与 renderer process 通信需要通过 IPC ， 使用 stream 的方式传递 html 数据。 一旦 browser process 接收到 renderer process 已经 commit 的确认之后结束导航阶段， 开始文档加载阶段。<br>此时，地址栏会更新，展示出新页面的网页信息。history tab 会更新，可通过返回键返回导航来的页面，为了让关闭 tab 或者窗口后便于恢复，这些信息会存放在硬盘中。。</p>
+<p>当 renderer process 渲染页面结束之后， 它会通过 IPC 通知 browser process 结束loading，此处也是 onload 事件发生的地方。</p>
+<p>至此，整个流程结束。</p>
+<h2 id="renderer-process"><a href="#renderer-process" class="headerlink" title="renderer process"></a>renderer process</h2><blockquote>
+<p>renderer process 负责对应 tab 页的渲染， 一般会包含 a main thread, a raster thread, a compositor thread, 如果使用了 web worker 或者 service worker ， 还会有 worker threads .</p>
+</blockquote>
+<p><img src="https://note.youdao.com/yws/api/personal/file/9981C9BF2B7741CAB26BB59AE94F097F?method=download&amp;shareKey=d59ea04f63e30e62343b0688891c0785" alt="threads in renderer"></p>
+<p>上图展示了一帧的步骤， 有的步骤不是每帧都会执行。</p>
+<h3 id="renderer-process-处理过程"><a href="#renderer-process-处理过程" class="headerlink" title="renderer process 处理过程"></a>renderer process 处理过程</h3><ol>
+<li><p>renderer process 在接收 html 数据时， main thread 将 html 字符串解析成 DOM。</p>
+</li>
+<li><p>如果在解析 html 元素时遇到了 img、link 标签时，preload scanner 会在 html 解析器解析到 tokens 时， 就告诉 browser process 的 network thread 请求对应资源。</p>
+</li>
+<li><p>如果 html 解析器遇到了 script 标签， main thread 会停止解析 html ， 去加载解析并执行 js 代码。 因为 js 可能会改变 DOM 结构，如果 js 改变了 DOM 结构，那么就需要在 js 之后重新构成 DOM 结构。对于不改变 DOM 结构的 js 我们可以使用 defer 或者 async 属性。</p>
+</li>
+<li><p>main thread 解析 css ， 计算每个 node 节点的样式。</p>
+</li>
+<li><p>通过遍历 DOM 和每个元素的样式计算， 会得出 DOM 树和 css 树。</p>
+</li>
+<li><p>使用 DOM 树和 css 树生成 layout 树， layout 树与 DOM 树类似，但是不包含 display:none 这种不展示的元素。</p>
+</li>
+<li><p>即使知道了不同元素的位置及样式信息，我们还需要知道不同元素的绘制先后顺序才能正确绘制出整个页面。在绘制阶段，主线程会遍历布局树以创建绘制记录。绘制记录可以看做是记录各元素绘制先后顺序的笔记。</p>
+</li>
+<li><p>在获取了所有需要的信息之后， 浏览器使用合成技术来绘制每帧。<br>合成技术会将一个页面分割成不同的层， 并对每层进行光栅化， 最终在 compositor thread 中重新组合。<br>在分层时， main thread 会遍历 layout 树创建 layer 树(即 update layer tree)。 添加了 <code>will-change</code> CSS 属性的元素，会被看做单独的一层。</p>
+</li>
+</ol>
+<p>一旦 layer 树被创建，渲染顺序被确定，主线程会把这些信息通知给 compositor thread， compositor thread 会栅格化每一层。有的层的可以达到整个页面的大小，因此，合成器线程将它们分成多个磁贴，并将每个磁贴发送到 raster threads，raster threads 会栅格化每一个磁贴并存储在 GPU 显存中。</p>
+<p>一旦磁贴被光栅化，合成器线程会收集称为绘制四边形的磁贴信息以创建合成帧。</p>
+<p>compositor thread 随后会通过 IPC 消息传递给 browser process ，由于浏览器的 UI 改变或者其它插件的渲染进程也可以添加合成帧，这些合成帧会被传递给 GPU 用以展示在屏幕上，如果滚动发生，合成器线程会创建另一个合成帧发送给 GPU。</p>
+<p>合成器的优点在于，其工作无关主线程，合成器线程不需要等待样式计算或者 JS 执行，这就是为什么合成器相关的动画 最流畅，如果某个动画涉及到布局或者绘制的调整，就会涉及到主线程的重新计算，自然会慢很多。</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/4C8C97130D784A1987586082011C5353?method=download&amp;shareKey=5e3499aeca6993c1c53826196026c818" alt="main thread"></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年11月12日 15:54</p>
+        <p>原始链接： <a class="post-url" href="/2019/11/12/浏览器的进程与线程/" title="浏览器的进程与线程">http://cumbermiao.github.io/2019/11/12/浏览器的进程与线程/</a></p>
+        <footer>
+            <a href="http://cumbermiao.github.io">
+                <img src="/images/logo.png" alt="Cumbermiao">
+                Cumbermiao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cumbermiao.github.io/2019/11/12/浏览器的进程与线程/&title=《浏览器的进程与线程》 — Cumber's Blog&pic=http://cumbermiao.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cumbermiao.github.io/2019/11/12/浏览器的进程与线程/&title=《浏览器的进程与线程》 — Cumber's Blog&source=专注前端" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cumbermiao.github.io/2019/11/12/浏览器的进程与线程/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《浏览器的进程与线程》 — Cumber's Blog&url=http://cumbermiao.github.io/2019/11/12/浏览器的进程与线程/&via=http://cumbermiao.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cumbermiao.github.io/2019/11/12/浏览器的进程与线程/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cumbermiao.github.io/2019/11/12/浏览器的进程与线程/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程与线程"><span class="post-toc-text">进程与线程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#浏览器的多进程"><span class="post-toc-text">浏览器的多进程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单分析一个简单请求的过程"><span class="post-toc-text">简单分析一个简单请求的过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#renderer-process"><span class="post-toc-text">renderer process</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#renderer-process-处理过程"><span class="post-toc-text">renderer process 处理过程</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/11/记一次webpack拆包/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">记一次webpack拆包</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Cumbermiao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://cumbermiao.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Jasmine/" style="font-size: 10px;">Jasmine</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
